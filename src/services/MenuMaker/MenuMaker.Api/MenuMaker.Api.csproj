@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>3e062d8f-f071-4b2b-8a5d-a604811de5e0</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	  <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MenuMaker.Domain\MenuMaker.Domain.csproj" />
     <ProjectReference Include="..\MenuMaker.Infrastructure\MenuMaker.Infrastructure.csproj" />
+	  
   </ItemGroup>
 
 </Project>

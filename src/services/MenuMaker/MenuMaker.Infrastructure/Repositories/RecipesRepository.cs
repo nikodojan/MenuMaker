@@ -1,5 +1,5 @@
 ﻿
-using MenuMaker.Domain.Aggregates.RecipeAggregate;
+using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,14 +13,14 @@ public class RecipesRepository : GenericRepository<Recipe, int, RecipesContext>,
 
     public async Task<double> GetCaloriesForRecipe(int id)
     {
-        var result = _dbContext.Recipes
-            .AsNoTracking().Where(r => r.Id == id)
-            .Include(r => r.Ingredients)
-            .ThenInclude(i => i.Grocery)
-            .ThenInclude(g => g.NutritionFacts)
-            .SelectMany(r =>
-                r.Ingredients.Select(i =>
-                    i.Grocery.NutritionFacts.Calories.Amount)).Sum();
-        return result;
+        //var result = _dbContext.Recipes
+        //    .AsNoTracking().Where(r => r.Id == id)
+        //    .Include(r => r.Ingredients)
+        //    .ThenInclude(i => i.Grocery)
+        //    .ThenInclude(g => g.NutritionFacts)
+        //    .SelectMany(r =>
+        //        r.Ingredients.Select(i =>
+        //            i.Grocery.NutritionFacts.Calories.Amount)).Sum();
+        return 0;
     }
 }

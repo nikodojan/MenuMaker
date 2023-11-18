@@ -1,8 +1,6 @@
 ﻿using MenuMaker.Api.DTOs;
 using MenuMaker.Api.Services;
-using MenuMaker.Domain.Aggregates.RecipeAggregate;
-using MenuMaker.Infrastructure.Persistence;
-using MenuMaker.Infrastructure.Repositories;
+using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Infrastructure.Repositories.Specifications;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +18,8 @@ public class RecipesController : ControllerBase
         _recipesService = recipesService;
     }
 
-    // GET: api/<RecipesController>
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetRecipes(
+    public async Task<ActionResult<IEnumerable<RecipeResponseModel>>> GetRecipes(
         [FromQuery] bool includeIngredients,
         [FromQuery] int skip,
         [FromQuery] int take)
@@ -30,36 +27,36 @@ public class RecipesController : ControllerBase
         var spec = new BaseSpecification<Recipe>();
         if (includeIngredients)
         {
-            spec.AddInclude(q => q.Include(r=>r.Ingredients).ThenInclude(i=>i.Grocery));
+            spec.AddInclude(q =>
+                q.Include(r => r.Ingredients)
+                    .ThenInclude(i => i.Grocery)
+                    .ThenInclude(g => g.Category)
+                );
         }
-
         spec.Skip(skip);
-        
         if (take > 0) { spec.Take(take); }
 
         return Ok(await _recipesService.GetRecipes(spec));
     }
 
-    // GET api/<RecipesController>/5
     [HttpGet("{id}")]
     public async Task<double> Get(int id)
     {
         return await _recipesService.GetCalories(id);
     }
 
-    // POST api/<RecipesController>
+
     [HttpPost]
     public void Post([FromBody] string value)
     {
     }
 
-    // PUT api/<RecipesController>/5
+
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] string value)
     {
     }
 
-    // DELETE api/<RecipesController>/5
     [HttpDelete("{id}")]
     public void Delete(int id)
     {

@@ -1,7 +1,7 @@
 ﻿using MenuMaker.Domain.Common;
 using System.ComponentModel.DataAnnotations;
 
-namespace MenuMaker.Domain.Aggregates.RecipeAggregate;
+namespace MenuMaker.Domain.Models.Recipes;
 
 public class Ingredient : Entity<int>
 {

@@ -1,5 +1,5 @@
 ﻿using System.Linq.Expressions;
-using MenuMaker.Domain.Aggregates.RecipeAggregate;
+using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Domain.Common;
 
 using MenuMaker.Infrastructure.Repositories.Specifications;

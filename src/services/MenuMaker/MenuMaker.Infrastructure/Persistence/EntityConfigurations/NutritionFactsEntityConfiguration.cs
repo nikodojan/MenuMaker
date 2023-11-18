@@ -1,4 +1,4 @@
-﻿using MenuMaker.Domain.Aggregates.RecipeAggregate;
+﻿using MenuMaker.Domain.Models.Recipes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -7,11 +7,6 @@ internal class NutritionFactsEntityConfiguration : IEntityTypeConfiguration<Nutr
 {
     public void Configure(EntityTypeBuilder<NutritionFacts> builder)
     {
-        builder.OwnsOne(nf => nf.Calories);
-        builder.OwnsOne(nf => nf.Fat);
-        builder.OwnsOne(nf => nf.Carbonhydrates);
-        builder.OwnsOne(nf => nf.Sugar);
-        builder.OwnsOne(nf => nf.Protein);
         builder.OwnsOne(nf => nf.ServingSize);
     }
 }

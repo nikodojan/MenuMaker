@@ -1,4 +1,4 @@
-﻿using MenuMaker.Domain.Aggregates.RecipeAggregate;
+﻿using MenuMaker.Domain.Models.Recipes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,5 +16,9 @@ internal class GroceryEntityConfiguration : IEntityTypeConfiguration<Grocery>
         builder
             .HasOne<GroceryCategory>(g=>g.Category)
             .WithMany();
+
+        builder
+            .Property<string>(nameof(Grocery.StandardUnit))
+            .HasDefaultValue<string>("g");
     }
 }

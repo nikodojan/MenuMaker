@@ -1,4 +1,4 @@
-﻿namespace MenuMaker.Domain.Aggregates.RecipeAggregate.ValueObjects;
+﻿namespace MenuMaker.Domain.Models.Recipes.ValueObjects;
 
 public class UnitValue
 {

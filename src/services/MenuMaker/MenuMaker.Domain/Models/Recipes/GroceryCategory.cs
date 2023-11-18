@@ -1,6 +1,6 @@
 ﻿using MenuMaker.Domain.Common;
 
-namespace MenuMaker.Domain.Aggregates.RecipeAggregate;
+namespace MenuMaker.Domain.Models.Recipes;
 
 public class GroceryCategory : Entity<int>
 {

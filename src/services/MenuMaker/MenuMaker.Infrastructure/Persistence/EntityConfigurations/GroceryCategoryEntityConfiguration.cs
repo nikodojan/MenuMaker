@@ -1,4 +1,4 @@
-﻿using MenuMaker.Domain.Aggregates.RecipeAggregate;
+﻿using MenuMaker.Domain.Models.Recipes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

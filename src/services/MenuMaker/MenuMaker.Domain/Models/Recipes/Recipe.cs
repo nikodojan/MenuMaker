@@ -1,7 +1,7 @@
 ﻿using MenuMaker.Domain.Common;
 using System.ComponentModel.DataAnnotations;
 
-namespace MenuMaker.Domain.Aggregates.RecipeAggregate;
+namespace MenuMaker.Domain.Models.Recipes;
 
 public class Recipe : Entity<int>
 {
@@ -20,6 +20,7 @@ public class Recipe : Entity<int>
     public string Instructions { get; set; }
 
     public int? Portions { get; set; }
+
     public int? TimeInMinutes { get; set; }
 
     public virtual List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
