@@ -43,6 +43,7 @@ public class Program
         builder.Services.AddScoped<IUnitOfWork<RecipesContext>, RecipesContext>();
 
         builder.Services.AddTransient<IRecipesService, RecipesService>();
+        builder.Services.AddTransient<IGroceriesListService, GroceriesListService>();
 
         builder.Services.AddHealthChecks()
             .AddDbContextCheck<RecipesContext>();
@@ -51,11 +52,14 @@ public class Program
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
+        //if (app.Environment.IsDevelopment())
+        //{
+        //    app.UseSwagger();
+        //    app.UseSwaggerUI();
+        //}
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
         app.UseHttpsRedirection();
 

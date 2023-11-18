@@ -26,40 +26,16 @@ public class GroceriesController : ControllerBase
     {
         var spec = new BaseSpecification<Grocery>();
         spec.AddInclude(q => q.Include(g=>g.Category));
-        //spec.AddInclude(q => q.Include(g => g.NutritionFacts));
+        spec.AddInclude(q => q.Include(g => g.NutritionFacts));
         var result = await _groceriesRepo.FindWithSpecification(spec);
-        //var mapper = new GroceryMapper();
-        //var res = new List<GroceryReponseModel>();
-        //foreach (var item in result)
-        //{
-        //    res.Add(mapper.ToGroceryReponseModel(item));
-        //}
-        
+        var mapper = new GroceryMapper();
+        var res = new List<GroceryReponseModel>();
+        foreach (var item in result)
+        {
+            res.Add(mapper.ToGroceryReponseModel(item));
+        }
+
         return Ok();
     }
 
-    // GET api/<GroceriesController>/5
-    [HttpGet("{id}")]
-    public string Get(int id)
-    {
-        return "value";
-    }
-
-    // POST api/<GroceriesController>
-    [HttpPost]
-    public void Post([FromBody] string value)
-    {
-    }
-
-    // PUT api/<GroceriesController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    // DELETE api/<GroceriesController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-    }
 }

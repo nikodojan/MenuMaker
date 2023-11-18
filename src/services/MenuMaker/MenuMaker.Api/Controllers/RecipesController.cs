@@ -38,27 +38,4 @@ public class RecipesController : ControllerBase
 
         return Ok(await _recipesService.GetRecipes(spec));
     }
-
-    [HttpGet("{id}")]
-    public async Task<double> Get(int id)
-    {
-        return await _recipesService.GetCalories(id);
-    }
-
-
-    [HttpPost]
-    public void Post([FromBody] string value)
-    {
-    }
-
-
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-    }
 }
