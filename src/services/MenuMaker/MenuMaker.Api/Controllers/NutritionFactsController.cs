@@ -18,21 +18,21 @@ public class NutritionFactsController : ControllerBase
         _nutritionFactsRepo = nutritionFactsRepo;
     }
     // GET: api/<NutritionFactsController>
-    [HttpGet]
-    public async Task<IActionResult> Get()
-    {
-        var mapper = new NutritionFactsResponseMapper();
+    //[HttpGet]
+    //public async Task<IActionResult> Get()
+    //{
+    //    var mapper = new NutritionFactsResponseMapper();
 
-        var fact = (await _nutritionFactsRepo.GetAllAsync()).First();
+    //    var fact = (await _nutritionFactsRepo.GetAllAsync()).First();
 
-        var resp = new GroceryNutritionFactsResponse()
-        {
-            Grocery = "Tomato",
-            NutritionFacts = mapper.NutritionFactsToResponse(fact)
-        };
+    //    var resp = new GroceryNutritionFactsResponse()
+    //    {
+    //        Grocery = "Tomato",
+    //        NutritionFacts = mapper.NutritionFactsToResponse(fact)
+    //    };
 
-        return Ok(resp);
-    }
+    //    return Ok(resp);
+    //}
 
     // GET api/<NutritionFactsController>/5
     [HttpGet("{id}")]

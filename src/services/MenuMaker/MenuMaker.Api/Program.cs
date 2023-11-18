@@ -13,7 +13,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
+        builder.Configuration.AddEnvironmentVariables();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
@@ -21,7 +21,8 @@ public class Program
 
         builder.Services.AddDbContext<RecipesContext>(options =>
         {
-            options.UseNpgsql(builder.Configuration.GetConnectionString("mm_db"), pgsqlOptions =>
+            var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
+            options.UseNpgsql(cs, pgsqlOptions =>
             {
                 pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
             });

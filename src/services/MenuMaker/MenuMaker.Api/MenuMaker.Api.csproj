@@ -5,8 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>3e062d8f-f071-4b2b-8a5d-a604811de5e0</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-	  <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+	<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,5 +25,11 @@
     <ProjectReference Include="..\MenuMaker.Infrastructure\MenuMaker.Infrastructure.csproj" />
 	  
   </ItemGroup>
+
+	<ItemGroup>
+		<None Update="Dockerfile">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
