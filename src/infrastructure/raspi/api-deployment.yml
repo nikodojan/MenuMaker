@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: menu-maker-api
+  labels:
+    app: menu-maker-api
+  namespace: menu-maker-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: menu-maker-api
+  template:
+    metadata:
+      labels:
+        app: menu-maker-api
+    spec:
+      containers:
+      - name: menu-maker-api
+        image: localhost:32000/dummy-api-arm64:registry
+        ports:
+        - containerPort: 80

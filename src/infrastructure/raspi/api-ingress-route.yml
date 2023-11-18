@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: menu-maker-api-ingressroute
+  namespace: menu-maker-dev
+spec:
+  entryPoints:
+    - menu-maker-api
+  routes:
+  - match: PathPrefix(`/api`)
+    kind: Rule
+    services:
+    - name: menu-maker-api-service
+      port: 80
