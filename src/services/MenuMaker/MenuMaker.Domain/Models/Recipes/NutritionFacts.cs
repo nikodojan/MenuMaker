@@ -15,14 +15,45 @@ public class NutritionFacts : Entity<int>
     public UnitValue ServingSize { get; set; }
         = new UnitValue(RecipeConstants.Units.Gramms, 0);
 
-    public int Calories { get; set; }
+    public double Calories { get; set; }
 
-    public int GrammsFat { get; set; }
+    public double GrammsFat { get; set; }
 
-    public int GrammsCarbonhydrates { get; set; }
+    public double GrammsCarbonhydrates { get; set; }
 
-    public int GrammsSugar { get; set; }
+    public double GrammsSugar { get; set; }
 
-    public int GrammsProtein { get; set; }
+    public double GrammsProtein { get; set; }
+
+    public double GrammsFiber { get; set; }
+
+    public static NutritionFacts operator+(NutritionFacts a, NutritionFacts b)
+    {
+        return new NutritionFacts()
+        {
+            Id = 0,
+            GroceryId = 0,
+            ServingSize = a.ServingSize,
+            Calories = a.Calories + b.Calories,
+            GrammsFat = a.GrammsFat + b.GrammsFat,
+            GrammsCarbonhydrates = a.GrammsCarbonhydrates + b.GrammsCarbonhydrates,
+            GrammsSugar = a.GrammsSugar + b.GrammsSugar,
+            GrammsFiber = a.GrammsFiber + b.GrammsFiber,
+            GrammsProtein = a.GrammsProtein + b.GrammsProtein
+        };
+    }
+
+    public NutritionFacts CalculateForServingSize(double servingSizeAmount)
+    {
+        ServingSize = new UnitValue(ServingSize.Unit, servingSizeAmount);
+        Calories = Calories / ServingSize.Amount * servingSizeAmount;
+        GrammsFat = GrammsFat / ServingSize.Amount * servingSizeAmount;
+        GrammsCarbonhydrates = GrammsCarbonhydrates / ServingSize.Amount * servingSizeAmount;
+        GrammsFiber = GrammsFiber / ServingSize.Amount * servingSizeAmount;
+        GrammsProtein = GrammsProtein / ServingSize.Amount * servingSizeAmount;
+        GrammsSugar = GrammsSugar / ServingSize.Amount * servingSizeAmount;
+
+        return this;
+    }
 }
 

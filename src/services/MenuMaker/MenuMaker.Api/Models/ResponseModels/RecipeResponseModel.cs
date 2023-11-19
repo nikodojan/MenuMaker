@@ -1,11 +1,11 @@
 ﻿using MenuMaker.Api.Models.ResponseModels;
-using MenuMaker.Domain.Models.Recipes;
-using System.ComponentModel.DataAnnotations;
 
 namespace MenuMaker.Api.DTOs;
 
 public class RecipeResponseModel
 {
+    public int Id { get; set; }
+
     public string Title { get; init; }
 
     public string? Description { get; init; }
@@ -19,6 +19,8 @@ public class RecipeResponseModel
     public int? TimeInMinutes { get; init; }
 
     public int Calories { get; init; }
+
+    public NutritionFactsValuesResponseModel? NutritionFacts { get; set; } = null;
 
     public IEnumerable<IngredientResponseModel> Ingredients { get; set; } = new List<IngredientResponseModel>();
 }

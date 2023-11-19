@@ -7,4 +7,5 @@ public interface IRecipesService
 {
     Task<IEnumerable<RecipeResponseModel>> GetRecipes(ISpecification<Recipe> spec);
     Task<double> GetCalories(int id);
+    Task<IEnumerable<RecipeResponseModel>> GetRecipes(bool includeIngredients, int skip, int take);
 }

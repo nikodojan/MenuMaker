@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace MenuMaker.Api.Models.ResponseModels;
 
-public class NutritionFactsResponse
+public class NutritionFactsValuesResponseModel
 {
     [JsonPropertyName("referenceAmount")]
     public int ReferenceAmount { get; set; } = 100;
@@ -25,4 +25,7 @@ public class NutritionFactsResponse
 
     [JsonPropertyName("protein")]
     public int GrammsProtein { get; set; }
+
+    [JsonPropertyName("fiber")]
+    public int GrammsFiber { get; set; }
 }

@@ -2,7 +2,7 @@
 
 namespace MenuMaker.Api.Models.ResponseModels;
 
-public class NutritionFactsResponseModel
+public class NutritionFactsGrResponseModel
 {
     public class NutritionValues
     {
