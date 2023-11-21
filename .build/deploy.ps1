@@ -1,0 +1,1 @@
+kubectl apply -f ./src/infrastructure/raspi/api-deployment.yml
