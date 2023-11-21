@@ -19,7 +19,6 @@ public class RecipesContext : DbContext, IUnitOfWork<RecipesContext>
         new IngredientEntityConfiguration().Configure(modelBuilder.Entity<Ingredient>());
         new GroceryEntityConfiguration().Configure(modelBuilder.Entity<Grocery>());
         new GroceryCategoryEntityConfiguration().Configure(modelBuilder.Entity<GroceryCategory>());
-        new NutritionFactsEntityConfiguration().Configure(modelBuilder.Entity<NutritionFacts>());
     }
 
     public async Task SaveAsync()

@@ -46,9 +46,6 @@ public class RecipesService : IRecipesService
                 q.Include(r => r.Ingredients)
                     .ThenInclude(i => i.Grocery)
                     .ThenInclude(g => g.Category)
-                .Include(r => r.Ingredients)
-                    .ThenInclude(i=>i.Grocery)
-                    .ThenInclude(g => g.NutritionFacts)
                 );
         }
         spec.Skip(skip);

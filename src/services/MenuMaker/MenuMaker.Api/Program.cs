@@ -37,8 +37,6 @@ public class Program
         builder.Services
             .AddTransient<IGenericRepository<Recipe, int>, GenericRepository<Recipe, int, RecipesContext>>();
         builder.Services
-            .AddTransient<IGenericRepository<NutritionFacts, int>, GenericRepository<NutritionFacts, int, RecipesContext>>();
-        builder.Services
             .AddTransient<IGenericRepository<Grocery, int>, GenericRepository<Grocery, int, RecipesContext>>();
         builder.Services.AddScoped<IUnitOfWork<RecipesContext>, RecipesContext>();
 

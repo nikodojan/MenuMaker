@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MenuMaker.Infrastructure.Persistence.EntityConfigurations;
-internal class NutritionFactsEntityConfiguration : IEntityTypeConfiguration<NutritionFacts>
+internal class NutritionFactsEntityConfiguration
 {
-    public void Configure(EntityTypeBuilder<NutritionFacts> builder)
-    {
-        builder.OwnsOne(nf => nf.ServingSize);
-    }
+    //public void Configure(EntityTypeBuilder<NutritionFacts> builder)
+    //{
+    //    builder.OwnsOne(nf => nf.ServingSize);
+    //}
 }

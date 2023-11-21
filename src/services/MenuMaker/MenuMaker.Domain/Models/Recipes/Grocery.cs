@@ -14,6 +14,6 @@ public class Grocery : Entity<int>
 
     public string StandardUnit { get; set; }
 
-    public virtual NutritionFacts? NutritionFacts { get; set; }
+    public virtual NutritionFacts NutritionFacts { get; set; }
 }
 

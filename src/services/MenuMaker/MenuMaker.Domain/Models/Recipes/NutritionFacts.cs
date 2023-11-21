@@ -1,16 +1,13 @@
-﻿using MenuMaker.Domain.Common;
-using MenuMaker.Domain.Models.Recipes.ValueObjects;
+﻿using MenuMaker.Domain.Models.Recipes.ValueObjects;
 
 namespace MenuMaker.Domain.Models.Recipes;
 
-public class NutritionFacts : Entity<int>
+public class NutritionFacts
 {
     public NutritionFacts()
     {
 
     }
-
-    public int GroceryId { get; init; }
 
     public UnitValue ServingSize { get; set; }
         = new UnitValue(RecipeConstants.Units.Gramms, 0);
@@ -27,12 +24,10 @@ public class NutritionFacts : Entity<int>
 
     public double GrammsFiber { get; set; }
 
-    public static NutritionFacts operator+(NutritionFacts a, NutritionFacts b)
+    public static NutritionFacts operator +(NutritionFacts a, NutritionFacts b)
     {
         return new NutritionFacts()
         {
-            Id = 0,
-            GroceryId = 0,
             ServingSize = a.ServingSize,
             Calories = a.Calories + b.Calories,
             GrammsFat = a.GrammsFat + b.GrammsFat,
