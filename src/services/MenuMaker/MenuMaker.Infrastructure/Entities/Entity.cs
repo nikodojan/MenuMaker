@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MenuMaker.Domain.Common;
+namespace MenuMaker.Infrastructure.Entities;
 
 public abstract class Entity<TId> where TId : notnull
 {

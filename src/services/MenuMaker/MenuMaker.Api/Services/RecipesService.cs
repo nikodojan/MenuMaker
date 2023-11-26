@@ -1,5 +1,7 @@
 ﻿using MenuMaker.Api.DTOs;
 using MenuMaker.Api.Mapper;
+using MenuMaker.Domain.Filters;
+using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Domain.Models.Recipes.ValueObjects;
 using MenuMaker.Infrastructure.Persistence;
@@ -22,16 +24,6 @@ public class RecipesService : IRecipesService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IEnumerable<RecipeResponseModel>> GetRecipes(ISpecification<Recipe> spec)
-    {
-        var recipes = await _recipesRepository.FindWithSpecification(spec);
-        var mapper = new RecipeMapper();
-        
-        var recipeResponseModels = recipes.Select(r=> mapper.ToRecipeResponseModel(r));
-
-        return recipeResponseModels;
-    }
-
     public async Task<IEnumerable<RecipeResponseModel>> GetRecipes(bool includeIngredients, int skip, int take)
     {
         // Nutrition facts should be fetched and calculated in any case
@@ -39,19 +31,9 @@ public class RecipesService : IRecipesService
         // But then it fetches ingredients anyways, so just always fetch?
         // Or live without NF 
 
-        var spec = new BaseSpecification<Recipe>();
-        if (includeIngredients)
-        {
-            spec.AddInclude(q =>
-                q.Include(r => r.Ingredients)
-                    .ThenInclude(i => i.Grocery)
-                    .ThenInclude(g => g.Category)
-                );
-        }
-        spec.Skip(skip);
-        if (take > 0) { spec.Take(take); }
+        var filter = new RecipeFilter(includeIngredients, skip, take);
 
-        var recipes = await _recipesRepository.FindWithSpecification(spec);
+        var recipes = await _recipesRepository.GetRecipesWithFilter(filter);
         var mapper = new RecipeMapper();
         var recipeResponseModels = recipes.Select(r => mapper.ToRecipeResponseModel(r)).ToList();
 

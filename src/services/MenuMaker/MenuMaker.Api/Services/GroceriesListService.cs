@@ -1,4 +1,5 @@
 ﻿using MenuMaker.Api.Models.ResponseModels;
+using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Infrastructure.Repositories;
 using MenuMaker.Infrastructure.Repositories.Specifications;
@@ -20,55 +21,55 @@ public class GroceriesListService : IGroceriesListService
     {
         var ingredients = new List<Ingredient>();
 
-        foreach (int id in recipeIds)
-        {
-            var spec = new BaseSpecification<Recipe>(recipe => recipe.Id == id);
-            spec.AddInclude(q =>
-                q.Include(r => r.Ingredients)
-                    .ThenInclude(i => i.Grocery)
-                    .ThenInclude(g => g.Category)
-                );
+        //foreach (int id in recipeIds)
+        //{
+        //    var spec = new BaseSpecification<Recipe>(recipe => recipe.Id == id);
+        //    spec.AddInclude(q =>
+        //        q.Include(r => r.Ingredients)
+        //            .ThenInclude(i => i.Grocery)
+        //            .ThenInclude(g => g.Category)
+        //        );
 
-            var recipes = await _recipesRepository.FindWithSpecification(spec);
+        //    var recipes = await _recipesRepository.FindWithSpecification(spec);
 
-            if (recipes.Any() && recipes.First() != null)
-            {
-                ingredients.AddRange(recipes.First().Ingredients);
-            }  
-        }
+        //    if (recipes.Any() && recipes.First() != null)
+        //    {
+        //        ingredients.AddRange(recipes.First().Ingredients);
+        //    }  
+        //}
 
-        var groupedByGrocery = ingredients.GroupBy(
-            keySelector: e => e.Grocery,
-            elementSelector: e => e,
-            resultSelector: (key, value) => new { Grocery = key, Selection = value })
-            .ToDictionary(e => e.Grocery, e => e.Selection);
+        //var groupedByGrocery = ingredients.GroupBy(
+        //    keySelector: e => e.Grocery,
+        //    elementSelector: e => e,
+        //    resultSelector: (key, value) => new { Grocery = key, Selection = value })
+        //    .ToDictionary(e => e.Grocery, e => e.Selection);
 
-        var groupedByGroceryAndUnit = new Dictionary<Grocery, Dictionary<string?, IEnumerable<Ingredient>>?>();
+        //var groupedByGroceryAndUnit = new Dictionary<Grocery, Dictionary<string?, IEnumerable<Ingredient>>?>();
 
-        foreach (var e in groupedByGrocery)
-        {
-            var byUnit = e.Value
-                .GroupBy(
-                    i => i.Unit,
-                    e => e,
-                    resultSelector: (key, value) => new { Grocery = key, Selection = value })
-                .ToDictionary(e => e.Grocery, e => e.Selection);
+        //foreach (var e in groupedByGrocery)
+        //{
+        //    var byUnit = e.Value
+        //        .GroupBy(
+        //            i => i.Unit,
+        //            e => e,
+        //            resultSelector: (key, value) => new { Grocery = key, Selection = value })
+        //        .ToDictionary(e => e.Grocery, e => e.Selection);
 
-            groupedByGroceryAndUnit.Add(e.Key, byUnit);
-        }
+        //    groupedByGroceryAndUnit.Add(e.Key, byUnit);
+        //}
 
-        var resultList = new List<GroceryListItem>();
+        //var resultList = new List<GroceryListItem>();
 
-        foreach (var grocery in groupedByGroceryAndUnit)
-        {
-            foreach (var unit in grocery.Value)
-            {
-                var sum = unit.Value.Sum(v => v.Amount);
-                var rec = new GroceryListItem(grocery.Key.NameSelectable, sum, unit.Key);
-                resultList.Add(rec);
-            }
-        }
+        //foreach (var grocery in groupedByGroceryAndUnit)
+        //{
+        //    foreach (var unit in grocery.Value)
+        //    {
+        //        var sum = unit.Value.Sum(v => v.Amount);
+        //        var rec = new GroceryListItem(grocery.Key.NameSelectable, sum, unit.Key);
+        //        resultList.Add(rec);
+        //    }
+        //}
 
-        return resultList;
+        return null;
     }
 }

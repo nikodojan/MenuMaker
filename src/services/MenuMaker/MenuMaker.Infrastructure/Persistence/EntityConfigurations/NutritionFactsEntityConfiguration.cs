@@ -1,5 +1,4 @@
-﻿using MenuMaker.Domain.Models.Recipes;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace MenuMaker.Infrastructure.Persistence.EntityConfigurations;

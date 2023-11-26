@@ -1,12 +1,10 @@
-﻿using MenuMaker.Domain.Common;
+﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace MenuMaker.Domain.Models.Recipes;
+namespace MenuMaker.Infrastructure.Entities.Recipes;
 
-public class Ingredient
+public class Ingredient : Entity<int>
 {
-    public int Id { get; set; }
-
     public double? Amount { get; set; }
 
     public string? Unit { get; set; }

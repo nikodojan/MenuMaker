@@ -1,12 +1,9 @@
-﻿using MenuMaker.Domain.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MenuMaker.Domain.Models.Recipes;
+namespace MenuMaker.Infrastructure.Entities.Recipes;
 
-public class Recipe
+public class Recipe : Entity<int>
 {
-    public int Id { get; set; }
-
     [Required]
     [StringLength(50)]
     public string Title { get; set; }
@@ -27,8 +24,4 @@ public class Recipe
 
     public virtual List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 
-    public override string ToString()
-    {
-        return $"Recipe for {Title}";
-    }
 }

@@ -1,4 +1,5 @@
 using MenuMaker.Api.Services;
+using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Repositories;
@@ -34,8 +35,8 @@ public class Program
         });
 
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
-        builder.Services
-            .AddTransient<IGenericRepository<Recipe, int>, GenericRepository<Recipe, int, RecipesContext>>();
+        //builder.Services
+        //    .AddTransient<IGenericRepository<Recipe, int>, GenericRepository<Recipe, int, RecipesContext>>();
         builder.Services
             .AddTransient<IGenericRepository<Grocery, int>, GenericRepository<Grocery, int, RecipesContext>>();
         builder.Services.AddScoped<IUnitOfWork<RecipesContext>, RecipesContext>();

@@ -1,4 +1,4 @@
-﻿using MenuMaker.Domain.Models.Recipes;
+﻿using MenuMaker.Infrastructure.Entities.Recipes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -25,7 +25,9 @@ internal class GroceryEntityConfiguration : IEntityTypeConfiguration<Grocery>
                     s=>
                     {
                         s.Property(s => s.Amount).HasColumnName(NfPrefix + "Serving_" + nameof(NutritionFacts.ServingSize.Amount));
-                        s.Property(s => s.Unit).HasColumnName(NfPrefix + "Serving_" + nameof(NutritionFacts.ServingSize.Unit));
+                        s.Property(s => s.Unit)
+                            .HasColumnName(NfPrefix + "Serving_" + nameof(NutritionFacts.ServingSize.Unit))
+                            .HasDefaultValue<string>("g");
                     });
             });
 

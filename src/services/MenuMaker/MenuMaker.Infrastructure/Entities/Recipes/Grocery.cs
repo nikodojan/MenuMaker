@@ -1,0 +1,21 @@
+﻿
+
+namespace MenuMaker.Infrastructure.Entities.Recipes;
+
+public class Grocery : Entity<int>
+{
+    public int Id { get; set; }
+
+    public string NameSelectable { get; set; } = string.Empty;
+
+    public string? NameSingular { get; set; }
+
+    public string? NamePlural { get; set; }
+
+    public GroceryCategory Category { get; set; }
+
+    public string StandardUnit { get; set; }
+
+    public virtual NutritionFacts NutritionFacts { get; set; }
+}
+

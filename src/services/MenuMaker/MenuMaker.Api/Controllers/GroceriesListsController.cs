@@ -16,7 +16,7 @@ public class GroceriesListsController : ControllerBase
         _groceriesListService = groceriesListService;
     }
 
-    [HttpGet]
+
     public async Task<IActionResult> Get([FromQuery] string recipeIds)
     {
         var validator = new RecipeListParameterValidator();

@@ -1,9 +1,9 @@
-﻿using MenuMaker.Domain.Common;
+﻿namespace MenuMaker.Domain.Models.Recipes;
 
-namespace MenuMaker.Domain.Models.Recipes;
-
-public class GroceryCategory : Entity<int>
+public class GroceryCategory
 {
+    public int Id { get; set; }
+
     public string Name { get; set; }
 }
 

@@ -1,8 +1,8 @@
 ﻿namespace MenuMaker.Domain.Models.Recipes;
-internal class RecipeConstants
+public class RecipeConstants
 {
     public const double StandardServing = 100;
-    internal class Units
+    public class Units
     {
         public const string Gramms = "g";
         public const string Milliliters = "ml";

@@ -1,4 +1,4 @@
-﻿using MenuMaker.Domain.Common;
+﻿using MenuMaker.Infrastructure.Entities;
 using MenuMaker.Infrastructure.Repositories.Specifications;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;

@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MenuMaker.Infrastructure.Repositories.Specifications;
 public static class DbSetSpecificationExtension
@@ -38,7 +32,7 @@ public static class DbSetSpecificationExtension
             }
 
             query = query.Skip(spec.SkipValue ?? 0);
-            
+
             query = spec.Includes.Aggregate(query, (current, include) => include(current));
 
             return query;

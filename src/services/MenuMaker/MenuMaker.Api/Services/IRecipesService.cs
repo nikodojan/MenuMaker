@@ -1,11 +1,7 @@
 ﻿using MenuMaker.Api.DTOs;
-using MenuMaker.Domain.Models.Recipes;
-using MenuMaker.Infrastructure.Repositories.Specifications;
 
 namespace MenuMaker.Api.Services;
 public interface IRecipesService
 {
-    Task<IEnumerable<RecipeResponseModel>> GetRecipes(ISpecification<Recipe> spec);
-    Task<double> GetCalories(int id);
     Task<IEnumerable<RecipeResponseModel>> GetRecipes(bool includeIngredients, int skip, int take);
 }
