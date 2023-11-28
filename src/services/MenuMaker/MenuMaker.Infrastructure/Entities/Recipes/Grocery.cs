@@ -4,8 +4,6 @@ namespace MenuMaker.Infrastructure.Entities.Recipes;
 
 public class Grocery : Entity<int>
 {
-    public int Id { get; set; }
-
     public string NameSelectable { get; set; } = string.Empty;
 
     public string? NameSingular { get; set; }

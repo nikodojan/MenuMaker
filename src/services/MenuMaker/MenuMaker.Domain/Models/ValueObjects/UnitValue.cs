@@ -1,4 +1,4 @@
-﻿namespace MenuMaker.Domain.Models.Recipes.ValueObjects;
+﻿namespace MenuMaker.Domain.Models.ValueObjects;
 
 public class UnitValue
 {

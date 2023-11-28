@@ -3,7 +3,7 @@ using MenuMaker.Api.Mapper;
 using MenuMaker.Domain.Filters;
 using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Recipes;
-using MenuMaker.Domain.Models.Recipes.ValueObjects;
+using MenuMaker.Domain.Models.ValueObjects;
 using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Repositories;
 using MenuMaker.Infrastructure.Repositories.Specifications;

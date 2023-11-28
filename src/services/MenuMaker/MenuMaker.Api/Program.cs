@@ -35,11 +35,9 @@ public class Program
         });
 
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
-        builder.Services.AddTransient<IGroceriesRepositorys, GroceryRepository>();
-        //builder.Services
-        //    .AddTransient<IGenericRepository<Recipe, int>, GenericRepository<Recipe, int, RecipesContext>>();
-        //builder.Services
-        //    .AddTransient<IGenericRepository<Grocery, int>, GenericRepository<Grocery, int, RecipesContext>>();
+        builder.Services.AddTransient<IGroceriesRepository, GroceriesRepository>();
+        builder.Services.AddTransient<IGroceriesService, GroceriesService>();
+
         builder.Services.AddScoped<IUnitOfWork<RecipesContext>, RecipesContext>();
 
         builder.Services.AddTransient<IRecipesService, RecipesService>();

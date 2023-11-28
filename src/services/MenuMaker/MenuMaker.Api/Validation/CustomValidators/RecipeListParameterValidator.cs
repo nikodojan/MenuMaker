@@ -14,24 +14,30 @@ public class RecipeListParameterValidator
 
         var numberStrings = trimmed.Split(',');
 
-        var ids = new List<int>();
+        var recipes = new List<(int, int)>();
 
-        foreach (var id in numberStrings)
+        foreach (var recipePortionPair in numberStrings)
         {
+            var values = recipePortionPair.Split(':');
+            if (values.Length != 2)
+                return new RecipeListParamaterValidationResult(false, $"The submittet recipeId:portion pair {values} is not in a valid format.", null);
+
             try
             {
-                ids.Add(Convert.ToInt32(id));
+                var recipeId = Convert.ToInt32(values[0]);
+                var portions = Convert.ToInt32(values[1]);
+                recipes.Add((recipeId, portions));
             }
             catch (FormatException)
             {
-                return new RecipeListParamaterValidationResult(false, $"{id} is not numbers", null);
+                return new RecipeListParamaterValidationResult(false, $"One of the values in {recipePortionPair}is not a number", null);
             }
             catch (OverflowException)
             {
-                return new RecipeListParamaterValidationResult(false, $"{id} is not numbers", null);
+                return new RecipeListParamaterValidationResult(false, $"One of the values in {recipePortionPair} is not a number", null);
             }
         }
 
-        return new RecipeListParamaterValidationResult(true, null, ids);
+        return new RecipeListParamaterValidationResult(true, null, recipes);
     }
 }

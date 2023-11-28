@@ -1,10 +1,11 @@
 ﻿using MenuMaker.Api.Models.ResponseModels;
+using MenuMaker.Domain.Filters;
 using MenuMaker.Domain.Interfaces;
+using MenuMaker.Domain.Models.Groceries;
 using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Infrastructure.Repositories;
 using MenuMaker.Infrastructure.Repositories.Specifications;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 
 namespace MenuMaker.Api.Services;
 
@@ -17,59 +18,49 @@ public class GroceriesListService : IGroceriesListService
         _recipesRepository = recipesRepository;
     }
 
-    public async Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<int> recipeIds)
+    public async Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<(int, int)> recipeIds)
     {
         var ingredients = new List<Ingredient>();
 
-        //foreach (int id in recipeIds)
-        //{
-        //    var spec = new BaseSpecification<Recipe>(recipe => recipe.Id == id);
-        //    spec.AddInclude(q =>
-        //        q.Include(r => r.Ingredients)
-        //            .ThenInclude(i => i.Grocery)
-        //            .ThenInclude(g => g.Category)
-        //        );
+        foreach (var tuple in recipeIds)
+        {
+            var recipe = await _recipesRepository.GetRecipe(tuple.Item1);
+            var portionedIngredients = recipe.CalculateIngredientsByPortions(tuple.Item2);
+            ingredients.AddRange(portionedIngredients);
+        }
 
-        //    var recipes = await _recipesRepository.FindWithSpecification(spec);
+        var groupedByGrocery = ingredients.GroupBy(
+            keySelector: e => e.Grocery,
+            elementSelector: e => e,
+            resultSelector: (key, value) => new { Grocery = key, Selection = value })
+            .ToDictionary(e => e.Grocery, e => e.Selection);
 
-        //    if (recipes.Any() && recipes.First() != null)
-        //    {
-        //        ingredients.AddRange(recipes.First().Ingredients);
-        //    }  
-        //}
+        var groupedByGroceryAndUnit = new Dictionary<Grocery, Dictionary<string?, IEnumerable<Ingredient>>?>();
 
-        //var groupedByGrocery = ingredients.GroupBy(
-        //    keySelector: e => e.Grocery,
-        //    elementSelector: e => e,
-        //    resultSelector: (key, value) => new { Grocery = key, Selection = value })
-        //    .ToDictionary(e => e.Grocery, e => e.Selection);
+        foreach (var e in groupedByGrocery)
+        {
+            var byUnit = e.Value
+                .GroupBy(
+                    i => i.Unit,
+                    e => e,
+                    resultSelector: (key, value) => new { Grocery = key, Selection = value })
+                .ToDictionary(e => e.Grocery, e => e.Selection);
 
-        //var groupedByGroceryAndUnit = new Dictionary<Grocery, Dictionary<string?, IEnumerable<Ingredient>>?>();
+            groupedByGroceryAndUnit.Add(e.Key, byUnit);
+        }
 
-        //foreach (var e in groupedByGrocery)
-        //{
-        //    var byUnit = e.Value
-        //        .GroupBy(
-        //            i => i.Unit,
-        //            e => e,
-        //            resultSelector: (key, value) => new { Grocery = key, Selection = value })
-        //        .ToDictionary(e => e.Grocery, e => e.Selection);
+        var resultList = new List<GroceryListItem>();
 
-        //    groupedByGroceryAndUnit.Add(e.Key, byUnit);
-        //}
+        foreach (var grocery in groupedByGroceryAndUnit)
+        {
+            foreach (var unit in grocery.Value)
+            {
+                var sum = unit.Value.Sum(v => v.Amount);
+                var rec = new GroceryListItem(grocery.Key.NameSelectable, sum, unit.Key);
+                resultList.Add(rec);
+            }
+        }
 
-        //var resultList = new List<GroceryListItem>();
-
-        //foreach (var grocery in groupedByGroceryAndUnit)
-        //{
-        //    foreach (var unit in grocery.Value)
-        //    {
-        //        var sum = unit.Value.Sum(v => v.Amount);
-        //        var rec = new GroceryListItem(grocery.Key.NameSelectable, sum, unit.Key);
-        //        resultList.Add(rec);
-        //    }
-        //}
-
-        return null;
+        return resultList;
     }
 }

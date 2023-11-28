@@ -1,6 +1,7 @@
-﻿using MenuMaker.Infrastructure.Entities.Recipes;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Ingredient = MenuMaker.Infrastructure.Entities.Recipes.Ingredient;
+using Grocery = MenuMaker.Infrastructure.Entities.Recipes.Grocery;
 
 namespace MenuMaker.Infrastructure.Persistence.EntityConfigurations;
 internal class IngredientEntityConfiguration : IEntityTypeConfiguration<Ingredient>

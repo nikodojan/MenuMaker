@@ -3,5 +3,5 @@
 namespace MenuMaker.Api.Services;
 public interface IGroceriesListService
 {
-    Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<int> recipeIds);
+    Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<(int, int)> recipeIds);
 }

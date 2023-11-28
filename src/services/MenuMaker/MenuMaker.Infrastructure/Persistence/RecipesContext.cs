@@ -1,6 +1,6 @@
-﻿using MenuMaker.Infrastructure.Persistence.EntityConfigurations;
+﻿using MenuMaker.Infrastructure.Entities.Recipes;
+using MenuMaker.Infrastructure.Persistence.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
-using MenuMaker.Infrastructure.Entities.Recipes;
 
 namespace MenuMaker.Infrastructure.Persistence;
 public class RecipesContext : DbContext, IUnitOfWork<RecipesContext>

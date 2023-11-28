@@ -1,4 +1,4 @@
-﻿using MenuMaker.Domain.Models.Recipes.ValueObjects;
+﻿using MenuMaker.Domain.Models.ValueObjects;
 using System.Text.Json.Serialization;
 
 namespace MenuMaker.Api.Models.ResponseModels;

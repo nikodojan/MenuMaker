@@ -1,4 +1,4 @@
-﻿namespace MenuMaker.Domain.Models.Recipes;
+﻿namespace MenuMaker.Domain.Models.Groceries;
 
 public class GroceryCategory
 {

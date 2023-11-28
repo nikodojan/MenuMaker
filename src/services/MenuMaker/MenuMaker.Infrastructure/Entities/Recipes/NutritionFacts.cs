@@ -1,5 +1,5 @@
-﻿using MenuMaker.Domain.Models.Recipes.ValueObjects;
-using MenuMaker.Domain.Models.Recipes;
+﻿using MenuMaker.Domain.Constants;
+using MenuMaker.Domain.Models.ValueObjects;
 
 namespace MenuMaker.Infrastructure.Entities.Recipes;
 

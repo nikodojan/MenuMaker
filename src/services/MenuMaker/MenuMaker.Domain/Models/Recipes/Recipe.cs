@@ -30,4 +30,20 @@ public class Recipe
     {
         return $"Recipe for {Title}";
     }
+
+    public List<Ingredient> CalculateIngredientsByPortions(int portions)
+    {
+        if (portions == Portions) 
+            return Ingredients;
+
+        var ingredients = new List<Ingredient>();
+
+        foreach (var ingr in Ingredients)
+        {
+            ingr.Amount = ingr.Amount / Portions * portions;
+            ingredients.Add(ingr);
+        }
+
+        return ingredients;
+    }
 }

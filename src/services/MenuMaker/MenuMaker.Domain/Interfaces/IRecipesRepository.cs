@@ -9,5 +9,4 @@ public interface IRecipesRepository
     Task<IEnumerable<Recipe>> GetRecipesWithFilter(RecipeFilter filter);
 
     Task<Recipe> GetRecipe(int id);
-
 }

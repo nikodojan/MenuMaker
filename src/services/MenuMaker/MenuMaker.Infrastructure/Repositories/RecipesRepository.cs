@@ -5,27 +5,36 @@ using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Mappers;
 using MenuMaker.Infrastructure.Repositories.Specifications;
 using Microsoft.EntityFrameworkCore;
+using MenuMaker.Infrastructure.Entities.Recipes;
+using Recipe = MenuMaker.Infrastructure.Entities.Recipes.Recipe;
 
 namespace MenuMaker.Infrastructure.Repositories;
-public class RecipesRepository : GenericRepository<Infrastructure.Entities.Recipes.Recipe, int, RecipesContext>, IRecipesRepository
+public class RecipesRepository : GenericRepository<Entities.Recipes.Recipe, int, RecipesContext>, IRecipesRepository
 {
     public RecipesRepository(RecipesContext context) : base(context)
     {
 
     }
 
-    public async Task<IEnumerable<Recipe>> GetAllRecipes()
+    public async Task<IEnumerable<Domain.Models.Recipes.Recipe>> GetAllRecipes()
     {
         var recipes = await GetAllAsync();
         return RecipeEntityMapper.MapToRecipeModelsList(recipes.ToList());
     }
 
-    public Task<Recipe> GetRecipe(int id)
+    public async Task<Domain.Models.Recipes.Recipe> GetRecipe(int id)
     {
-        throw new NotImplementedException();
+        var spec = new BaseSpecification<Recipe>(r=>r.Id == id);
+        spec.AddInclude(q =>
+            q.Include(r => r.Ingredients)
+                .ThenInclude(i => i.Grocery)
+                .ThenInclude(g => g.Category)
+            );
+        var recipeEntity = (await FindWithSpecification(spec)).FirstOrDefault();
+        return RecipeEntityMapper.MapToRecipeModel(recipeEntity);
     }
 
-    public async Task<IEnumerable<Recipe>> GetRecipesWithFilter(RecipeFilter filter)
+    public async Task<IEnumerable<Domain.Models.Recipes.Recipe>> GetRecipesWithFilter(RecipeFilter filter)
     {
         var spec = new BaseSpecification<Entities.Recipes.Recipe>();
         if (filter.IncludeIngredients)
@@ -42,4 +51,12 @@ public class RecipesRepository : GenericRepository<Infrastructure.Entities.Recip
         var recipes = await FindWithSpecification(spec);
         return RecipeEntityMapper.MapToRecipeModelsList(recipes.ToList());
     }
+
+    public async Task<IEnumerable<Domain.Models.Recipes.Recipe>> FindRecipesWithSpecification(ISpecification<Recipe> spec)
+    {
+        var recipeEntities = await FindWithSpecification(spec);
+        var recipeModels = RecipeEntityMapper.MapToRecipeModelsList(recipeEntities.ToList());
+        return recipeModels;
+    }
+    
 }

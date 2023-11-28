@@ -19,4 +19,5 @@ public class RecipeFilter
     public int Take { get; set; }
     public string? Name { get; }
     public bool IncludeIngredients { get; set; } = false;
+    public int IdCriteria { get; set; }
 }

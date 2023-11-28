@@ -1,4 +1,4 @@
-﻿namespace MenuMaker.Domain.Models.Recipes;
+﻿namespace MenuMaker.Domain.Constants;
 public class RecipeConstants
 {
     public const double StandardServing = 100;

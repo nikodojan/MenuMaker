@@ -1,8 +1,7 @@
-﻿using MenuMaker.Api.Services;
+﻿using MenuMaker.Api.Models.RequestModels;
+using MenuMaker.Api.Services;
 using MenuMaker.Api.Validations.CustomValidators;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MenuMaker.Api.Controllers;
 [Route("api/v1/[controller]")]
@@ -16,7 +15,7 @@ public class GroceriesListsController : ControllerBase
         _groceriesListService = groceriesListService;
     }
 
-
+    [HttpGet]
     public async Task<IActionResult> Get([FromQuery] string recipeIds)
     {
         var validator = new RecipeListParameterValidator();
@@ -29,5 +28,12 @@ public class GroceriesListsController : ControllerBase
         var groecriesList = await _groceriesListService.GetGroceryList(validationResult.RecipeIds);
 
         return Ok(groecriesList);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> GenerateGroceriesList([FromBody] GroceriesListRequestModel[] recipesAndPortions)
+    {
+
+        return Ok(recipesAndPortions);
     }
 }
