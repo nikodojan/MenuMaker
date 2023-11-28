@@ -1,5 +1,4 @@
-﻿using MenuMaker.Domain.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MenuMaker.Domain.Models.Recipes;
 

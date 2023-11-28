@@ -1,8 +1,7 @@
-﻿using MenuMaker.Domain.Common;
-
+﻿
 namespace MenuMaker.Domain.Models.Recipes;
 
-public class Grocery : Entity<int>
+public class Grocery
 {
     public string NameSelectable { get; set; } = string.Empty;
 
