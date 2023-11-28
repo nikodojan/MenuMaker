@@ -1,4 +1,5 @@
-﻿using MenuMaker.Api.Models.ResponseModels;
+﻿using MenuMaker.Api.Models.RequestModels;
+using MenuMaker.Api.Models.ResponseModels;
 using MenuMaker.Domain.Filters;
 using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Groceries;
@@ -18,14 +19,14 @@ public class GroceriesListService : IGroceriesListService
         _recipesRepository = recipesRepository;
     }
 
-    public async Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<(int, int)> recipeIds)
+    public async Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<GroceriesListRequestModel> listRequests)
     {
         var ingredients = new List<Ingredient>();
 
-        foreach (var tuple in recipeIds)
+        foreach (var request in listRequests)
         {
-            var recipe = await _recipesRepository.GetRecipe(tuple.Item1);
-            var portionedIngredients = recipe.CalculateIngredientsByPortions(tuple.Item2);
+            var recipe = await _recipesRepository.GetRecipe(request.RecipeId);
+            var portionedIngredients = recipe.CalculateIngredientsByPortions(request.Portions);
             ingredients.AddRange(portionedIngredients);
         }
 
@@ -62,5 +63,16 @@ public class GroceriesListService : IGroceriesListService
         }
 
         return resultList;
+    }
+
+    public async Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<(int, short)> idPortionsTuples)
+    {
+        var recipesAndPortions = new List<GroceriesListRequestModel>();
+        foreach (var tuple in idPortionsTuples)
+        {
+            recipesAndPortions.Add(new GroceriesListRequestModel(tuple.Item1, tuple.Item2));
+        }
+
+        return await GetGroceryList(recipesAndPortions);
     }
 }

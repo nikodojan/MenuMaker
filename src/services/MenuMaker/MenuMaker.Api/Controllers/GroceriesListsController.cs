@@ -20,20 +20,21 @@ public class GroceriesListsController : ControllerBase
     {
         var validator = new RecipeListParameterValidator();
         var validationResult = await validator.Validate(recipeIds);
+
         if (!validationResult.IsValid)
         {
             return BadRequest(validationResult.Message);
         }
 
-        var groecriesList = await _groceriesListService.GetGroceryList(validationResult.RecipeIds);
+        var groceriesList = await _groceriesListService.GetGroceryList(validationResult.RecipeIds);
 
-        return Ok(groecriesList);
+        return Ok(groceriesList);
     }
 
     [HttpPost]
     public async Task<IActionResult> GenerateGroceriesList([FromBody] GroceriesListRequestModel[] recipesAndPortions)
     {
-
-        return Ok(recipesAndPortions);
+        var groceriesList = await _groceriesListService.GetGroceryList(recipesAndPortions);
+        return Ok(groceriesList);
     }
 }

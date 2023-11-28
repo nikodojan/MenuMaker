@@ -16,5 +16,6 @@ public class Grocery
     public string StandardUnit { get; set; }
 
     public NutritionFacts NutritionFacts { get; set; }
+    public bool HasNutritionValues { get; set; }
 }
 

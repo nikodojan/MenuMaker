@@ -2,10 +2,10 @@
 
 namespace MenuMaker.Api.Models.RequestModels;
 
-public class GroceriesListRequestModel
+public class GroceriesListRequestModel(int recipeId, short portions)
 {
     [JsonPropertyName("recipeId")]
-    public int RecipeId { get; set; }
+    public int RecipeId { get; } = recipeId;
     [JsonPropertyName("portions")]
-    public short Portions { get; set; }
+    public short Portions { get; } = portions;
 }

@@ -14,7 +14,7 @@ public class RecipeListParameterValidator
 
         var numberStrings = trimmed.Split(',');
 
-        var recipes = new List<(int, int)>();
+        var recipes = new List<(int, short)>();
 
         foreach (var recipePortionPair in numberStrings)
         {
@@ -25,7 +25,7 @@ public class RecipeListParameterValidator
             try
             {
                 var recipeId = Convert.ToInt32(values[0]);
-                var portions = Convert.ToInt32(values[1]);
+                var portions = Convert.ToInt16(values[1]);
                 recipes.Add((recipeId, portions));
             }
             catch (FormatException)

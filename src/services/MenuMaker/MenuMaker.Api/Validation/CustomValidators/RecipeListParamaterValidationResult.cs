@@ -1,5 +1,5 @@
 ﻿namespace MenuMaker.Api.Validation.CustomValidators;
 
-public record RecipeListParamaterValidationResult(bool IsValid, string? Message, IEnumerable<(int, int)>? RecipeIds)
+public record RecipeListParamaterValidationResult(bool IsValid, string? Message, IEnumerable<(int, short)>? RecipeIds)
 {
 }
