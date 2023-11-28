@@ -15,4 +15,4 @@ jobs:
         with:
           dotnet-version: '8'
       - name: Build Solution
-        run: dotnet build MenuMaker.sln
+        run: dotnet build src/services/MenuMaker/MenuMaker.sln
