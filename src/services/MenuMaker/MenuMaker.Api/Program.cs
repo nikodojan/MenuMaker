@@ -34,6 +34,21 @@ public class Program
             }
         });
 
+        //builder.Services.AddDbContext<RecipesContext>(options =>
+        //{
+        //    var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
+
+        //    options.UseSqlServer(cs, sqlServerOptions =>
+        //    {
+        //        sqlServerOptions.MigrationsAssembly("MenuMaker.Infrastructure");
+        //    });
+
+        //    if (builder.Environment.IsDevelopment())
+        //    {
+        //        options.EnableSensitiveDataLogging();
+        //    }
+        //});
+
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
         builder.Services.AddTransient<IGroceriesRepository, GroceriesRepository>();
         builder.Services.AddTransient<IGroceriesService, GroceriesService>();
