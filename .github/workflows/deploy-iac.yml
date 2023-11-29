@@ -24,7 +24,7 @@ jobs:
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZ_SUBSCRIPTION_ID }}
-        #resourceGroupName: ${{ env.AZ_MM_RG }}
+        resourceGroupName: ${{ env.AZ_MM_RG }}
         template: .src/infra/azure/rg.bicep
         #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
         failOnStdErr: false
