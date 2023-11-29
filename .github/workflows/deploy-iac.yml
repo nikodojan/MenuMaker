@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy-infrastructure:
     runs-on: ubuntu-latest
     steps:
 
@@ -20,11 +20,11 @@ jobs:
         creds: ${{ secrets.AZ_CREDENTIALS }}
 
       # Deploy Bicep file
-    - name: Resource group ${{ env.AZ_MM_RG }}
+    - name: Resource group ${{ vars.AZ_MM_RG }}
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZ_SUBSCRIPTION_ID }}
-        resourceGroupName: ${{ env.AZ_MM_RG }}
+        resourceGroupName: ${{ vars.AZ_MM_RG }}
         template: .src/infra/azure/rg.bicep
         #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
         failOnStdErr: false
