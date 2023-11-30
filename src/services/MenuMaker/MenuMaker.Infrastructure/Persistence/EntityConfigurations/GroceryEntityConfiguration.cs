@@ -39,6 +39,8 @@ internal class GroceryEntityConfiguration : IEntityTypeConfiguration<Grocery>
             .Property<string>(nameof(Grocery.StandardUnit))
             .HasDefaultValue<string>("g");
 
+        builder.Property<string>(nameof(Grocery.NameSelectable)).HasMaxLength(250);
+
         builder.HasIndex(g => g.NameSelectable).IsUnique();
     }
 }

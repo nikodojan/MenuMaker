@@ -3,8 +3,8 @@ using System;
 using MenuMaker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,38 +18,39 @@ namespace MenuMaker.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Grocery", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<bool>("HasNutritionValues")
-                        .HasColumnType("boolean");
+                        .HasColumnType("bit");
 
                     b.Property<string>("NamePlural")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameSelectable")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("NameSingular")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StandardUnit")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasDefaultValue("g");
 
                     b.HasKey("Id");
@@ -66,13 +67,13 @@ namespace MenuMaker.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -83,29 +84,29 @@ namespace MenuMaker.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<double?>("Amount")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("Description")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("GroceryId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("PartOfDish")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("RecipeId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("Unit")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -120,33 +121,33 @@ namespace MenuMaker.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ImgPath")
                         .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Instructions")
                         .IsRequired()
                         .HasMaxLength(2000)
-                        .HasColumnType("character varying(2000)");
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<int?>("Portions")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int?>("TimeInMinutes")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -164,30 +165,30 @@ namespace MenuMaker.Infrastructure.Migrations
                     b.OwnsOne("MenuMaker.Infrastructure.Entities.Recipes.NutritionFacts", "NutritionFacts", b1 =>
                         {
                             b1.Property<int>("GroceryId")
-                                .HasColumnType("integer");
+                                .HasColumnType("int");
 
                             b1.Property<double>("Calories")
-                                .HasColumnType("double precision")
+                                .HasColumnType("float")
                                 .HasColumnName("NF_Calories");
 
                             b1.Property<double>("GrammsCarbonhydrates")
-                                .HasColumnType("double precision")
+                                .HasColumnType("float")
                                 .HasColumnName("NF_GrammsCarbonhydrates");
 
                             b1.Property<double>("GrammsFat")
-                                .HasColumnType("double precision")
+                                .HasColumnType("float")
                                 .HasColumnName("NF_GrammsFat");
 
                             b1.Property<double>("GrammsFiber")
-                                .HasColumnType("double precision")
+                                .HasColumnType("float")
                                 .HasColumnName("NF_GrammsFiber");
 
                             b1.Property<double>("GrammsProtein")
-                                .HasColumnType("double precision")
+                                .HasColumnType("float")
                                 .HasColumnName("NF_GrammsProtein");
 
                             b1.Property<double>("GrammsSugar")
-                                .HasColumnType("double precision")
+                                .HasColumnType("float")
                                 .HasColumnName("NF_GrammsSugar");
 
                             b1.HasKey("GroceryId");
@@ -200,16 +201,16 @@ namespace MenuMaker.Infrastructure.Migrations
                             b1.OwnsOne("MenuMaker.Domain.Models.ValueObjects.UnitValue", "ServingSize", b2 =>
                                 {
                                     b2.Property<int>("NutritionFactsGroceryId")
-                                        .HasColumnType("integer");
+                                        .HasColumnType("int");
 
                                     b2.Property<double>("Amount")
-                                        .HasColumnType("double precision")
+                                        .HasColumnType("float")
                                         .HasColumnName("NF_Serving_Amount");
 
                                     b2.Property<string>("Unit")
                                         .IsRequired()
                                         .ValueGeneratedOnAdd()
-                                        .HasColumnType("text")
+                                        .HasColumnType("nvarchar(max)")
                                         .HasDefaultValue("g")
                                         .HasColumnName("NF_Serving_Unit");
 

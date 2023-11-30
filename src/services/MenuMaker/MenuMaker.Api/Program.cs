@@ -20,27 +20,12 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<RecipesContext>(options =>
-        {
-            var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
-            options.UseNpgsql(cs, pgsqlOptions =>
-            {
-                pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
-            });
-
-            if (builder.Environment.IsDevelopment())
-            {
-                options.EnableSensitiveDataLogging();
-            }
-        });
-
         //builder.Services.AddDbContext<RecipesContext>(options =>
         //{
         //    var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
-
-        //    options.UseSqlServer(cs, sqlServerOptions =>
+        //    options.UseNpgsql(cs, pgsqlOptions =>
         //    {
-        //        sqlServerOptions.MigrationsAssembly("MenuMaker.Infrastructure");
+        //        pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
         //    });
 
         //    if (builder.Environment.IsDevelopment())
@@ -48,6 +33,21 @@ public class Program
         //        options.EnableSensitiveDataLogging();
         //    }
         //});
+
+        builder.Services.AddDbContext<RecipesContext>(options =>
+        {
+            var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
+
+            options.UseSqlServer(cs, sqlServerOptions =>
+            {
+                sqlServerOptions.MigrationsAssembly("MenuMaker.Infrastructure");
+            });
+
+            if (builder.Environment.IsDevelopment())
+            {
+                options.EnableSensitiveDataLogging();
+            }
+        });
 
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
         builder.Services.AddTransient<IGroceriesRepository, GroceriesRepository>();
