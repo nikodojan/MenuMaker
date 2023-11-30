@@ -25,19 +25,13 @@ param clientIpValue string = '147.78.30.245'
 param publicNetworkAccess string = 'Enabled'
 param requestedBackupStorageRedundancy string = 'Local'
 
-param minimalTlsVersion string = '1.2'
-param enableSqlLedger bool = false
-param availabilityZone string = 'NoPreference'
-param useFreeLimit bool = true
-param freeLimitExhaustionBehavior string = 'BillOverUsage'
-
 resource server 'Microsoft.Sql/servers@2021-05-01-preview' = {
   location: location
   tags: serverTags
   name: serverName
   properties: {
     version: '12.0'
-    minimalTlsVersion: minimalTlsVersion
+    minimalTlsVersion: '1.2'
     publicNetworkAccess: publicNetworkAccess
     administratorLogin: administratorLogin
     administratorLoginPassword: administratorLoginPassword
@@ -59,10 +53,10 @@ resource serverName_database 'Microsoft.Sql/servers/databases@2022-08-01-preview
     highAvailabilityReplicaCount: numberOfReplicas
     autoPauseDelay: autoPauseDelay
     requestedBackupStorageRedundancy: requestedBackupStorageRedundancy
-    isLedgerOn: enableSqlLedger
-    availabilityZone: availabilityZone
-    useFreeLimit: useFreeLimit
-    freeLimitExhaustionBehavior: freeLimitExhaustionBehavior
+    isLedgerOn: false
+    availabilityZone: 'NoPreference'
+    useFreeLimit: true
+    freeLimitExhaustionBehavior: 'BillOverUsage'
   }
   sku: {
     name: skuName
