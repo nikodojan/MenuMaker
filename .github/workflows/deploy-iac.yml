@@ -20,11 +20,11 @@ jobs:
         creds: ${{ secrets.AZ_CREDENTIALS }}
 
       # Deploy Bicep file
-    - name: Resource group ${{ vars.AZ_MM_RG }}
+    - name: PostgreSQL
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZ_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ vars.AZ_MM_RG }}
-        template: src/infra/azure/menumaker/rg.bicep
-        #parameters: 'storagePrefix=mystore storageSKU=Standard_LRS'
+        template: src/infra/azure/menumaker/postgresql-db.bicep
+        parameters: 'administratorLogin=${{ secrets.SQL_DB_LOGIN }} postgresqlAdminPassword=${{ secrets.SQL_DB_PASSWORD }}'
         failOnStdErr: false
