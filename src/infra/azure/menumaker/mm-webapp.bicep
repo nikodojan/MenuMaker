@@ -14,8 +14,6 @@ param numberOfWorkers string = '1'
 param currentStack string = 'dotnet'
 param phpVersion string = 'OFF'
 param netFrameworkVersion string = 'v8.0'
-param repoUrl string = 'https://github.com/nikodojan/MenuMaker'
-param branch string = 'main'
 
 @secure()
 param asDbConnectionString string = ''
