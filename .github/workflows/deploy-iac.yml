@@ -20,13 +20,14 @@ jobs:
         creds: ${{ secrets.AZ_CREDENTIALS }}
 
       # Deploy Bicep files
-    - name: PostgreSQL
+
+    - name: Database
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZ_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ vars.AZ_MM_RG }}
-        template: src/infra/azure/menumaker/postgresql-db.bicep
-        parameters: 'administratorLogin=${{ secrets.SQL_DB_LOGIN }} postgresqlAdminPassword=${{ secrets.SQL_DB_PASSWORD }}'
+        template: src/infra/azure/menumaker/sql-db.bicep
+        parameters: 'administratorLogin=${{ secrets.SQL_DB_LOGIN }} administratorLoginPassword=${{ secrets.SQL_DB_PASSWORD }}'
         failOnStdErr: false
 
     - name: MenuMakerAppService
