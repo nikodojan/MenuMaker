@@ -22,7 +22,7 @@
 #ENTRYPOINT ["dotnet", "MenuMaker.Api.dll"]
 
 # Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0-jammy-arm64v8
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-jammy-arm64v8
 EXPOSE 80
 EXPOSE 443
 

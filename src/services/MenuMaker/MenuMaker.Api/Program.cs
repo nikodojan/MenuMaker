@@ -15,32 +15,26 @@ public class Program
 
         // Add services to the container.
         builder.Configuration.AddEnvironmentVariables();
+
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", policy =>
+                policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+        });
+
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        //builder.Services.AddDbContext<RecipesContext>(options =>
-        //{
-        //    var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
-        //    options.UseNpgsql(cs, pgsqlOptions =>
-        //    {
-        //        pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
-        //    });
-
-        //    if (builder.Environment.IsDevelopment())
-        //    {
-        //        options.EnableSensitiveDataLogging();
-        //    }
-        //});
-
         builder.Services.AddDbContext<RecipesContext>(options =>
         {
             var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
-
-            options.UseSqlServer(cs, sqlServerOptions =>
+            options.UseNpgsql(cs, pgsqlOptions =>
             {
-                sqlServerOptions.MigrationsAssembly("MenuMaker.Infrastructure");
+                pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
             });
 
             if (builder.Environment.IsDevelopment())
@@ -48,6 +42,21 @@ public class Program
                 options.EnableSensitiveDataLogging();
             }
         });
+
+        //builder.Services.AddDbContext<RecipesContext>(options =>
+        //{
+        //    var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
+
+        //    options.UseSqlServer(cs, sqlServerOptions =>
+        //    {
+        //        sqlServerOptions.MigrationsAssembly("MenuMaker.Infrastructure");
+        //    });
+
+        //    if (builder.Environment.IsDevelopment())
+        //    {
+        //        options.EnableSensitiveDataLogging();
+        //    }
+        //});
 
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
         builder.Services.AddTransient<IGroceriesRepository, GroceriesRepository>();
@@ -71,11 +80,12 @@ public class Program
         //    app.UseSwaggerUI();
         //}
 
+
         app.UseSwagger();
         app.UseSwaggerUI();
 
         app.UseHttpsRedirection();
-
+        app.UseCors();
         app.UseAuthorization();
 
         app.MapControllers();
