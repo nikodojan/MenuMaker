@@ -15,10 +15,5 @@ export const routes: Routes = [
     path: 'recipes/:id',
     loadComponent: () => 
       import('./recipes/recipe/recipe.component').then(mod=>mod.RecipeComponent)
-  },
-  {
-    path: 'api',
-    loadComponent: () => 
-      import('./api/api/api.component').then(mod=>mod.ApiComponent)
   }
 ];

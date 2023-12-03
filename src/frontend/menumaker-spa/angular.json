@@ -98,8 +98,7 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
-              "node_modules/swagger-ui-dist/swagger-ui.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
