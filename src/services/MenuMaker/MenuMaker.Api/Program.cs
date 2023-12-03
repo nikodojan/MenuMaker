@@ -29,34 +29,39 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<RecipesContext>(options =>
+        if (builder.Environment.IsDevelopment())
         {
-            var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
-            options.UseNpgsql(cs, pgsqlOptions =>
+            builder.Services.AddDbContext<RecipesContext>(options =>
             {
-                pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
+                var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
+                options.UseNpgsql(cs, pgsqlOptions =>
+                {
+                    pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
+                });
+
+                if (builder.Environment.IsDevelopment())
+                {
+                    options.EnableSensitiveDataLogging();
+                }
             });
-
-            if (builder.Environment.IsDevelopment())
+        } 
+        else
+        {
+            builder.Services.AddDbContext<RecipesContext>(options =>
             {
-                options.EnableSensitiveDataLogging();
-            }
-        });
+                var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
 
-        //builder.Services.AddDbContext<RecipesContext>(options =>
-        //{
-        //    var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
+                options.UseSqlServer(cs, sqlServerOptions =>
+                {
+                    sqlServerOptions.MigrationsAssembly("MenuMaker.Infrastructure");
+                });
 
-        //    options.UseSqlServer(cs, sqlServerOptions =>
-        //    {
-        //        sqlServerOptions.MigrationsAssembly("MenuMaker.Infrastructure");
-        //    });
-
-        //    if (builder.Environment.IsDevelopment())
-        //    {
-        //        options.EnableSensitiveDataLogging();
-        //    }
-        //});
+                if (builder.Environment.IsDevelopment())
+                {
+                    options.EnableSensitiveDataLogging();
+                }
+            });
+        }
 
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
         builder.Services.AddTransient<IGroceriesRepository, GroceriesRepository>();
