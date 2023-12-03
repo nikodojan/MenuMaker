@@ -18,8 +18,6 @@ public class RecipeResponseModel
 
     public int? TimeInMinutes { get; init; }
 
-    public int Calories { get; init; }
-
     public NutritionFactsValuesResponseModel? NutritionFacts { get; set; } = null;
 
     public IEnumerable<IngredientResponseModel> Ingredients { get; set; } = new List<IngredientResponseModel>();

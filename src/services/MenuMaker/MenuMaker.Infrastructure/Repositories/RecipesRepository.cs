@@ -31,6 +31,10 @@ public class RecipesRepository : GenericRepository<Entities.Recipes.Recipe, int,
                 .ThenInclude(g => g.Category)
             );
         var recipeEntity = (await FindWithSpecification(spec)).FirstOrDefault();
+        if (recipeEntity == null)
+        {
+            return null;
+        }
         return RecipeEntityMapper.MapToRecipeModel(recipeEntity);
     }
 

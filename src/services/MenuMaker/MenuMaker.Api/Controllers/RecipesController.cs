@@ -25,4 +25,13 @@ public class RecipesController : ControllerBase
 
         return Ok(recipes);
     }
+
+    [HttpGet]
+    [Route("{id}")]
+    public async Task<IActionResult> GetRecipeByIt([FromRoute] int id)
+    {
+        var recipe = await _recipesService.GetRecipeById(id);
+        if (recipe == null) { return NotFound(); }
+        return Ok(recipe);
+    }
 }

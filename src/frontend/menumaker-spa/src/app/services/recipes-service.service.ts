@@ -17,8 +17,14 @@ export class RecipesService {
     includeIngredients : boolean = false, 
     skip: number = 0, 
     take: number = 0): Observable<Recipe[]> { 
-    const query = `?includeIngredients=${includeIngredients}&skip=${skip}&take=${take}`;
-    return this.httpClient.get<Recipe[]>(this.baseUrl + query);
+      const query = `?includeIngredients=${includeIngredients}&skip=${skip}&take=${take}`;
+      return this.httpClient.get<Recipe[]>(this.baseUrl + query);
   }
+
+  getRecipeById(id: number) : Observable<Recipe> {
+    return this.httpClient.get<Recipe>(this.baseUrl + '/' + id);
+  }
+
+  
 
 }

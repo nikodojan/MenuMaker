@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row justify-content-between">
+    <div class="col align-items-start">
+      <div>
+        <h3>{{recipe.title}}</h3>
+        <p>{{recipe.description}}</p>
+      </div>
+    </div>
+    <div class="col d-flex align-content-end">
+      <div class="ms-auto">
+        <add-recipe-to-list-button [recipeId]="recipe.id" [recipeTitle]="recipe.title"/>
+      </div>
+      
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-6 col-md-4">
+      <img class="front-image" src="{{image}}">
+    </div>
+  </div>
+
+  <div class="row">
+    <p>
+      Portions: {{recipe.portions}}
+    </p>
+    <p>
+      Time: {{recipe.timeInMinutes}}
+    </p>
+  </div>
+  
+  <!-- ingredients -->
+  <div class="row">
+    <div class="col">
+      <ul class="list-unstyled">
+        @for(ingr of recipe.ingredients; track ingr.id){
+          <li>
+            <div class="row">
+              <div class="col" style="width: 4rem;">
+                {{ingr.amount}}
+              </div>
+              <div class="col" style="width: 4rem;">
+                {{ingr.unit}}
+              </div>
+              <div class="col" style="width: 10rem;">
+                {{ingr.grocery.name}}
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- instructions -->
+  <div class="row">
+    <p>
+      {{recipe.instructions}}
+    </p>
+  </div>
+
+
+</div>
+

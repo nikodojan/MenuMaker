@@ -70,6 +70,7 @@ public class Program
         builder.Services.AddHealthChecks()
             .AddDbContextCheck<RecipesContext>();
 
+        builder.Services.AddHttpLogging(options=> { });
 
         var app = builder.Build();
 
@@ -77,8 +78,6 @@ public class Program
         if (app.Environment.IsDevelopment())
         {
             app.UseHttpLogging();
-            //app.UseSwagger();
-            //app.UseSwaggerUI();
         }
 
         app.UseSwagger();

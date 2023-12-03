@@ -3,13 +3,15 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { RecipespageComponent } from '../recipes/recipespage/recipespage.component';
+import { ListcontainerComponent } from '../sidelist/listcontainer/listcontainer.component';
+import { RouterOutlet, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'main-layout',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatSidenavModule, RecipespageComponent],
+  imports: [RouterOutlet, RouterLink, MatCardModule, MatButtonModule, MatSidenavModule, RecipespageComponent, ListcontainerComponent],
   templateUrl: './main-layout.component.html',
-  styleUrl: './main-layout.component.sass'
+  styleUrl: './main-layout.component.scss'
 })
 export class MainLayoutComponent {
 

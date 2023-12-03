@@ -1,0 +1,7 @@
+<ul class="list-unstyled">
+  @for (item of groceriesList | async; track (item.groceryName + item.unit)) {
+    <li>
+      {{item.amount}} {{item.unit}} {{item.groceryName}}
+    </li>
+  }
+</ul>

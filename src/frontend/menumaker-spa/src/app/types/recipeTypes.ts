@@ -1,10 +1,13 @@
 export interface Recipe {
   id: number,
   title: string,
+  imgPath: string | null,
   description: string | null,
   portions: number,
-  minutes: number,
-  ingredients: Ingredient[] | null
+  timeInMinutes: number,
+  ingredients: Ingredient[] | null,
+  instructions: string,
+  nutritionFacts: NutritionFacts | null
 }
 
 export interface Ingredient {
@@ -13,7 +16,7 @@ export interface Ingredient {
   unit: string | null,
   description: string | null,
   partOfDish: string | null
-  grocery: object
+  grocery: Grocery
 }
 
 export interface Grocery {

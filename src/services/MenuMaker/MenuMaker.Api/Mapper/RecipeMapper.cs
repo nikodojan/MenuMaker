@@ -6,10 +6,10 @@ using Riok.Mapperly.Abstractions;
 namespace MenuMaker.Api.Mapper;
 
 [Mapper]
-public partial class RecipeMapper
+public static partial class RecipeMapper
 {
-    public partial RecipeResponseModel ToRecipeResponseModel(Recipe recipe);
+    public static partial RecipeResponseModel MapToRecipeResponseModel(Recipe recipe);
 
-    private IngredientResponseModel MapToIngredientResponseModel(Ingredient ingredient) =>
+    private static IngredientResponseModel MapToIngredientResponseModel(Ingredient ingredient) =>
         new IngredientMapper().ToIngredientResponseModel(ingredient);
 }

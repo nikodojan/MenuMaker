@@ -24,6 +24,14 @@ public class RecipesService : IRecipesService
         _unitOfWork = unitOfWork;
     }
 
+    public async Task<RecipeResponseModel> GetRecipeById(int id)
+    {
+        var recipe = await _recipesRepository.GetRecipe(id);
+        var recipeResponse = RecipeMapper.MapToRecipeResponseModel(recipe);
+        recipeResponse.NutritionFacts = NutritionFactsMapper.ToValuesReponseModel(CalculateNutritionFactsForRecipe(recipe));
+        return recipeResponse;
+    }
+
     public async Task<IEnumerable<RecipeResponseModel>> GetRecipes(bool includeIngredients, int skip, int take)
     {
         // Nutrition facts should be fetched and calculated in any case
@@ -34,8 +42,7 @@ public class RecipesService : IRecipesService
         var filter = new RecipeFilter(includeIngredients, skip, take);
 
         var recipes = await _recipesRepository.GetRecipesWithFilter(filter);
-        var mapper = new RecipeMapper();
-        var recipeResponseModels = recipes.Select(r => mapper.ToRecipeResponseModel(r)).ToList();
+        var recipeResponseModels = recipes.Select(r => RecipeMapper.MapToRecipeResponseModel(r)).ToList();
 
         if (includeIngredients)
         {
