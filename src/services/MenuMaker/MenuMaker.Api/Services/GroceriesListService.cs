@@ -30,6 +30,38 @@ public class GroceriesListService : IGroceriesListService
             ingredients.AddRange(portionedIngredients);
         }
 
+        var groceryListItems = new List<GroceryListItem>();
+
+        foreach (var ingr in ingredients)
+        {
+            var listItem = new GroceryListItem(ingr.Grocery.NameSelectable, ingr.Amount, ingr.Unit);
+            if (groceryListItems.SingleOrDefault(i=>i.GroceryName == listItem.GroceryName) is GroceryListItem existingItem and not null)
+            {
+                if (existingItem?.Unit == ingr.Unit)
+                {
+                    existingItem.Amount += ingr.Amount;
+                }
+            }
+            else
+            {
+                groceryListItems.Add(listItem);
+            }
+        }
+
+        return groceryListItems;
+    }
+
+    public async Task<IEnumerable<GroceryListItem>> GetGroceryList2(IEnumerable<GroceriesListRequestModel> listRequests)
+    {
+        var ingredients = new List<Ingredient>();
+
+        foreach (var request in listRequests)
+        {
+            var recipe = await _recipesRepository.GetRecipe(request.RecipeId);
+            var portionedIngredients = recipe.CalculateIngredientsByPortions(request.Portions);
+            ingredients.AddRange(portionedIngredients);
+        }
+
         var groupedByGrocery = ingredients.GroupBy(
             keySelector: e => e.Grocery,
             elementSelector: e => e,

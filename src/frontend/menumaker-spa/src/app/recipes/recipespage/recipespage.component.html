@@ -1,0 +1,32 @@
+<div class="container">
+
+  <h3>Recipes</h3>
+
+  <div class="row" style="max-width: 100%;">
+    @for(num of repeater; track num) {
+      @for (recipe of recipesList; track recipe.id) {
+        <div class="col-12 col-sm-6 col-md-4 mb-1 mt-1" style="height:fit-content">
+          
+          <div class="card">
+            <a routerLink="/recipes/{{recipe.id}}">
+            <img src="{{recipe.imgPath ? recipe.imgPath : imgNotAvailable}}" class="card-img-top" alt="...">
+            <div class="card-body pb-1">
+              <h6 class="card-title custom-card-title mb-0">{{recipe.title}}</h6>
+
+            </div>
+            </a>
+            <div class="card-footer">
+              <div class="text-right d-flex justify-content-end">
+                <button (click)="addButtonClicked(recipe.id, recipe.title)" class="btn btn-primary btn-sm" style="z-index: 1000; position: relative;
+                ">Add to list</button>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+      }
+    }
+  </div>
+</div>
+
+

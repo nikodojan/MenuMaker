@@ -1,0 +1,20 @@
+<div class="container mt-3">
+  <h4>Menu</h4>
+  <div>Recipes selected for the current menu.</div>
+  <div class="row mt-2">
+    <div class="col">
+      <button class="btn btn-sm btn-success" (click)="onGetList()">Get list</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-sm btn-link" (click)="clearList()">Clear list</button>
+    </div>
+  </div>
+  
+  <br>
+  <ul class="list-unstyled">
+    @for (recipe of recipes | async; track recipe.id) {
+      <listitem [recipe]=recipe (deleteItemEvent)="delete($event)"></listitem>
+    }
+  </ul>
+</div>
+

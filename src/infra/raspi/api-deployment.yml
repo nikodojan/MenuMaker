@@ -20,6 +20,7 @@ spec:
         image: localhost:32000/menu-maker-api-arm64:latest
         ports:
         - containerPort: 80
+        - containerPort: 443
         env:
         - name: mm-db-connection-string #name of env variable
           valueFrom:
