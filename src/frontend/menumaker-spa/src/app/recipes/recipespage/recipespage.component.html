@@ -3,7 +3,6 @@
   <h3>Recipes</h3>
 
   <div class="row" style="max-width: 100%;">
-    @for(num of repeater; track num) {
       @for (recipe of recipesList; track recipe.id) {
         <div class="col-12 col-sm-6 col-md-4 mb-1 mt-1" style="height:fit-content">
           
@@ -22,10 +21,8 @@
               </div>
             </div>
           </div>
-        
         </div>
       }
-    }
   </div>
 </div>
 

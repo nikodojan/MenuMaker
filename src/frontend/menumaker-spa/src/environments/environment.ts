@@ -1,3 +1,3 @@
 export const environment = {
-  apiBaseUrl: "https://menumakerapi.azurewebsites.net/api/v1"
+  apiBaseUrl: "https://menumakerapi.azurewebsites.net/api"
 };
