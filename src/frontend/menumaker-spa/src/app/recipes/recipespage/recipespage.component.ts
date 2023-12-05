@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
 import { RecipesService } from '../../services/recipes-service.service';
 import { Recipe } from '../../types/recipeTypes';
 import { RouterLink } from '@angular/router';
@@ -26,6 +27,8 @@ import { AppstateService } from '../../services/appstate.service';
   selector: 'recipespage',
   standalone: true,
   imports: [
+    CommonModule,
+    NgIf,
     RouterLink,
     MatCardModule,
     MatButtonModule, 
@@ -49,13 +52,16 @@ export class RecipespageComponent {
 
   recipesList : Recipe[] = [];
   imgNotAvailable : string = '../../../assets/images/donut.png';
-    repeater : number[] = [1,2,3,4,5,6];
+
+  isLoading : boolean = true;
 
   async ngOnInit(){
     this.recipesService
       .getRecipes()
-      .subscribe((recipes) => 
-        this.recipesList = recipes
+      .subscribe((recipes) => {
+        this.isLoading = false;
+        this.recipesList = recipes;
+      }
       );
   }
 
