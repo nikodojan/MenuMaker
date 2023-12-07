@@ -9,7 +9,7 @@ import { RecipespageComponent } from './recipes/recipespage/recipespage.componen
   standalone: true,
   imports: [CommonModule, RouterOutlet, MainLayoutComponent, RecipespageComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'menumaker-spa';

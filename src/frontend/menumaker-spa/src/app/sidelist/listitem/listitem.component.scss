@@ -1,0 +1,13 @@
+.mat-icon:hover {
+  cursor: pointer;
+}
+
+.delete-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  vertical-align: middle;
+  text-align: end;
+  padding-right: 1rem;
+}

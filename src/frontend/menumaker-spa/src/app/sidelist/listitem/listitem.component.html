@@ -1,16 +1,20 @@
 <div class="container">
   <hr ms-0 me-0 w-100>
   <div class="col">
+
     <div class="row">
       {{recipe?.title}}
     </div>
-    <div class="row justify-content-between">
+    
+    <div class="row justify-content-between pt-1">
       <div class="col align-items-start p-0">
         <input class="form-control form-control-sm" maxlength="2" style="max-width: 4rem;" type="number" value="{{recipe?.portions}}" (change)="onPortionsChanged($event)">
       </div>
-      <div class="col align-items-end p-0">
-        <button class="btn btn-sm btn-danger align-self-end" (click)="onDeleteClicked()">remove</button>
+      <div class="col p-0 delete-col">
+
+        <mat-icon class="material-symbols-outlined text-danger" aria-hidden="false" aria-label="Delete" fontIcon="delete" alt="Delete" (click)="onDeleteClicked()"></mat-icon>
       </div>
     </div>
+
   </div>
 </div>
