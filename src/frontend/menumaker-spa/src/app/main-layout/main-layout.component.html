@@ -1,42 +1,70 @@
-<div class="container" style="height: 100vh;">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container-fluid p-0" style="height: 100vh;">
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="">MenuMaker</a>
+    <div class="row justify-content-between w-100">
+
+      <div class="col-md-3">
+        <a class="navbar-brand" routerLink="">MenuMaker</a>
+      </div>
+
+      <div class="col">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/recipes">Recipes</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" routerLink="/api">Api</a>
+            </li> -->
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#">Groceries list</a>
+            </li> -->
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        
+      </div>
+    </div>
+    
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/recipes">Recipes</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/api">Api</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Groceries list</a>
-        </li> -->
-      </ul>
-    </div>
+
 
   </div>
 </nav>
 
-<mat-sidenav-container class="sidelist">
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-  
-  <mat-sidenav class="shadow" opened mode="side" position="end">
+<div id="main-content" class="container bg-light">
+  <mat-sidenav-container class="sidelist">
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
     
+    <mat-sidenav class="shadow" opened mode="side" position="end">
+      <div id="sidenav-toggle" style="
+        background-color: blue;
+        position: relative;
+        height: 2rem;
+        width: 2rem;
+        top: 0;
+        left: -1rem;
+        z-index: 1000;
+        ">
+        B
+      </div>
+  
+      <listcontainer></listcontainer>
+    </mat-sidenav>
+  </mat-sidenav-container>
+</div>
 
-    <listcontainer></listcontainer>
-  </mat-sidenav>
-</mat-sidenav-container>
 </div>
 

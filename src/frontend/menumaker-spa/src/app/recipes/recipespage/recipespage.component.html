@@ -1,8 +1,12 @@
 <div class="container">
 
-  <h3>Recipes</h3>
+  <h5>Recipes</h5>
 
-    <div class="row" *ngIf="!isLoading; else loadingView" style="max-width: 100%;">
+    <div *ngIf="loadingError.length > 0">
+      <p>{{loadingError}}</p>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="!isLoading; else loadingView" style="max-width: 100%;">
       @for (recipe of recipesList; track recipe.id) {
         <div class="col-12 col-sm-6 col-md-4 mb-1 mt-1" style="height:fit-content">  
           <div class="card">

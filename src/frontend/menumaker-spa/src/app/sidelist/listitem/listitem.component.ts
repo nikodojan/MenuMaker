@@ -2,11 +2,12 @@ import { Component, Input, Output, EventEmitter  } from '@angular/core';
 import { SelectedRecipe } from '../../types/appTypes';
 import {MatButtonModule} from '@angular/material/button';
 import { AppstateService } from '../../services/appstate.service';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'listitem',
   standalone: true,
-  imports: [MatButtonModule],
+  imports: [MatButtonModule,MatIconModule],
   templateUrl: './listitem.component.html',
   styleUrl: './listitem.component.scss'
 })

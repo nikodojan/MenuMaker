@@ -54,13 +54,23 @@ export class RecipespageComponent {
   imgNotAvailable : string = '../../../assets/images/donut.png';
 
   isLoading : boolean = true;
+  loadingError: string = '';
 
   async ngOnInit(){
     this.recipesService
       .getRecipes()
-      .subscribe((recipes) => {
-        this.isLoading = false;
-        this.recipesList = recipes;
+      .subscribe({
+        next: (v) => {
+          this.recipesList = v;
+          this.isLoading = false;
+        },
+        error: (e) => {
+          this.recipesList = []
+          this.isLoading = false;
+          this.loadingError = 'Recipes could not be loaded. Please try again in a minute.';
+          console.error(e)
+        },
+        complete: () => {} 
       }
       );
   }
