@@ -42,29 +42,34 @@
   </div>
 </nav>
 
-<div id="main-content" class="container bg-light">
+
   <mat-sidenav-container class="sidelist">
+
     <mat-sidenav-content>
-      <router-outlet></router-outlet>
+      <div id="main-content" class="container bg-light">
+
+        <div class="sidelist-toggle" (click)="sidelist.toggle()">
+          <div>
+            <mat-icon class="material-symbols-outlined text-danger" [fontIcon]="isSidelistOpened ? 'keyboard_double_arrow_right' : 'keyboard_double_arrow_left'" ></mat-icon>
+          </div>
+        </div>
+
+        <router-outlet></router-outlet>
+      </div>
     </mat-sidenav-content>
     
-    <mat-sidenav class="shadow" opened mode="side" position="end">
-      <div id="sidenav-toggle" style="
-        background-color: blue;
-        position: relative;
-        height: 2rem;
-        width: 2rem;
-        top: 0;
-        left: -1rem;
-        z-index: 1000;
-        ">
-        B
-      </div>
-  
+    <mat-sidenav #sidelist 
+      [opened]="isSidelistOpened" 
+      (opened)="isSidelistOpened = true" 
+      (closed)="isSidelistOpened = false" 
+      class="shadow" 
+      mode="side" 
+      position="end">
       <listcontainer></listcontainer>
     </mat-sidenav>
+
   </mat-sidenav-container>
-</div>
+
 
 </div>
 

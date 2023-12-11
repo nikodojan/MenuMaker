@@ -1,13 +1,43 @@
 .sidelist {
   mat-sidenav {
     width: 300px;
+    padding-top: 70px;
+  }
+
+  mat-sidenav-container {
+    background: transparent;
+    
+  }
+
+  mat-sidenav-content {
+    height: 100vh !important;
   }
 
   min-height: 90%;
+  padding-top: 70px;
+}
+
+.sidelist-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  height: 3rem;
+  background-color: white;
+  border-radius: 4px 0 0 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  vertical-align: middle;
+  padding-right: 0.5rem;
+
+  mat-icon {
+    font-size: 2rem;
+  }
 }
 
 #main-content {
   height: 100%;
-  padding-top: 70px;
   padding-right: 0;
 }
