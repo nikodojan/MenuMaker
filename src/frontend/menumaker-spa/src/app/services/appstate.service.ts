@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { SelectedRecipe } from '../types/appTypes';
+import { Observable, BehaviorSubject, groupBy, map } from 'rxjs';
+import { GroceriesListCategory, SelectedRecipe } from '../types/appTypes';
+import { GroceriesListItem } from '../types/dtoTypes';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,13 @@ export class AppstateService {
   }
 
   private _selectedRecipes$ = new BehaviorSubject<SelectedRecipe[]>([]);
-  private _currentGroceriesList$ = new BehaviorSubject<any[]>([]);
+  private _currentGroceriesList$ = new BehaviorSubject<GroceriesListItem[]>([]);
 
   setGroceriesList(list:any): void {
     this._currentGroceriesList$.next(list);
   } 
 
-  getGroceriesList() : Observable<any> {
+  getGroceriesList() : Observable<GroceriesListItem[]> {
     return this._currentGroceriesList$.asObservable();
   }
 

@@ -6,5 +6,6 @@ export interface GroceriesListRequestObject {
 export interface GroceriesListItem {
   groceryName: string,
   amount: number,
-  unit: string
+  unit: string,
+  category: string
 }
