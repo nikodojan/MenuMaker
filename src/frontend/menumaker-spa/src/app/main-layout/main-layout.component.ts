@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -6,11 +6,13 @@ import { RecipespageComponent } from '../recipes/recipespage/recipespage.compone
 import { ListcontainerComponent } from '../sidelist/listcontainer/listcontainer.component';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
+
 
 @Component({
   selector: 'main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, MatCardModule, MatButtonModule, MatSidenavModule, RecipespageComponent, ListcontainerComponent,MatIconModule],
+  imports: [RouterOutlet, RouterLink, MatCardModule, MatButtonModule, MatSidenavModule, RecipespageComponent, ListcontainerComponent,MatIconModule, MatTooltipModule],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })

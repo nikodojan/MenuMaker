@@ -1,0 +1,20 @@
+.groceries-list {
+
+  .gr-amount {
+    text-align: end;
+  }
+
+  .gr-unit {
+    text-align: start;
+    padding-left: 2rem;
+  }
+
+  .gr-name {
+    padding-left: 2rem;
+  }
+
+  mat-divider {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+}

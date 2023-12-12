@@ -48,7 +48,6 @@ export class ListcontainerComponent {
     this.recipes.subscribe(selectedRecipes => {
       this.groceriesListService.getGroceriesListForMenu(selectedRecipes)
       .subscribe(data => {
-        console.log(data);
         this.stateService.setGroceriesList(data);
         this.openDialog();
       })
@@ -57,8 +56,6 @@ export class ListcontainerComponent {
 
   openDialog(): void {
     this.dialog.open(GroceriesListDialogComponent);
-
-    //dialogRef.afterClosed().subscribe();
   }
 }
 
