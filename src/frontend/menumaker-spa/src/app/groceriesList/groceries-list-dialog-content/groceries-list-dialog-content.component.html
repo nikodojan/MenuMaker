@@ -1,15 +1,18 @@
-<ul class="list-unstyled">
-  @for (item of groceriesList | async; track (item.groceryName + item.unit)) {
+<ul class="list-unstyled groceries-list">
+  @for (cat of groceriesListSorted; track cat.name) {
     <li>
-      {{item.amount}} {{item.unit}} {{item.groceryName}}
+      <h5>{{cat.name}}</h5>
+      <table class="table-sm">
+        @for (grocery of cat.groceries; track grocery.groceryName){
+          <tr>
+            <td class="gr-amount">{{grocery.amount}}</td>
+            <td class="gr-unit">{{grocery.unit}}</td>
+            <td class="gr-name">{{grocery.groceryName}}</td>
+          </tr>
+        }
+      </table>
+
+      <mat-divider></mat-divider>
     </li>
   }
 </ul>
-
-<!-- <ul class="list-unstyled">
-  @for (cat of groceriesListSorted; track (cat.category)) {
-    <li>
-      {{cat.category}}
-    </li>
-  }
-</ul> -->
