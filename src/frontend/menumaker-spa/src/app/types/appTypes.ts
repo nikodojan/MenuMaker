@@ -1,4 +1,4 @@
-import { Grocery } from "./recipeTypes"
+import { GroceriesListItem } from "./dtoTypes"
 
 export interface SelectedRecipe {
   id: number,
@@ -6,7 +6,7 @@ export interface SelectedRecipe {
   portions: number
 }
 
-export interface GroceryCategoryGrouping {
+export interface GroceriesListCategory {
   name: string,
-  groeries: Grocery[]
+  groceries: GroceriesListItem[]
 }

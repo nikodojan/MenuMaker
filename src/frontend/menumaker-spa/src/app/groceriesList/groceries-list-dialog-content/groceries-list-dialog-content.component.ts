@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { AppstateService } from '../../services/appstate.service';
-import { GroceriesListService } from '../../services/groceries-list.service';
 import { AsyncPipe } from '@angular/common';
 import { GroceriesListItem } from '../../types/dtoTypes';
-import { Observable } from 'rxjs';
-import { GroceryCategoryGrouping } from '../../types/appTypes';
+import { Observable, groupBy, map } from 'rxjs';
+import { GroceriesListCategory } from '../../types/appTypes';
 
 
 @Component({
@@ -16,18 +15,23 @@ import { GroceryCategoryGrouping } from '../../types/appTypes';
 })
 export class GroceriesListDialogContentComponent {
   constructor(
-    private stateService : AppstateService, 
-    private groceriesListService : GroceriesListService) {}
+    private stateService : AppstateService) {}
 
   groceriesList : Observable<GroceriesListItem[]> = this.stateService.getGroceriesList();
 
-  groceriesListSorted : GroceryCategoryGrouping[] = [];
+  // groceriesListSorted : any = {};
 
   // ngOnInit() {
   //   this.stateService.getGroceriesList().subscribe(
   //     groceries => {
   //       groceries.map(g=> {
-  //         if (this.groceriesListSorted[g.category])
+  //         if (this.groceriesListSorted[g.category]){
+  //           let arr : GroceriesListItem[] = this.groceriesListSorted[g.category];
+  //           arr.push(g);
+  //           this.groceriesListSorted[g.category] = arr;
+  //         } else {
+  //           this.groceriesListSorted[g.category] = [g];
+  //         }
   //       })
   //     }
   //   )
