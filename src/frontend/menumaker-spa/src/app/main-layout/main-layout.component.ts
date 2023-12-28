@@ -6,13 +6,23 @@ import { RecipespageComponent } from '../recipes/recipespage/recipespage.compone
 import { ListcontainerComponent } from '../sidelist/listcontainer/listcontainer.component';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'main-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, MatCardModule, MatButtonModule, MatSidenavModule, RecipespageComponent, ListcontainerComponent,MatIconModule, MatTooltipModule],
+  imports: [
+    RouterOutlet, 
+    RouterLink, 
+    MatCardModule, 
+    MatButtonModule, 
+    MatSidenavModule, 
+    RecipespageComponent, 
+    ListcontainerComponent,
+    MatIconModule, 
+    MatTooltipModule,
+    FooterComponent],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
 })
