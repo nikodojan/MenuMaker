@@ -6,13 +6,10 @@
 
   mat-sidenav-container {
     background: transparent;
-    
+    height: 100% !important;
   }
 
-  mat-sidenav-content {
-    height: 100vh !important;
-  }
-
+  height: 100% !important;
   min-height: 90%;
   padding-top: 70px;
 }
@@ -38,6 +35,9 @@
 }
 
 #main-content {
-  height: 100%;
   padding-right: 0;
+}
+
+.main-wrapper {
+  height: 100vh;
 }

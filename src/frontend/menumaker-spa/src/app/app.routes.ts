@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomepageComponent } from './home/homepage/homepage.component';
+import { AboutpageComponent } from './aboutpage/aboutpage.component';
 
 export const routes: Routes = [
   {
@@ -15,5 +16,10 @@ export const routes: Routes = [
     path: 'recipes/:id',
     loadComponent: () => 
       import('./recipes/recipe/recipe.component').then(mod=>mod.RecipeComponent)
+  },
+  {
+    path: 'about',
+    loadComponent: () => 
+      import('./aboutpage/aboutpage.component').then(mod=>mod.AboutpageComponent)
   }
 ];

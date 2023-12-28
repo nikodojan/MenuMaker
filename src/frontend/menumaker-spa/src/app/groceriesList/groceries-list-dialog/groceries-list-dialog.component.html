@@ -1,6 +1,18 @@
-<h1 mat-dialog-title>Groceries list</h1>
+<h1 mat-dialog-title>Groceries list
+  <mat-icon 
+  id="copy-list-icon"
+  class="material-symbols-outlined text-secondary" 
+  aria-hidden="false" 
+  aria-label="Copy list to clipboard" 
+  fontIcon="content_copy" 
+  alt="Copy list to clipboard"
+  [cdkCopyToClipboard]="getGroceriesListForCopy()"
+  matTooltip="Copy list to clipboard"
+  matTooltipPosition="above"
+  ></mat-icon></h1>  
+
 <div mat-dialog-content>
-  <groceries-list-dialog-content></groceries-list-dialog-content>
+  <groceries-list-dialog-content [groceriesListSorted]="groceriesListSorted"></groceries-list-dialog-content>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">OK</button>
