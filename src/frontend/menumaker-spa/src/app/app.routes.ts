@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomepageComponent } from './home/homepage/homepage.component';
 import { AboutpageComponent } from './aboutpage/aboutpage.component';
+import { GroceriespageComponent } from './groceries/groceriespage/groceriespage.component';
 
 export const routes: Routes = [
   {
@@ -10,16 +11,21 @@ export const routes: Routes = [
   {
     path: 'recipes',
     loadComponent: () => 
-      import('./recipes/recipespage/recipespage.component').then(mod=>mod.RecipespageComponent)
+      import('./recipes/recipespage/recipespage.component').then(comp=>comp.RecipespageComponent)
   },
   {
     path: 'recipes/:id',
     loadComponent: () => 
-      import('./recipes/recipe/recipe.component').then(mod=>mod.RecipeComponent)
+      import('./recipes/recipe/recipe.component').then(comp=>comp.RecipeComponent)
   },
   {
     path: 'about',
     loadComponent: () => 
-      import('./aboutpage/aboutpage.component').then(mod=>mod.AboutpageComponent)
+      import('./aboutpage/aboutpage.component').then(comp=>comp.AboutpageComponent)
+  },
+  {
+    path: 'groceries',
+    loadComponent: () => 
+      import('./groceries/groceriespage/groceriespage.component').then(comp=>comp.GroceriespageComponent)
   }
 ];

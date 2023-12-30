@@ -1,0 +1,17 @@
+<div class="container page">
+    <h5>Groceries</h5>
+    <p>This is an overview of all groceries and products used in the recipes with their nutrition values.</p>
+
+    <!-- search and filter -->
+    <!-- organize in columns, by categories -->
+    <!-- if possible on hover tooltip with image and info -->
+    <!-- on click, modal with info -->
+    <ul>
+        @for(grocery of groceries; track grocery.id){
+            <li>{{grocery.name}}</li>
+        }
+    </ul>
+    
+
+</div>
+

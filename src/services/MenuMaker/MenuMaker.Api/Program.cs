@@ -29,40 +29,20 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        if (builder.Environment.IsDevelopment())
+        builder.Services.AddDbContext<RecipesContext>(options =>
         {
-            builder.Services.AddDbContext<RecipesContext>(options =>
+            var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
+            options.UseNpgsql(cs, pgsqlOptions =>
             {
-                var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
-                options.UseNpgsql(cs, pgsqlOptions =>
-                {
-                    pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
-                });
-
-                if (builder.Environment.IsDevelopment())
-                {
-                    options.EnableSensitiveDataLogging();
-                }
+                pgsqlOptions.MigrationsAssembly("MenuMaker.Infrastructure");
             });
-        } 
-        else
-        {
-            builder.Services.AddDbContext<RecipesContext>(options =>
+
+            if (builder.Environment.IsDevelopment())
             {
-                var cs = builder.Configuration.GetValue<string>("mm-db-connection-string");
-
-                options.UseSqlServer(cs, sqlServerOptions =>
-                {
-                    sqlServerOptions.MigrationsAssembly("MenuMaker.Infrastructure");
-                });
-
-                if (builder.Environment.IsDevelopment())
-                {
-                    options.EnableSensitiveDataLogging();
-                }
-            });
-        }
-
+                options.EnableSensitiveDataLogging();
+            }
+        });
+        
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
         builder.Services.AddTransient<IGroceriesRepository, GroceriesRepository>();
         builder.Services.AddTransient<IGroceriesService, GroceriesService>();

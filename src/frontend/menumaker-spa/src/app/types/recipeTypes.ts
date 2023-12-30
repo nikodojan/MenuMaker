@@ -21,7 +21,7 @@ export interface Ingredient {
 
 export interface Grocery {
   id: number,
-  name: string | null,
+  name: string,
   category: string | null
   nutritionFacts: NutritionFacts[] | null
 }
