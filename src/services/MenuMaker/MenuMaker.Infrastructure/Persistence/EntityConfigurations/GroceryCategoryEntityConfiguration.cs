@@ -13,5 +13,10 @@ internal class GroceryCategoryEntityConfiguration : IEntityTypeConfiguration<Gro
     public void Configure(EntityTypeBuilder<GroceryCategory> builder)
     {
         builder.ToTable("GroceryCategories");
+
+        builder
+            .HasOne<GroceryCategory>(gc => gc.ParentCategory)
+            .WithMany()
+            .IsRequired(false);
     }
 }

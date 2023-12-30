@@ -67,7 +67,6 @@ export class AddRecipeToListButtonComponent {
       });
   
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
         let portions = result;
         this.appStateService.addSelectedRecipe(id, title, portions)
       });

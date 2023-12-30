@@ -1,33 +1,25 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, retry, catchError, throwError } from 'rxjs';
-import { Recipe } from '../types/recipeTypes';
+import { catchError, retry, throwError } from 'rxjs';
+import { Grocery } from '../types/recipeTypes';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RecipesService {
+export class GroceriesService {
 
   constructor(private httpClient : HttpClient) { }
 
-  baseUrl : string =  environment.apiBaseUrl + '/v1/recipes';
-  
-  getRecipes(
-    includeIngredients : boolean = false, 
-    skip: number = 0, 
-    take: number = 0): Observable<Recipe[]> { 
-      const query = `?includeIngredients=${includeIngredients}&skip=${skip}&take=${take}`;
-      return this.httpClient.get<Recipe[]>(this.baseUrl + query)
+  baseUrl : string =  environment.apiBaseUrl + '/v1/groceries'
+
+  getGroceries() {
+    return this.httpClient.get<Grocery[]>(this.baseUrl)
       .pipe(
         retry(2),
         catchError(this.handleError)
       );
-  }
-
-  getRecipeById(id: number) : Observable<Recipe> {
-    return this.httpClient.get<Recipe>(this.baseUrl + '/' + id);
-  }
+  };
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -42,5 +34,4 @@ export class RecipesService {
     // Return an observable with a user-facing error message.
     return throwError(() => new Error('An error occured while loading the recipes; please try again.'));
   }
-
 }

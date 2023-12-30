@@ -60,15 +60,15 @@ export class RecipespageComponent {
     this.recipesService
       .getRecipes()
       .subscribe({
-        next: (v) => {
-          this.recipesList = v;
+        next: (response) => {
+          this.recipesList = response;
           this.isLoading = false;
         },
-        error: (e) => {
+        error: (error) => {
           this.recipesList = []
           this.isLoading = false;
           this.loadingError = 'Recipes could not be loaded. Please try again in a minute.';
-          console.error(e)
+          console.error(error)
         },
         complete: () => {} 
       }
@@ -85,7 +85,6 @@ export class RecipespageComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       let portions = result;
       this.appStateService.addSelectedRecipe(id, title, portions)
     });
