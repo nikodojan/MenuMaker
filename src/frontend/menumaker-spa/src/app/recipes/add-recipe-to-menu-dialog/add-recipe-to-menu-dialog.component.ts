@@ -44,4 +44,5 @@ export class AddRecipeToMenuDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
 }

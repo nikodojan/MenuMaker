@@ -18,8 +18,9 @@ import { AddRecipeToMenuDialogComponent } from '../add-recipe-to-menu-dialog/add
 import { AppstateService } from '../../services/appstate.service';
 
 export interface AddButtonOptions {
-  class: string,
-  text: string
+  class?: string,
+  text?: string,
+  portions?: number
 }
 
 @Component({
@@ -52,10 +53,16 @@ export class AddRecipeToListButtonComponent {
     recipeTitle: string = "";
 
     @Input()
-    options: AddButtonOptions = {
-      class: "btn btn-primary btn-sm",
-      text: "Add to list"
-    };
+    options: AddButtonOptions = {};
+
+    ngOnInit() {
+      console.log(this.options);
+      this.options = {
+        class: this.options.class ? this.options.class : "btn btn-primary btn-sm",
+        text: this.options.text ? this.options.text : "Add to list",
+        portions: this.options.portions ? this.options.portions : 2
+      }
+    }
     
     addButtonClicked(){
       this.openDialog(this.recipeId, this.recipeTitle);
@@ -63,7 +70,7 @@ export class AddRecipeToListButtonComponent {
   
     openDialog(id : number, title : string): void {
       const dialogRef = this.dialog.open(AddRecipeToMenuDialogComponent, {
-        data: {portions: 2},
+        data: {portions: this.options.portions},
       });
   
       dialogRef.afterClosed().subscribe(result => {

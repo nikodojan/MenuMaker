@@ -15,5 +15,7 @@ internal class RecipeEntityConfiguration : IEntityTypeConfiguration<Recipe>
             .HasMany<Ingredient>(r => r.Ingredients)
         .WithOne()
         .HasForeignKey(i=>i.RecipeId);
+
+        builder.Property<int>(r => r.Portions).IsRequired().HasDefaultValue<int>(1);
     }
 }

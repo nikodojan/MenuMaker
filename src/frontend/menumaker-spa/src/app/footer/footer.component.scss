@@ -1,0 +1,23 @@
+.mm-footer {
+  background-color: #2d2d2d;
+  color: #d0d0d0 !important;
+  margin-top: 1rem;
+
+  ul  {
+    margin-top: 0.5rem;
+  }
+
+  .footer-link { 
+    color: inherit;
+    font-weight: 400;
+    text-decoration: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .footer-link:hover {
+    color: #6c757d;
+  }
+}
