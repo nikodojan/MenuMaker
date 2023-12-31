@@ -20,7 +20,7 @@ public class Recipe
     [StringLength(2000)]
     public string Instructions { get; set; }
 
-    public int? Portions { get; set; }
+    public int Portions { get; set; }
 
     public int? TimeInMinutes { get; set; }
 

@@ -38,13 +38,13 @@
   </nav>
 
 <!-- main -->
-  <mat-sidenav-container class="sidelist">
+  <mat-sidenav-container class="sidenav-container" style="background: transparent;">
 
     <mat-sidenav-content>
       <div id="main-content" class="container">
 
         <div 
-          class="sidelist-toggle" 
+          class="sidelist-toggle shadow-sm" 
           (click)="sidelist.toggle()"
           [matTooltip]="isSidelistOpened ? 'Close menu list' : 'Open menu list'"
           matTooltipPosition="above">

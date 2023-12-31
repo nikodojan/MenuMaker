@@ -2,3 +2,13 @@
   width: 100%;
   object-fit: contain;
 }
+
+.portions-input {
+  border: 0;
+  width: 3rem;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}

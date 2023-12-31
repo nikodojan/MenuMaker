@@ -1,6 +1,6 @@
 <div class="container page">
 
-  <h5>Recipes</h5>
+  <h3>Recipes</h3>
 
     <div *ngIf="loadingError.length > 0">
       <p>{{loadingError}}</p>
@@ -20,13 +20,12 @@
             </a>
             <div class="card-footer">
               <div class="text-right d-flex justify-content-end">
-                <button (click)="addButtonClicked(recipe.id, recipe.title)" class="btn btn-primary btn-sm" style="z-index: 1000; position: relative;
+                <button (click)="addButtonClicked(recipe.id, recipe.title)" class="btn btn-link btn-sm" style="z-index: 1000; position: relative;
                 ">Add to list</button>
               </div>
             </div>
           </div>
         </div>
-
       }
     </div>
 

@@ -12,7 +12,7 @@ export interface Recipe {
 
 export interface Ingredient {
   id: number,
-  amount: number,
+  amount: number | null,
   unit: string | null,
   description: string | null,
   partOfDish: string | null

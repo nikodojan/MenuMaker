@@ -1,17 +1,17 @@
-.sidelist {
+.sidenav-container {
   mat-sidenav {
     width: 300px;
     padding-top: 70px;
   }
 
-  mat-sidenav-container {
-    background: transparent;
-    height: 100% !important;
+  .mat-drawer-content {
+    min-height: 100svh !important;
+    padding-right: 0 !important;
+    //height: fit-content !important;
   }
 
-  height: 100% !important;
-  min-height: 90%;
   padding-top: 70px;
+  min-height: 100% !important;
 }
 
 .sidelist-toggle {
@@ -19,8 +19,8 @@
   top: 50%;
   right: 0;
   height: 3rem;
-  background-color: white;
-  border-radius: 4px 0 0 4px;
+  background-color: #f8f9fa;
+  border-radius: 8px 0 0 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,10 +34,6 @@
   }
 }
 
-#main-content {
-  padding-right: 0;
-}
-
 .main-wrapper {
-  height: 100vh;
+  height: 100svh;
 }
