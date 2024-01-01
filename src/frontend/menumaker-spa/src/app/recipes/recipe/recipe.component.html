@@ -36,38 +36,42 @@
     </p>
   </div>
   
-  <!-- ingredients -->
+  
   <div class="row">
-    <h5 class="pb-2">Ingredients</h5>
-    <div class="col">
-      <table class="table table-sm">
-        @for(ingr of recipe.ingredients; track ingr.id){
-          <tr>
-            <td id="amount-col" style="width: 5rem;">
-              {{ingr.amount}}
-            </td>
-            <td id="unit-col" style="width: 5rem;">
-              {{ingr.unit}}
-            </td>
-            <td id="ingredient-col" style="width: fit-content;">
-              {{ingr.grocery.name}}
-            </td>
-          </tr>
-        }
-      </table>
-
+    <!-- ingredients -->
+    <div class="col col-md-6 col-sm-12">
+      <div class="recipe-section">
+        <h5 class="pb-2">Ingredients</h5>
+        <div class="col">
+          <table class="table table-sm ingredients-table">
+            @for(ingr of recipe.ingredients; track ingr.id){
+              <tr>
+                <td id="amount-col">
+                  {{ingr.amount}}
+                </td>
+                <td id="unit-col">
+                  {{ingr.unit}}
+                </td>
+                <td id="ingredient-col">
+                  {{ingr.grocery.name}}
+                </td>
+              </tr>
+            }
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- instructions -->
+    <div class="col col-md-6 col-sm-12">
+      <div class="recipe-section">
+        <h5 class="pb-2">Instructions</h5>
+        <div class="col">
+          <p>
+            {{recipe.instructions}}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- instructions -->
-  <div class="row">
-    <h5 class="pb-2">Instructions</h5>
-    <div class="col">
-      <p>
-        {{recipe.instructions}}
-      </p>
-    </div>
-  </div>
-
 </div>
 
