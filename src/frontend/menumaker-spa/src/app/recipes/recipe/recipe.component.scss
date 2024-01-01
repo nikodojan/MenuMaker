@@ -12,3 +12,24 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   opacity: 1;
 }
+
+.recipe-section {
+  padding: .5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  height: 100%;
+}
+
+.ingredients-table {
+  #amount-col {
+    width: 3rem;
+  }
+
+  #unit-col {
+    width: 5rem;
+  }
+
+  #ingredient-col {
+    width: fit-content;
+  }
+}
