@@ -1,6 +1,7 @@
 ﻿using MenuMaker.Infrastructure.Entities.Recipes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Text.Json;
 
 namespace MenuMaker.Infrastructure.Persistence.EntityConfigurations;
 internal class RecipeEntityConfiguration : IEntityTypeConfiguration<Recipe>
@@ -18,11 +19,9 @@ internal class RecipeEntityConfiguration : IEntityTypeConfiguration<Recipe>
 
         builder.Property<int>(r => r.Portions).IsRequired().HasDefaultValue<int>(1);
 
-        builder.OwnsOne(r => r.Instructions, i=>i.ToJson());
-
-        builder.Property(r=>r.Instructions).HasDefaultValue(new Dictionary<string, List<string>>()
-        {
-            { "", new List<string>() { "Step1" } }
-        });
+        builder.Property(r => r.Instructions).HasColumnType("jsonb")
+            .HasConversion(
+                i => JsonSerializer.Serialize(i, (JsonSerializerOptions)null),
+                i => JsonSerializer.Deserialize<Dictionary<string, List<string>>>(i, (JsonSerializerOptions)null));
     }
 }

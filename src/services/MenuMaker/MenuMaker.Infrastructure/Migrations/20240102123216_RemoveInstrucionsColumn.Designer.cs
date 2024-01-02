@@ -3,6 +3,7 @@ using System;
 using MenuMaker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MenuMaker.Infrastructure.Migrations
 {
     [DbContext(typeof(RecipesContext))]
-    partial class RecipesContextModelSnapshot : ModelSnapshot
+    [Migration("20240102123216_RemoveInstrucionsColumn")]
+    partial class RemoveInstrucionsColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,27 +261,6 @@ namespace MenuMaker.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Grocery");
-                });
-
-            modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Recipe", b =>
-                {
-                    b.OwnsOne("System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>>", "Instructions", b1 =>
-                        {
-                            b1.Property<int>("RecipeId")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("RecipeId");
-
-                            b1.ToTable("Recipes");
-
-                            b1.ToJson("Instructions");
-
-                            b1.WithOwner()
-                                .HasForeignKey("RecipeId");
-                        });
-
-                    b.Navigation("Instructions")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Recipe", b =>
