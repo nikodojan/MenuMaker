@@ -17,5 +17,12 @@ internal class RecipeEntityConfiguration : IEntityTypeConfiguration<Recipe>
         .HasForeignKey(i=>i.RecipeId);
 
         builder.Property<int>(r => r.Portions).IsRequired().HasDefaultValue<int>(1);
+
+        builder.OwnsOne(r => r.Instructions, i=>i.ToJson());
+
+        builder.Property(r=>r.Instructions).HasDefaultValue(new Dictionary<string, List<string>>()
+        {
+            { "", new List<string>() { "Step1" } }
+        });
     }
 }

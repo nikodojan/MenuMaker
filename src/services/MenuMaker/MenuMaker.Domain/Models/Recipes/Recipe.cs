@@ -13,18 +13,19 @@ public class Recipe
     [StringLength(100)]
     public string? Description { get; set; }
 
-    [StringLength(300)]
     public string? ImgPath { get; set; }
 
+    //[Required]
+    //[StringLength(2000)]
+    //public string Instructions { get; set; }
     [Required]
-    [StringLength(2000)]
-    public string Instructions { get; set; }
+    public Dictionary<string, List<string>> Instructions { get; set; } = new();
 
     public int Portions { get; set; }
 
     public int? TimeInMinutes { get; set; }
 
-    public virtual List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+    public virtual List<Ingredient> Ingredients { get; set; } = new();
 
     public override string ToString()
     {
