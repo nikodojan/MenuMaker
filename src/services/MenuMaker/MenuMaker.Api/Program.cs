@@ -40,7 +40,6 @@ public class Program
             if (builder.Environment.IsDevelopment())
             {
                 options.EnableSensitiveDataLogging();
-                options.LogTo(Console.WriteLine);
             }
         });
         
