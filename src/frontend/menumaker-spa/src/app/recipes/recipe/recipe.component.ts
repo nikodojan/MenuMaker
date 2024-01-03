@@ -29,9 +29,6 @@ import { AddRecipeToMenuDialogComponent } from '../add-recipe-to-menu-dialog/add
   styleUrl: './recipe.component.scss'
 })
 export class RecipeComponent {
-  recipe : Recipe;
-  image: string;
-
   constructor(
     private route: ActivatedRoute,
     private recipesService: RecipesService,
@@ -41,7 +38,17 @@ export class RecipeComponent {
       this.image = this.recipe?.imgPath ? this.recipe?.imgPath : '../../../assets/images/donut.png';
   }
 
+  recipe : Recipe;
+  image: string;
+  instructionsKeys: string[] = [];
 
+  ngOnInit() {
+    let id : number = this.route.snapshot.params['id'];
+    this.recipesService.getRecipeById(id).subscribe(response => {
+      this.recipe = response;
+      this.instructionsKeys = Object.keys(this.recipe.instructions);
+    });
+  }
 
   onPortionsChanged(event: any) {
     if (event.target.value !== this.recipe.portions) {
@@ -64,12 +71,7 @@ export class RecipeComponent {
     }
   }
 
-  ngOnInit() {
-    let id : number = this.route.snapshot.params['id'];
-    this.recipesService.getRecipeById(id).subscribe(response => {
-      this.recipe = response;
-    });
-  }
+
 
   addButtonClicked(){
     if (this.recipe.portions < 1) {
