@@ -12,7 +12,7 @@ public class RecipeResponseModel
 
     public string? ImgPath { get; init; }
 
-    public string Instructions { get; init; }
+    public Dictionary<string, List<string>> Instructions { get; set; } = new();
 
     public int? Portions { get; init; }
 
@@ -20,5 +20,6 @@ public class RecipeResponseModel
 
     public NutritionFactsValuesResponseModel? NutritionFacts { get; set; } = null;
 
-    public IEnumerable<IngredientResponseModel> Ingredients { get; set; } = new List<IngredientResponseModel>();
+    public List<IngredientResponseModel> Ingredients { get; set; } = new();
+
 }

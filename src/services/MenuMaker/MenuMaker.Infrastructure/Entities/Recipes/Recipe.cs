@@ -14,14 +14,12 @@ public class Recipe : Entity<int>
     [StringLength(300)]
     public string? ImgPath { get; set; }
 
-    [Required]
-    [StringLength(2000)]
-    public string Instructions { get; set; }
-
     public int Portions { get; set; }
 
     public int? TimeInMinutes { get; set; }
 
     public virtual List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+
+    public Dictionary<string, List<string>> Instructions { get; set; } = new();
 
 }

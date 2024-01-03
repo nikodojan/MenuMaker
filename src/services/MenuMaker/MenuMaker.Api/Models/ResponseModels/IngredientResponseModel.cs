@@ -8,7 +8,7 @@ public class IngredientResponseModel
     public int Id { get; set; }
     public double? Amount { get; set; }
     public string? Unit { get; set; }
-    public GroceryReponseModel Grocery { get; set; } = default!;
+    public required GroceryReponseModel Grocery { get; set; }
     public string? Description { get; set; }
     public string? PartOfDish { get; set; }
 }

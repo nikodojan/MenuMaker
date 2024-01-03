@@ -24,7 +24,7 @@ public class RecipesRepository : GenericRepository<Entities.Recipes.Recipe, int,
 
     public async Task<Domain.Models.Recipes.Recipe> GetRecipe(int id)
     {
-        var spec = new BaseSpecification<Recipe>(r=>r.Id == id);
+        var spec = new BaseSpecification<Recipe>(r => r.Id == id);
         spec.AddInclude(q =>
             q.Include(r => r.Ingredients)
                 .ThenInclude(i => i.Grocery)

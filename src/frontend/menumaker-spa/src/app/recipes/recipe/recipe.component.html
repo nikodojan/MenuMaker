@@ -44,16 +44,16 @@
         <h5 class="pb-2">Ingredients</h5>
         <div class="col">
           <table class="table table-sm ingredients-table">
-            @for(ingr of recipe.ingredients; track ingr.id){
+            @for(ingredient of recipe.ingredients; track ingredient.id){
               <tr>
                 <td id="amount-col">
-                  {{ingr.amount}}
+                  {{ingredient.amount}}
                 </td>
                 <td id="unit-col">
-                  {{ingr.unit}}
+                  {{ingredient.unit}}
                 </td>
                 <td id="ingredient-col">
-                  {{ingr.grocery.name}}
+                  {{ingredient.grocery.name}}
                 </td>
               </tr>
             }
@@ -66,9 +66,16 @@
       <div class="recipe-section">
         <h5 class="pb-2">Instructions</h5>
         <div class="col">
-          <p>
-            {{recipe.instructions}}
-          </p>
+          @for(key of instructionsKeys; track key){
+            @if(key && key.toLowerCase() !== 'main'){
+              <h6>{{key}}</h6>
+            }
+            @for(instruction of recipe.instructions[key]; track $index) {
+              <p class="instructions-step">
+                {{instruction}}
+              </p>
+            }
+          }
         </div>
       </div>
     </div>

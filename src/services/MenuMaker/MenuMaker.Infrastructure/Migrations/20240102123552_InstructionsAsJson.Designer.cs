@@ -3,6 +3,7 @@ using System;
 using MenuMaker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MenuMaker.Infrastructure.Migrations
 {
     [DbContext(typeof(RecipesContext))]
-    partial class RecipesContextModelSnapshot : ModelSnapshot
+    [Migration("20240102123552_InstructionsAsJson")]
+    partial class InstructionsAsJson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,7 +167,7 @@ namespace MenuMaker.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("MenuMaker.Infrastructure.Entities.Recipes.Grocery.NutritionFacts#MenuMaker.Infrastructure.Entities.Recipes.NutritionFacts", "NutritionFacts", b1 =>
+                    b.OwnsOne("MenuMaker.Infrastructure.Entities.Recipes.NutritionFacts", "NutritionFacts", b1 =>
                         {
                             b1.Property<int>("GroceryId")
                                 .HasColumnType("integer");
@@ -195,12 +198,12 @@ namespace MenuMaker.Infrastructure.Migrations
 
                             b1.HasKey("GroceryId");
 
-                            b1.ToTable("Groceries", (string)null);
+                            b1.ToTable("Groceries");
 
                             b1.WithOwner()
                                 .HasForeignKey("GroceryId");
 
-                            b1.OwnsOne("MenuMaker.Infrastructure.Entities.Recipes.Grocery.NutritionFacts#MenuMaker.Infrastructure.Entities.Recipes.NutritionFacts.ServingSize#MenuMaker.Domain.Models.ValueObjects.UnitValue", "ServingSize", b2 =>
+                            b1.OwnsOne("MenuMaker.Domain.Models.ValueObjects.UnitValue", "ServingSize", b2 =>
                                 {
                                     b2.Property<int>("NutritionFactsGroceryId")
                                         .HasColumnType("integer");
@@ -218,7 +221,7 @@ namespace MenuMaker.Infrastructure.Migrations
 
                                     b2.HasKey("NutritionFactsGroceryId");
 
-                                    b2.ToTable("Groceries", (string)null);
+                                    b2.ToTable("Groceries");
 
                                     b2.WithOwner()
                                         .HasForeignKey("NutritionFactsGroceryId");
@@ -262,14 +265,14 @@ namespace MenuMaker.Infrastructure.Migrations
 
             modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Recipe", b =>
                 {
-                    b.OwnsOne("MenuMaker.Infrastructure.Entities.Recipes.Recipe.Instructions#System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>>", "Instructions", b1 =>
+                    b.OwnsOne("System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>>", "Instructions", b1 =>
                         {
                             b1.Property<int>("RecipeId")
                                 .HasColumnType("integer");
 
                             b1.HasKey("RecipeId");
 
-                            b1.ToTable("Recipes", (string)null);
+                            b1.ToTable("Recipes");
 
                             b1.ToJson("Instructions");
 

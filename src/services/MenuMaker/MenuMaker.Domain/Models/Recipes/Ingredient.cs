@@ -10,12 +10,6 @@ public class Ingredient
 
     public string? Unit { get; set; }
 
-    /// <summary>
-    /// Grocery name.
-    /// </summary>
-    //[StringLength(50)]
-    //public string Name { get; set; } = string.Empty;
-
     public Grocery Grocery { get; set; } = default!;
 
     [StringLength(50)]
@@ -27,6 +21,6 @@ public class Ingredient
     [StringLength(50)]
     public string? PartOfDish { get; set; }
 
-    public int RecipeId { get; set; } // FK, one Recipe has many Ingredients
+    //public int RecipeId { get; set; } // FK, one Recipe has many Ingredients
 }
 

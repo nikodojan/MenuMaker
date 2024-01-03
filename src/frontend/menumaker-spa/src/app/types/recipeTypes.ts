@@ -6,7 +6,7 @@ export interface Recipe {
   portions: number,
   timeInMinutes: number,
   ingredients: Ingredient[] | null,
-  instructions: string,
+  instructions: Record<string, string[]>,
   nutritionFacts: NutritionFacts | null
 }
 
