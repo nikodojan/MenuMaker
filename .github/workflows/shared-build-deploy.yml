@@ -25,8 +25,8 @@ jobs:
               - src/frontend/**
       - name: Check for changes
         run: |
-          ${{vars.BackendChanged}} = ${{ steps.changed-files.outputs.services_any_changed == true }}
-          ${{vars.FrontendChaged}} = ${{ steps.changed-files.outputs.frontend_any_changed == true }}
+          echo "${{vars.BackendChanged}} = ${{ steps.changed-files.outputs.services_any_changed }}"
+          echo "${{vars.FrontendChaged}} = ${{ steps.changed-files.outputs.frontend_any_changed }}"
   build-and-deploy-backend:
     if: vars.BackendChanged
     uses: nikodojan/MenuMaker/.github/workflows/build-and-deploy-backend.yml@main
