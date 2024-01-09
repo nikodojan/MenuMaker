@@ -1,0 +1,37 @@
+name: Shared Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  changed_files:
+    runs-on: ubuntu-latest
+    name: Test changed-files
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Get changed files for frontend and backend
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files_yaml: |
+            services:
+              - src/services/**
+            frontend:
+              - src/frontend/**
+      - name: Check for changes
+        shell: pwsh
+        run: |
+          ${{vars.BackendChanged}} = ${{ steps.changed-files.outputs.services_any_changed == true }}
+          ${{vars.FrontendChaged}} = ${{ steps.changed-files.outputs.frontend_any_changed == true }}
+  build-and-deploy-backend:
+    if: vars.BackendChanged
+    uses: nikodojan/MenuMaker/.github/workflows/build-and-deploy-backend.yml@main
+  build-and-deploy-frontend:
+    if: vars.FrontendChaged
+    uses: nikodojan/MenuMaker/.github/workflows/build-and-deploy-frontend.yml@main
+
