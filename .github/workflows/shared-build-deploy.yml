@@ -1,5 +1,9 @@
 name: Shared Build and Deploy
 
+env:
+  BACKEND_CHANGED: false
+  FRONTEND_CHANGED: false
+
 on:
   push:
     branches:
@@ -25,12 +29,14 @@ jobs:
               - src/frontend/**
       - name: Check for changes
         run: |
-          echo "${{vars.BackendChanged}} = ${{ steps.changed-files.outputs.services_any_changed }}"
-          echo "${{vars.FrontendChaged}} = ${{ steps.changed-files.outputs.frontend_any_changed }}"
+          echo "${{vars.BACKEND_CHANGED}} = ${{ steps.changed-files.outputs.services_any_changed }}"
+          echo "${{vars.FRONTEND_CHANGED}} = ${{ steps.changed-files.outputs.frontend_any_changed }}"
   build-and-deploy-backend:
-    if: vars.BackendChanged
     uses: nikodojan/MenuMaker/.github/workflows/build-and-deploy-backend.yml@main
+    with:
+      should_run: 'true'
   build-and-deploy-frontend:
-    if: vars.FrontendChaged
     uses: nikodojan/MenuMaker/.github/workflows/build-and-deploy-frontend.yml@main
+    with:
+      should_run: 'false'
 

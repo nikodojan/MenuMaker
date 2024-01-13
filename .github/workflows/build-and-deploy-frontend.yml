@@ -2,10 +2,18 @@ name: Azure Static Web Apps CI/CD
 
 on:
   workflow_dispatch:
+    inputs:
+      should_run:
+        type: boolean
+        default: true
   workflow_call:
+    inputs:
+      should_run:
+        type: boolean
 
 jobs:
   build_and_deploy_job:
+    if: ${{inputs.should_run == true}}
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
