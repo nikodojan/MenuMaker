@@ -22,7 +22,7 @@ jobs:
               - src/services/**
 
       - name: Set up .NET Core
-        if: ${{ steps.changed-files.outputs.services_any_changed }} || ${{github.event_name == 'workflow_dispatch'}}
+        if: ${{ steps.changed-files.outputs.services_any_changed == true}} || ${{github.event_name == 'workflow_dispatch'}}
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.x'
