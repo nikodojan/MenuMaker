@@ -5,7 +5,7 @@ public static class DbSetSpecificationExtension
 {
     public static IQueryable<TEntity> QueryWithSpecification<TEntity>(
         this DbSet<TEntity> dbSet,
-        ISpecification<TEntity> spec)
+        ISpecification<TEntity>? spec)
             where TEntity : class
     {
         {

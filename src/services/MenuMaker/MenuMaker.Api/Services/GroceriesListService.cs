@@ -2,6 +2,7 @@
 using MenuMaker.Api.Models.ResponseModels;
 using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Recipes;
+using MenuMaker.Infrastructure.Repositories;
 
 namespace MenuMaker.Api.Services;
 

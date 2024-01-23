@@ -20,9 +20,8 @@ public class UnitValue
 
     public UnitValue()
     {
-
     }
 
-    public string Unit { get; init; }
-    public double Amount { get; init; }
+    public string Unit { get; set; }
+    public double Amount { get; set; }
 }

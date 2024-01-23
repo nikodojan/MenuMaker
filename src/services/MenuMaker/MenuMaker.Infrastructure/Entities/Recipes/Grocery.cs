@@ -1,5 +1,8 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace MenuMaker.Infrastructure.Entities.Recipes;
 
 public class Grocery : Entity<int>
@@ -11,6 +14,8 @@ public class Grocery : Entity<int>
     public string? NamePlural { get; set; }
 
     public GroceryCategory Category { get; set; }
+
+    public int CategoryId { get; set; }
 
     public string StandardUnit { get; set; }
 

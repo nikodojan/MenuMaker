@@ -30,7 +30,7 @@ public class NutritionFactsGrResponseModel
 
     public int Id { get; set; }
 
-    public NutritionValues Values { get; set; }
+    public NutritionValues Values { get; set; } = new NutritionValues();
 
     public GroceryReponseModel Grocery { get; set; } = new GroceryReponseModel();
 }

@@ -33,7 +33,8 @@ internal class GroceryEntityConfiguration : IEntityTypeConfiguration<Grocery>
 
         builder
             .HasOne<GroceryCategory>(g=>g.Category)
-            .WithMany();
+            .WithMany()
+            .HasForeignKey(g=>g.CategoryId);
 
         builder
             .Property<string>(nameof(Grocery.StandardUnit))

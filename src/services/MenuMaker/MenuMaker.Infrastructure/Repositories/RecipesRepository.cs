@@ -1,15 +1,15 @@
 ﻿using MenuMaker.Domain.Filters;
 using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Recipes;
-using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Mappers;
 using MenuMaker.Infrastructure.Repositories.Specifications;
 using Microsoft.EntityFrameworkCore;
 using MenuMaker.Infrastructure.Entities.Recipes;
 using Recipe = MenuMaker.Infrastructure.Entities.Recipes.Recipe;
+using MenuMaker.Infrastructure.Persistence;
 
 namespace MenuMaker.Infrastructure.Repositories;
-public class RecipesRepository : GenericRepository<Entities.Recipes.Recipe, int, RecipesContext>, IRecipesRepository
+public class RecipesRepository : GenericRepository<Recipe, int, RecipesContext>, IRecipesRepository
 {
     public RecipesRepository(RecipesContext context) : base(context)
     {
@@ -40,7 +40,7 @@ public class RecipesRepository : GenericRepository<Entities.Recipes.Recipe, int,
 
     public async Task<IEnumerable<Domain.Models.Recipes.Recipe>> GetRecipesWithFilter(RecipeFilter filter)
     {
-        var spec = new BaseSpecification<Entities.Recipes.Recipe>();
+        var spec = new BaseSpecification<Recipe>();
         if (filter.IncludeIngredients)
         {
             spec.AddInclude(q =>
@@ -51,7 +51,7 @@ public class RecipesRepository : GenericRepository<Entities.Recipes.Recipe, int,
         }
         spec.Skip(filter.Skip);
         if (filter.Take > 0) { spec.Take(filter.Take); }
-        
+
         var recipes = await FindWithSpecification(spec);
         return RecipeEntityMapper.MapToRecipeModelsList(recipes.ToList());
     }
@@ -62,5 +62,5 @@ public class RecipesRepository : GenericRepository<Entities.Recipes.Recipe, int,
         var recipeModels = RecipeEntityMapper.MapToRecipeModelsList(recipeEntities.ToList());
         return recipeModels;
     }
-    
+
 }

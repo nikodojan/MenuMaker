@@ -1,13 +1,10 @@
 ﻿using MenuMaker.Api.DTOs;
 using MenuMaker.Api.Mapper;
 using MenuMaker.Domain.Filters;
-using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Domain.Models.ValueObjects;
 using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Repositories;
-using MenuMaker.Infrastructure.Repositories.Specifications;
-using Microsoft.EntityFrameworkCore;
 
 namespace MenuMaker.Api.Services;
 
@@ -17,7 +14,7 @@ public class RecipesService : IRecipesService
     private readonly IUnitOfWork<RecipesContext> _unitOfWork;
 
     public RecipesService(
-        IRecipesRepository recipesRepository, 
+        IRecipesRepository recipesRepository,
         IUnitOfWork<RecipesContext> unitOfWork)
     {
         _recipesRepository = recipesRepository;
@@ -59,8 +56,7 @@ public class RecipesService : IRecipesService
 
     private NutritionFacts CalculateNutritionFactsForRecipe(Recipe recipe)
     {
-        if (recipe == null) return null;
-        if (!recipe.Ingredients.Any()) return null;
+        if (!recipe.Ingredients.Any()) return new();
 
         var newNf = new NutritionFacts();
         foreach (var ingr in recipe.Ingredients)
@@ -71,11 +67,5 @@ public class RecipesService : IRecipesService
         var servingSize = new UnitValue("Recipe", 1);
         newNf.ServingSize = servingSize;
         return newNf;
-    }
-
-    public async Task<double> GetCalories(int id)
-    {
-        //return await _recipesRepository.GetCaloriesForRecipe(id);
-        throw new NotImplementedException();
     }
 }

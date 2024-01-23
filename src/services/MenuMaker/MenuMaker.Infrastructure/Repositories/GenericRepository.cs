@@ -127,36 +127,13 @@ public class GenericRepository<TEntity, TId, TDbContext>
         return await _dbSet.FindAsync(id);
     }
 
-    public async Task<IEnumerable<TEntity>> FindWithSpecification(ISpecification<TEntity> specification = null)
+    public async Task<IEnumerable<TEntity>> FindWithSpecification(ISpecification<TEntity>? specification = null)
     {
         return await _dbSet.QueryWithSpecification<TEntity>(specification).ToListAsync();
     }
 
-    /// <summary>
-    /// Gets a collection of entities based on the specified criteria.
-    /// </summary>
-    /// <param name="filter">The condition the entities must fulfil to be returned</param>
-    /// <param name="orderBy">The function used to order the entities</param>
-    /// <param name="top">The number of records to limit the results to</param>
-    /// <param name="skip">The number of records to skip</param>
-    /// <param name="includeProperties">Any other navigation properties to include when returning the collection</param>
-    /// <returns>Total count of entities and a collection of entities</returns>
-    //public async Task<(int totalCount, IEnumerable<TEntity> entities)> GetManyAsync(
-    //    Expression<Func<TEntity, bool>>? filter = null,
-    //    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-    //    int? top = null,
-    //    int? skip = null,
-    //    params Expression<Func<TEntity, object>>[] includeProperties)
-    //{
-    //    IQueryable<TEntity> countQuery = _dbSet;
-    //    if (filter != null)
-    //    {
-    //        countQuery = countQuery.Where(filter);
-    //    }
-
-    //    var totalCount = await countQuery.CountAsync();
-    //    // TODO: Support order by property name string
-    //    var entities = await _dbSet.QueryMany(filter, orderBy, top, skip, includeProperties).ToListAsync();
-    //    return (totalCount, entities);
-    //}
+    public async Task<int> SaveChangesAsync()
+    {
+        return await _dbContext.SaveChangesAsync();
+    }
 }
