@@ -23,7 +23,7 @@ public class GroceriesController : ControllerBase
     }
 
     [HttpPost]
-    //[ApiKey]
+    [ApiKey]
     public async Task<IActionResult> AddGrocery([FromBody] GroceryRequestModel grocery)
     {
         var groceryModel = GroceryMapper.MapToGroceryModel(grocery);
@@ -32,6 +32,7 @@ public class GroceriesController : ControllerBase
     }
 
     [HttpPut]
+    [ApiKey]
     [Route("{id:int}")]
     public async Task<IActionResult> EditGrocery([FromRoute] int id, [FromBody] GroceryRequestModel grocery)
     {
@@ -42,6 +43,15 @@ public class GroceriesController : ControllerBase
         await _groceriesService.UpdateGrocery(groceryModel);
 
         return Ok();
-;   }
+    }
+
+    [HttpDelete]
+    [ApiKey]
+    [Route("{id:int}")]
+    public async Task<IActionResult> DeleteGrocery(int id)
+    {
+        await _groceriesService.DeleteGrocery(id);
+        return Ok();
+    }
 
 }

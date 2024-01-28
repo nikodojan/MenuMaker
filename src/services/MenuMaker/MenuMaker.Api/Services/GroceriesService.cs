@@ -2,6 +2,7 @@
 using MenuMaker.Api.Models.RequestModels;
 using MenuMaker.Api.Models.ResponseModels;
 using MenuMaker.Domain.Interfaces;
+using MenuMaker.Domain.Models.Groceries;
 using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Infrastructure.Mappers;
 using MenuMaker.Infrastructure.Persistence;
@@ -24,10 +25,14 @@ public class GroceriesService : IGroceriesService
         return GroceryMapper.MapToGroceryReponseModelsList(groceryModels.ToList());
     }
 
-    //public async Task<GroceryReponseModel> GetGroceryById(int id)
-    //{
-    //    throw new NotImplementedException();
-    //}
+    public async Task<GroceryReponseModel?> GetGroceryById(int id)
+    {
+        if ((await _groceriesRepository.GetGroceryById(id)) is Grocery grocery)
+            return GroceryMapper.MapToGroceryReponseModel(grocery);
+        else
+            return null;
+        
+    }
 
     public async Task AddGrocery(Domain.Models.Groceries.Grocery grocery)
     {
@@ -41,6 +46,12 @@ public class GroceriesService : IGroceriesService
     {
         var groceryEntity = GroceryEntityMapper.MapToGroceryEntity(grocery);
         _groceriesRepository.Update(groceryEntity);
+        await _groceriesRepository.SaveChangesAsync();
+    }
+
+    public async Task DeleteGrocery(int groceryId)
+    {
+        await _groceriesRepository.DeleteAsync(groceryId);
         await _groceriesRepository.SaveChangesAsync();
     }
 }

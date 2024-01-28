@@ -23,7 +23,8 @@ public class GroceriesRepository : GenericRepository<Grocery, int, RecipesContex
     public async Task<Domain.Models.Groceries.Grocery?> GetGroceryById(int id)
     {
         var grocery = await GetAsync(id);
-        if (grocery is null) return null;
+        if (grocery is null) 
+            return null;
         return GroceryEntityMapper.MapToGroceryModel(grocery);
     }
 
@@ -31,6 +32,11 @@ public class GroceriesRepository : GenericRepository<Grocery, int, RecipesContex
     {
         await base.AddAsync(grocery);
         _dbContext.Entry(grocery.Category).State = EntityState.Unchanged;
-        Console.WriteLine(_dbContext.Entry(grocery.Category).State);
+    }
+
+    public new void Update(Grocery grocery)
+    {
+        base.Update(grocery);
+        _dbContext.Entry(grocery.Category).State = EntityState.Unchanged;
     }
 }
