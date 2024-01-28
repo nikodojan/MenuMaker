@@ -124,7 +124,8 @@ public class GenericRepository<TEntity, TId, TDbContext>
         {
             query = includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
-        return await _dbSet.FindAsync(id);
+        var result = await query.FirstOrDefaultAsync(e=>(object)e.Id == (object)id);
+        return result;
     }
 
     public async Task<IEnumerable<TEntity>> FindWithSpecification(ISpecification<TEntity>? specification = null)

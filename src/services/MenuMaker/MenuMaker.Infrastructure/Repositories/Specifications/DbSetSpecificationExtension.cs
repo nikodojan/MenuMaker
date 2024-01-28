@@ -33,6 +33,8 @@ public static class DbSetSpecificationExtension
 
             query = query.Skip(spec.SkipValue ?? 0);
 
+            query = query.Take(spec.TakeValue ?? 0);
+
             query = spec.Includes.Aggregate(query, (current, include) => include(current));
 
             return query;

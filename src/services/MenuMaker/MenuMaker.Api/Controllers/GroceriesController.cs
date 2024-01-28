@@ -1,6 +1,7 @@
 ﻿using MenuMaker.Api.Authentication;
 using MenuMaker.Api.Mapper;
 using MenuMaker.Api.Models.RequestModels;
+using MenuMaker.Api.Models.ResponseModels;
 using MenuMaker.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,15 @@ public class GroceriesController : ControllerBase
     public async Task<IActionResult> Get()
     {
         return Ok(await _groceriesService.GetAllGroceries());
+    }
+
+    [HttpGet]
+    [Route("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        if ((await _groceriesService.GetGroceryById(id)) is GroceryReponseModel grocery)
+            return Ok(grocery);
+        return NotFound();
     }
 
     [HttpPost]

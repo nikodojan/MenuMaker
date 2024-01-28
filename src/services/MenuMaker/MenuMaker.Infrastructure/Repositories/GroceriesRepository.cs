@@ -22,7 +22,7 @@ public class GroceriesRepository : GenericRepository<Grocery, int, RecipesContex
 
     public async Task<Domain.Models.Groceries.Grocery?> GetGroceryById(int id)
     {
-        var grocery = await GetAsync(id);
+        var grocery = await GetAsync(id, gr => gr.Category);
         if (grocery is null) 
             return null;
         return GroceryEntityMapper.MapToGroceryModel(grocery);
