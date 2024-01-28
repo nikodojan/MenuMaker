@@ -1,9 +1,4 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace MenuMaker.Infrastructure.Entities.Recipes;
+﻿namespace MenuMaker.Infrastructure.Entities.Recipes;
 
 public class Grocery : Entity<int>
 {

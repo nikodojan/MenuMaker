@@ -7,5 +7,5 @@ public interface IGroceriesService
 {
     Task AddGrocery(Grocery grocery);
     Task<IEnumerable<GroceryReponseModel>> GetAllGroceries();
-    //Task<GroceryReponseModel> GetGroceryById(int id);
+    Task UpdateGrocery(Grocery grocery);
 }

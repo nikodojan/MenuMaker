@@ -26,4 +26,11 @@ public class GroceriesRepository : GenericRepository<Grocery, int, RecipesContex
         if (grocery is null) return null;
         return GroceryEntityMapper.MapToGroceryModel(grocery);
     }
+
+    public async Task AddGroceryAsync(Grocery grocery)
+    {
+        await base.AddAsync(grocery);
+        _dbContext.Entry(grocery.Category).State = EntityState.Unchanged;
+        Console.WriteLine(_dbContext.Entry(grocery.Category).State);
+    }
 }

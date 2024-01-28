@@ -29,6 +29,19 @@ public class GroceriesController : ControllerBase
         var groceryModel = GroceryMapper.MapToGroceryModel(grocery);
         await _groceriesService.AddGrocery(groceryModel);
         return Created();
-    } 
+    }
+
+    [HttpPut]
+    [Route("{id:int}")]
+    public async Task<IActionResult> EditGrocery([FromRoute] int id, [FromBody] GroceryRequestModel grocery)
+    {
+        if (grocery.Id != id)
+            return BadRequest();
+
+        var groceryModel = GroceryMapper.MapToGroceryModel(grocery);
+        await _groceriesService.UpdateGrocery(groceryModel);
+
+        return Ok();
+;   }
 
 }

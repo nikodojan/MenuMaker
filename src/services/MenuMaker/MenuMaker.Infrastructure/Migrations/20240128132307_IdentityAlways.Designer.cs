@@ -3,6 +3,7 @@ using System;
 using MenuMaker.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MenuMaker.Infrastructure.Migrations
 {
     [DbContext(typeof(RecipesContext))]
-    partial class RecipesContextModelSnapshot : ModelSnapshot
+    [Migration("20240128132307_IdentityAlways")]
+    partial class IdentityAlways
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,7 +168,7 @@ namespace MenuMaker.Infrastructure.Migrations
                     b.HasOne("MenuMaker.Infrastructure.Entities.Recipes.GroceryCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.OwnsOne("MenuMaker.Infrastructure.Entities.Recipes.NutritionFacts", "NutritionFacts", b1 =>
@@ -242,8 +245,7 @@ namespace MenuMaker.Infrastructure.Migrations
                 {
                     b.HasOne("MenuMaker.Infrastructure.Entities.Recipes.GroceryCategory", "ParentCategory")
                         .WithMany()
-                        .HasForeignKey("ParentCategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ParentCategoryId");
 
                     b.Navigation("ParentCategory");
                 });

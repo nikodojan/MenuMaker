@@ -34,7 +34,8 @@ internal class GroceryEntityConfiguration : IEntityTypeConfiguration<Grocery>
         builder
             .HasOne<GroceryCategory>(g=>g.Category)
             .WithMany()
-            .HasForeignKey(g=>g.CategoryId);
+            .HasForeignKey(g=>g.CategoryId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .Property<string>(nameof(Grocery.StandardUnit))
@@ -43,5 +44,7 @@ internal class GroceryEntityConfiguration : IEntityTypeConfiguration<Grocery>
         builder.Property<string>(nameof(Grocery.NameSelectable)).HasMaxLength(250);
 
         builder.HasIndex(g => g.NameSelectable).IsUnique();
+
+        builder.Property<int>(g => g.Id).UseIdentityAlwaysColumn();
     }
 }

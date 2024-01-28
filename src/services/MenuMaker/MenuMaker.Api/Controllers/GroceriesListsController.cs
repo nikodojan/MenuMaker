@@ -19,14 +19,14 @@ public class GroceriesListsController : ControllerBase
     public async Task<IActionResult> Get([FromQuery] string recipeIds)
     {
         var validator = new RecipeListParameterValidator();
-        var validationResult = await validator.Validate(recipeIds);
+        var validationResult = validator.Validate(recipeIds);
 
         if (!validationResult.IsValid)
         {
             return BadRequest(validationResult.Message);
         }
 
-        var groceriesList = await _groceriesListService.GetGroceryList(validationResult.RecipeIds);
+        var groceriesList = await _groceriesListService.GetGroceryList(validationResult.RecipeIds!);
 
         return Ok(groceriesList);
     }

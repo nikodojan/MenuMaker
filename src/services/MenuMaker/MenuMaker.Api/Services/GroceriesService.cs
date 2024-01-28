@@ -31,9 +31,16 @@ public class GroceriesService : IGroceriesService
 
     public async Task AddGrocery(Domain.Models.Groceries.Grocery grocery)
     {
-        grocery.Id = default;
         var groceryEntity = GroceryEntityMapper.MapToGroceryEntity(grocery);
-        await _groceriesRepository.AddAsync(groceryEntity);
+        await _groceriesRepository.AddGroceryAsync(groceryEntity);
+        await _groceriesRepository.SaveChangesAsync();
+        
+    }
+
+    public async Task UpdateGrocery(Domain.Models.Groceries.Grocery grocery)
+    {
+        var groceryEntity = GroceryEntityMapper.MapToGroceryEntity(grocery);
+        _groceriesRepository.Update(groceryEntity);
         await _groceriesRepository.SaveChangesAsync();
     }
 }
