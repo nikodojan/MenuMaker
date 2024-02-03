@@ -43,7 +43,7 @@ public class BaseSpecification<T> : ISpecification<T>
     {
         if (skip >= 0)
         {
-            this.SkipValue = skip;
+            SkipValue = skip;
         }
     }
 
@@ -51,7 +51,7 @@ public class BaseSpecification<T> : ISpecification<T>
     {
         if (take >= 0) 
         {
-            this.TakeValue = take;
+            TakeValue = take;
         }
     }
 }

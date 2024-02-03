@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: windows-latest
     outputs:
-      changed-files: ${{ steps.changed-files.outputs.services_any_changed }}
+      files-changes: ${{ steps.changed-files.outputs.services_any_changed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        if: ${{needs.build.outputs.changed-files}}
+        if: ${{needs.build.outputs.files-changes}}
         uses: actions/download-artifact@v3
         with:
           name: .net-app
@@ -65,7 +65,7 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        if: ${{needs.build.outputs.changed-files}}
+        if: ${{needs.build.outputs.files-changes}}
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'menumakerapi'
