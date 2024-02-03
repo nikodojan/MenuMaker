@@ -1,4 +1,8 @@
-﻿using MenuMaker.Api.Services;
+﻿using MenuMaker.Api.Authentication;
+using MenuMaker.Api.Mapper;
+using MenuMaker.Api.Models.RequestModels;
+using MenuMaker.Api.Models.ResponseModels;
+using MenuMaker.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MenuMaker.Api.Controllers;
@@ -16,18 +20,48 @@ public class GroceriesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        //var spec = new BaseSpecification<Grocery>();
-        //spec.AddInclude(q => q.Include(g=>g.Category));
-        //spec.AddInclude(q => q.Include(g => g.NutritionFacts));
-        //var result = await _groceriesRepo.FindWithSpecification(spec);
-        //var mapper = new GroceryMapper();
-        //var res = new List<GroceryReponseModel>();
-        //foreach (var item in result)
-        //{
-        //    res.Add(mapper.ToGroceryReponseModel(item));
-        //}
-
         return Ok(await _groceriesService.GetAllGroceries());
+    }
+
+    [HttpGet]
+    [Route("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        if ((await _groceriesService.GetGroceryById(id)) is GroceryReponseModel grocery)
+            return Ok(grocery);
+        return NotFound();
+    }
+
+    [HttpPost]
+    [ApiKey]
+    public async Task<IActionResult> AddGrocery([FromBody] GroceryRequestModel grocery)
+    {
+        var groceryModel = GroceryMapper.MapToGroceryModel(grocery);
+        await _groceriesService.AddGrocery(groceryModel);
+        return Created();
+    }
+
+    [HttpPut]
+    [ApiKey]
+    [Route("{id:int}")]
+    public async Task<IActionResult> EditGrocery([FromRoute] int id, [FromBody] GroceryRequestModel grocery)
+    {
+        if (grocery.Id != id)
+            return BadRequest();
+
+        var groceryModel = GroceryMapper.MapToGroceryModel(grocery);
+        await _groceriesService.UpdateGrocery(groceryModel);
+
+        return Ok();
+    }
+
+    [HttpDelete]
+    [ApiKey]
+    [Route("{id:int}")]
+    public async Task<IActionResult> DeleteGrocery(int id)
+    {
+        await _groceriesService.DeleteGrocery(id);
+        return Ok();
     }
 
 }

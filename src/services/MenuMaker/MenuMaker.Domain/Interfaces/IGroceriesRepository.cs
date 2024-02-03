@@ -1,11 +1,7 @@
 ﻿using MenuMaker.Domain.Models.Groceries;
 
 namespace MenuMaker.Domain.Interfaces;
-public interface IGroceriesRepository
+public interface IGroceriesRepository2
 {
     Task<IEnumerable<Grocery>> GetGroceries();
-
-    Task AddGrocery(Grocery grocery);
-
-    Task AddGroceries(IEnumerable<Grocery> groceries);
 }

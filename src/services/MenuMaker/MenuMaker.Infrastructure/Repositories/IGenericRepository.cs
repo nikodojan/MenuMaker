@@ -17,4 +17,5 @@ public interface IGenericRepository<TEntity, TId>
     void Update(TEntity entity);
     void UpdateValues(TEntity existingEntityToUpdate, TEntity entityWithUpdates);
     Task<IEnumerable<TEntity>> FindWithSpecification(ISpecification<TEntity> specification = null);
+    Task<int> SaveChangesAsync();
 }

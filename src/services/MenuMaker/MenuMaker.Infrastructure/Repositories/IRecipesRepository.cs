@@ -1,8 +1,8 @@
 ﻿using MenuMaker.Domain.Filters;
 using MenuMaker.Domain.Models.Recipes;
 
-namespace MenuMaker.Domain.Interfaces;
-public interface IRecipesRepository2
+namespace MenuMaker.Infrastructure.Repositories;
+public interface IRecipesRepository
 {
     Task<IEnumerable<Recipe>> GetAllRecipes();
 

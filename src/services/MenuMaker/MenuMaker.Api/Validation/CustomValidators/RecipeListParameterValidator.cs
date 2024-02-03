@@ -5,7 +5,7 @@ namespace MenuMaker.Api.Validations.CustomValidators;
 
 public class RecipeListParameterValidator
 {
-    public async Task<RecipeListParamaterValidationResult> Validate(string list)
+    public RecipeListParamaterValidationResult Validate(string list)
     {
         var trimmed = list.TrimStart('[').TrimEnd(']');
 

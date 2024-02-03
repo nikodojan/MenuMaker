@@ -5,17 +5,19 @@ namespace MenuMaker.Domain.Models.Groceries;
 public class Grocery
 {
     public int Id { get; set; }
+
     public string NameSelectable { get; set; } = string.Empty;
 
     public string? NameSingular { get; set; }
 
     public string? NamePlural { get; set; }
 
-    public GroceryCategory Category { get; set; }
+    public GroceryCategory Category { get; set; } = new();
 
-    public string StandardUnit { get; set; }
+    public required string StandardUnit { get; set; }
 
-    public NutritionFacts NutritionFacts { get; set; }
+    public NutritionFacts NutritionFacts { get; set; } = new();
+
     public bool HasNutritionValues { get; set; }
 }
 

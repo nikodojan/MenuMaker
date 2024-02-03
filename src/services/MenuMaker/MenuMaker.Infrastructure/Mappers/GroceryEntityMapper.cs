@@ -11,5 +11,5 @@ public static partial class GroceryEntityMapper
 
     public static partial Entities.Recipes.Grocery MapToGroceryEntity(Grocery entity);
 
-    public static partial List<Entities.Recipes.Grocery> MapToGroceryEntity(List<Grocery> entity);
+    public static partial List<Entities.Recipes.Grocery> MapToGroceryEntityList(List<Grocery> entity);
 }
