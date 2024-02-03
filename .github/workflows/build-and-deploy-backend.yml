@@ -58,6 +58,11 @@ jobs:
         with:
           name: .net-app
 
+      - uses: azure/login@v1
+        if: ${{needs.build.outputs.changed-files}}
+        with:
+          creds: ${{ secrets.AZ_CREDENTIALS }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         if: ${{needs.build.outputs.changed-files}}
