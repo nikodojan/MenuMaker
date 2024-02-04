@@ -1,12 +1,9 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy menumakerapi
-
 on:
   workflow_dispatch:
   workflow_call:
-
 jobs:
   build:
     runs-on: windows-latest
@@ -22,50 +19,42 @@ jobs:
           files_yaml: |
             services:
               - src/services/**
-
       - name: Set up .NET Core
         if: steps.changed-files.outputs.services_any_changed == 'true' || github.event_name == 'workflow_dispatch'
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.x'
-
       - name: Build project
         if: steps.changed-files.outputs.services_any_changed == 'true' || github.event_name == 'workflow_dispatch'
         run: dotnet build src/services/MenuMaker/MenuMaker.Api/MenuMaker.Api.csproj --configuration Release
-
       - name: Publish project
         if: steps.changed-files.outputs.services_any_changed == 'true' || github.event_name == 'workflow_dispatch'
         run: dotnet publish src/services/MenuMaker/MenuMaker.Api/MenuMaker.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
-
       - name: Upload artifact for deployment job
         if: steps.changed-files.outputs.services_any_changed == 'true' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
           path: "${{env.DOTNET_ROOT}}/myapp"
-
   deploy:
     runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
     steps:
       - name: Download artifact from build job
-        if: ${{needs.build.outputs.files-changes}}
+        if: needs.build.outputs.files-changes  == 'true' || github.event_name == 'workflow_dispatch'
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-
       - uses: azure/login@v1
-        if: ${{needs.build.outputs.changed-files}}
+        if: needs.build.outputs.files-changes  == 'true' || github.event_name == 'workflow_dispatch'
         with:
           creds: ${{ secrets.AZ_CREDENTIALS }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        if: ${{needs.build.outputs.files-changes}}
+        if: needs.build.outputs.files-changes  == 'true' || github.event_name == 'workflow_dispatch'
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'menumakerapi'
