@@ -7,18 +7,12 @@ public class Recipe
     public int Id { get; set; }
 
     [Required]
-    [StringLength(50)]
     public string Title { get; set; }
 
-    [StringLength(100)]
     public string? Description { get; set; }
 
     public string? ImgPath { get; set; }
 
-    //[Required]
-    //[StringLength(2000)]
-    //public string Instructions { get; set; }
-    [Required]
     public Dictionary<string, List<string>> Instructions { get; set; } = new();
 
     public int Portions { get; set; }

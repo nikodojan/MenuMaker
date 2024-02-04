@@ -63,4 +63,16 @@ public class RecipesRepository : GenericRepository<Recipe, int, RecipesContext>,
         return recipeModels;
     }
 
+    public async Task AddRecipeAsync(Recipe recipe)
+    {
+        await base.AddAsync(recipe);
+        var dummyIdCounter = 0;
+        foreach (var ingr in recipe.Ingredients)
+        {
+            _dbContext.Entry<Grocery>(ingr.Grocery).State = EntityState.Unchanged;
+            _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).Entity.Id = ++dummyIdCounter;
+            _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).State = EntityState.Unchanged;
+        }
+    }
+
 }
