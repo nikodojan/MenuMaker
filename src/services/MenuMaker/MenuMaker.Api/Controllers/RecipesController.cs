@@ -1,4 +1,7 @@
-﻿using MenuMaker.Api.DTOs;
+﻿using MenuMaker.Api.Authentication;
+using MenuMaker.Api.DTOs;
+using MenuMaker.Api.Mapper;
+using MenuMaker.Api.Models.RequestModels;
 using MenuMaker.Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,5 +36,13 @@ public class RecipesController : ControllerBase
         var recipe = await _recipesService.GetRecipeById(id);
         if (recipe == null) { return NotFound(); }
         return Ok(recipe);
+    }
+
+    [HttpPost]
+    [ApiKey]
+    public async Task<IActionResult> AddRecipe([FromBody] RecipeRequestModel recipe)
+    {
+        var newRecipe = await _recipesService.AddRecipe(RecipeMapper.MapToRecipeModel(recipe));
+        return Created(newRecipe.Id.ToString(), RecipeMapper.MapToRecipeResponseModel(newRecipe));
     }
 }

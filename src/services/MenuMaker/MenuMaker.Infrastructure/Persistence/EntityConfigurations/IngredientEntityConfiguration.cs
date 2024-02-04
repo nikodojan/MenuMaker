@@ -12,6 +12,9 @@ internal class IngredientEntityConfiguration : IEntityTypeConfiguration<Ingredie
 
         builder.HasKey(x => x.Id);
 
-        builder.HasOne<Grocery>(i => i.Grocery).WithMany();
+        builder
+            .HasOne<Grocery>(i => i.Grocery)
+            .WithMany()
+            .HasForeignKey(i=>i.GroceryId);
     }
 }

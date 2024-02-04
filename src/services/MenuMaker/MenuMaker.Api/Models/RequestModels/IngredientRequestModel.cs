@@ -1,9 +1,8 @@
-﻿using MenuMaker.Domain.Models.Groceries;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace MenuMaker.Domain.Models.Recipes;
+namespace MenuMaker.Api.Models.RequestModels;
 
-public class Ingredient
+public class IngredientRequestModel
 {
     public int Id { get; set; }
 
@@ -11,7 +10,7 @@ public class Ingredient
 
     public string? Unit { get; set; }
 
-    public Grocery Grocery { get; set; } = new();
+    public int GroceryId { get; set; }
 
     [StringLength(50)]
     public string? Description { get; set; }
@@ -19,4 +18,3 @@ public class Ingredient
     [StringLength(50)]
     public string? PartOfDish { get; set; }
 }
-

@@ -3,6 +3,7 @@ using MenuMaker.Api.Mapper;
 using MenuMaker.Domain.Filters;
 using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Domain.Models.ValueObjects;
+using MenuMaker.Infrastructure.Mappers;
 using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Repositories;
 
@@ -67,5 +68,13 @@ public class RecipesService : IRecipesService
         var servingSize = new UnitValue("Recipe", 1);
         newNf.ServingSize = servingSize;
         return newNf;
+    }
+
+    public async Task<Recipe> AddRecipe(Recipe recipeModel)
+    {
+        var recipe = RecipeEntityMapper.MapToRecipeEntity(recipeModel);
+        await _recipesRepository.AddRecipeAsync(recipe);
+        await _recipesRepository.SaveChangesAsync();
+        return RecipeEntityMapper.MapToRecipeModel(recipe);
     }
 }

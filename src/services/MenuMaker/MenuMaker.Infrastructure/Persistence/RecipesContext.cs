@@ -20,7 +20,7 @@ public class RecipesContext : DbContext, IUnitOfWork<RecipesContext>
         new GroceryEntityConfiguration().Configure(modelBuilder.Entity<Grocery>());
         new GroceryCategoryEntityConfiguration().Configure(modelBuilder.Entity<GroceryCategory>());
 
-        modelBuilder.UseIdentityAlwaysColumns();
+        modelBuilder.UseIdentityByDefaultColumns();
 
     }
 

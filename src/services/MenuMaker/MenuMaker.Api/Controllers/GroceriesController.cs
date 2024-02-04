@@ -3,6 +3,7 @@ using MenuMaker.Api.Mapper;
 using MenuMaker.Api.Models.RequestModels;
 using MenuMaker.Api.Models.ResponseModels;
 using MenuMaker.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MenuMaker.Api.Controllers;
@@ -37,8 +38,8 @@ public class GroceriesController : ControllerBase
     public async Task<IActionResult> AddGrocery([FromBody] GroceryRequestModel grocery)
     {
         var groceryModel = GroceryMapper.MapToGroceryModel(grocery);
-        await _groceriesService.AddGrocery(groceryModel);
-        return Created();
+        var newGrocery = await _groceriesService.AddGrocery(groceryModel);
+        return Created(newGrocery.Id.ToString(), GroceryMapper.MapToGroceryReponseModel(newGrocery));
     }
 
     [HttpPut]
@@ -50,9 +51,8 @@ public class GroceriesController : ControllerBase
             return BadRequest();
 
         var groceryModel = GroceryMapper.MapToGroceryModel(grocery);
-        await _groceriesService.UpdateGrocery(groceryModel);
-
-        return Ok();
+        var updatedGrocery = await _groceriesService.UpdateGrocery(groceryModel);
+        return Ok(GroceryMapper.MapToGroceryReponseModel(updatedGrocery));
     }
 
     [HttpDelete]

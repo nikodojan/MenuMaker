@@ -9,11 +9,7 @@ public class Ingredient : Entity<int>
 
     public string? Unit { get; set; }
 
-    /// <summary>
-    /// Grocery name.
-    /// </summary>
-    //[StringLength(50)]
-    //public string Name { get; set; } = string.Empty;
+    public int GroceryId { get; set; }
 
     public Grocery Grocery { get; set; } = default!;
 
@@ -26,6 +22,6 @@ public class Ingredient : Entity<int>
     [StringLength(50)]
     public string? PartOfDish { get; set; }
 
-    public int RecipeId { get; set; } // FK, one Recipe has many Ingredients
+    public int RecipeId { get; set; }
 }
 

@@ -9,4 +9,8 @@ public interface IRecipesRepository
     Task<IEnumerable<Recipe>> GetRecipesWithFilter(RecipeFilter filter);
 
     Task<Recipe> GetRecipe(int id);
+
+    Task AddRecipeAsync(Entities.Recipes.Recipe recipe);
+
+    Task<int> SaveChangesAsync();
 }

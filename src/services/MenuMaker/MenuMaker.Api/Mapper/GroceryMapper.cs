@@ -10,17 +10,24 @@ namespace MenuMaker.Api.Mapper;
 [Mapper]
 public static partial class GroceryMapper
 {
-    [MapProperty(new[] { nameof(Grocery.Category), nameof(Grocery.Category.Name) },
+    [MapProperty(
+        new[] { nameof(Grocery.Category), nameof(Grocery.Category.Name) },
         new[] { nameof(GroceryReponseModel.Category) })]
-    [MapProperty(nameof(Grocery.NameSelectable), nameof(GroceryReponseModel.Name))]
+    [MapProperty(
+        nameof(Grocery.NameSelectable), 
+        nameof(GroceryReponseModel.Name))]
     public static partial GroceryReponseModel MapToGroceryReponseModel(Grocery grocery);
 
-    [MapProperty(new[] { nameof(Grocery.Category), nameof(Grocery.Category.Name) },
-    new[] { nameof(GroceryReponseModel.Category) })]
-    [MapProperty(nameof(Grocery.NameSelectable), nameof(GroceryReponseModel.Name))]
+    [MapProperty(
+        new[] { nameof(Grocery.Category), nameof(Grocery.Category.Name) },
+        new[] { nameof(GroceryReponseModel.Category) })]
+    [MapProperty(
+        nameof(Grocery.NameSelectable), 
+        nameof(GroceryReponseModel.Name))]
     public static partial List<GroceryReponseModel> MapToGroceryReponseModelsList(List<Grocery> groceryModels);
 
-    [MapProperty(new[] { nameof(GroceryRequestModel.CategoryId) }, 
+    [MapProperty(
+        new[] { nameof(GroceryRequestModel.CategoryId) }, 
         new[] {nameof(Grocery.Category), nameof(Grocery.Category.Id)})]
     public static partial Grocery MapToGroceryModel(GroceryRequestModel groceryRequestModel);
 

@@ -8,4 +8,6 @@ public static partial class RecipeEntityMapper
     public static partial Domain.Models.Recipes.Recipe MapToRecipeModel(Recipe entity);
 
     public static partial List<Domain.Models.Recipes.Recipe> MapToRecipeModelsList(List<Recipe> entities);
+
+    public static partial Recipe MapToRecipeEntity(Domain.Models.Recipes.Recipe model);
 }

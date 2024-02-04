@@ -19,5 +19,9 @@ internal class GroceryCategoryEntityConfiguration : IEntityTypeConfiguration<Gro
             .WithMany()
             .IsRequired(false)
             .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasKey(gc => gc.Id);
+
+        builder.Property(gc => gc.Id).ValueGeneratedOnAdd();
     }
 }

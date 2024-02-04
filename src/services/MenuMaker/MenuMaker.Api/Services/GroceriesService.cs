@@ -1,11 +1,7 @@
 ﻿using MenuMaker.Api.Mapper;
-using MenuMaker.Api.Models.RequestModels;
 using MenuMaker.Api.Models.ResponseModels;
-using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Groceries;
-using MenuMaker.Domain.Models.Recipes;
 using MenuMaker.Infrastructure.Mappers;
-using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Repositories;
 
 namespace MenuMaker.Api.Services;
@@ -31,22 +27,23 @@ public class GroceriesService : IGroceriesService
             return GroceryMapper.MapToGroceryReponseModel(grocery);
         else
             return null;
-        
+
     }
 
-    public async Task AddGrocery(Domain.Models.Groceries.Grocery grocery)
+    public async Task<Grocery> AddGrocery(Domain.Models.Groceries.Grocery grocery)
     {
         var groceryEntity = GroceryEntityMapper.MapToGroceryEntity(grocery);
         await _groceriesRepository.AddGroceryAsync(groceryEntity);
         await _groceriesRepository.SaveChangesAsync();
-        
+        return GroceryEntityMapper.MapToGroceryModel(groceryEntity);
     }
 
-    public async Task UpdateGrocery(Domain.Models.Groceries.Grocery grocery)
+    public async Task<Grocery> UpdateGrocery(Domain.Models.Groceries.Grocery grocery)
     {
         var groceryEntity = GroceryEntityMapper.MapToGroceryEntity(grocery);
         _groceriesRepository.Update(groceryEntity);
         await _groceriesRepository.SaveChangesAsync();
+        return GroceryEntityMapper.MapToGroceryModel(groceryEntity);
     }
 
     public async Task DeleteGrocery(int groceryId)

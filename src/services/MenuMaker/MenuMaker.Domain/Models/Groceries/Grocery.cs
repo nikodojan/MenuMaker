@@ -14,7 +14,7 @@ public class Grocery
 
     public GroceryCategory Category { get; set; } = new();
 
-    public required string StandardUnit { get; set; }
+    public string StandardUnit { get; set; } = Constants.RecipeConstants.Units.Gramms;
 
     public NutritionFacts NutritionFacts { get; set; } = new();
 
