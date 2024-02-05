@@ -33,4 +33,7 @@ public static partial class GroceryMapper
 
     private static NutritionFacts MapToNutritionFacts(NutritionFactsViewModel nf) => 
         NutritionFactsMapper.MapToNutritionFacts(nf);
+
+    private static NutritionFactsValuesResponseModel MapToNutritionFactsValuesResponseModel(NutritionFacts model) =>
+        NutritionFactsMapper.ToValuesReponseModel(model);
 }
