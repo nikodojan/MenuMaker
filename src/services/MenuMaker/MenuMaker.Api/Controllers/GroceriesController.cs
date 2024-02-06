@@ -52,8 +52,7 @@ public class GroceriesController : ControllerBase
 
         var groceryModel = GroceryMapper.MapToGroceryModel(grocery);
         var updatedGrocery = await _groceriesService.UpdateGrocery(groceryModel);
-        var mappedViewMoedl = GroceryMapper.MapToGroceryReponseModel(updatedGrocery);
-        return Ok(mappedViewMoedl);
+        return Ok(GroceryMapper.MapToGroceryReponseModel(updatedGrocery));
     }
 
     [HttpDelete]
