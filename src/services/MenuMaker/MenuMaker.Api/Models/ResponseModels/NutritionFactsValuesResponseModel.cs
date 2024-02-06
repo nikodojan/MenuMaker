@@ -12,20 +12,20 @@ public class NutritionFactsValuesResponseModel
     public string ReferenceAmountUnit { get; set; } = "g";
 
     [JsonPropertyName("calories")]
-    public int Calories { get; set; }
+    public double Calories { get; set; }
 
     [JsonPropertyName("fat")]
-    public int GrammsFat { get; set; }
+    public double GrammsFat { get; set; }
 
     [JsonPropertyName("carbonhydrates")]
-    public int GrammsCarbonhydrates { get; set; }
+    public double GrammsCarbonhydrates { get; set; }
 
     [JsonPropertyName("sugar")]
-    public int GrammsSugar { get; set; }
+    public double GrammsSugar { get; set; }
 
     [JsonPropertyName("protein")]
-    public int GrammsProtein { get; set; }
+    public double GrammsProtein { get; set; }
 
     [JsonPropertyName("fiber")]
-    public int GrammsFiber { get; set; }
+    public double GrammsFiber { get; set; }
 }
