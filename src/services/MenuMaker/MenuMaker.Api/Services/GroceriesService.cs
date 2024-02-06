@@ -35,7 +35,9 @@ public class GroceriesService : IGroceriesService
         var groceryEntity = GroceryEntityMapper.MapToGroceryEntity(grocery);
         await _groceriesRepository.AddGroceryAsync(groceryEntity);
         await _groceriesRepository.SaveChangesAsync();
-        return GroceryEntityMapper.MapToGroceryModel(groceryEntity);
+        _groceriesRepository.ClearTracker();
+        groceryEntity = await _groceriesRepository.GetAsync(groceryEntity.Id, gr => gr.Category);
+        return GroceryEntityMapper.MapToGroceryModel(groceryEntity!);
     }
 
     public async Task<Grocery> UpdateGrocery(Domain.Models.Groceries.Grocery grocery)
@@ -43,7 +45,9 @@ public class GroceriesService : IGroceriesService
         var groceryEntity = GroceryEntityMapper.MapToGroceryEntity(grocery);
         _groceriesRepository.Update(groceryEntity);
         await _groceriesRepository.SaveChangesAsync();
-        return GroceryEntityMapper.MapToGroceryModel(groceryEntity);
+        _groceriesRepository.ClearTracker();
+        groceryEntity = await _groceriesRepository.GetAsync(groceryEntity.Id, gr=>gr.Category);
+        return GroceryEntityMapper.MapToGroceryModel(groceryEntity!);
     }
 
     public async Task DeleteGrocery(int groceryId)

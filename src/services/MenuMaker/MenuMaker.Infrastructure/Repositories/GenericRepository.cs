@@ -79,7 +79,7 @@ public class GenericRepository<TEntity, TId, TDbContext>
     /// <returns><see cref="Task"/></returns>
     public Task DeleteAsync(TId id)
     {
-        return DeleteManyAsync(e => e.Id.Equals(id));
+        return DeleteManyAsync(e => e.Id!.Equals(id));
     }
 
     /// <summary>
@@ -136,5 +136,17 @@ public class GenericRepository<TEntity, TId, TDbContext>
     public async Task<int> SaveChangesAsync()
     {
         return await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task<TEntity> ReloadAsync(TEntity entity)
+    {
+        var entry = _dbContext.Entry(entity);
+        await entry.ReloadAsync();
+        return entity;
+    }
+
+    public void ClearTracker()
+    {
+        _dbContext.ChangeTracker.Clear();
     }
 }
