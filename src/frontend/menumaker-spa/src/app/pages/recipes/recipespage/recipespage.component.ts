@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
-import { RecipesService } from '../../services/recipes-service.service';
-import { Recipe } from '../../types/recipeTypes';
+import { RecipesService } from '../../../services/recipes-service.service';
+import { Recipe } from '../../../common/types/dto-types';
 import { RouterLink } from '@angular/router';
 
 import {MatCardModule} from '@angular/material/card';
@@ -21,7 +21,7 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { AddRecipeToMenuDialogComponent } from '../add-recipe-to-menu-dialog/add-recipe-to-menu-dialog.component';
-import { AppstateService } from '../../services/appstate.service';
+import { AppstateService } from '../../../services/appstate.service';
 
 @Component({
   selector: 'recipespage',

@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { catchError, retry, throwError } from 'rxjs';
-import { Grocery } from '../types/recipeTypes';
+import { Grocery } from '../common/types/dto-types';
 
 @Injectable({
   providedIn: 'root'

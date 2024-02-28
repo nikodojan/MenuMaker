@@ -15,7 +15,8 @@ public static partial class RecipeMapper
     private static IngredientResponseModel MapToIngredientResponseModel(Ingredient ingredient) =>
         IngredientMapper.ToIngredientResponseModel(ingredient);
 
-    public static partial Recipe MapToRecipeModel(RecipeRequestModel recipeRequest);
+    [MapperIgnoreTarget(nameof(Recipe.Id))]
+    public static partial Recipe MapToRecipeModel(this RecipeRequestModel recipeRequest);
 
     private static Ingredient MapToIngredientRequestModel(IngredientRequestModel ingredientRequest) => 
         IngredientMapper.MapToIngredientModel(ingredientRequest);

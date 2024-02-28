@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Grocery } from '../../types/recipeTypes';
-import { GroceriesService } from '../../services/groceries-service.service';
+import { Grocery } from '../../../common/types/dto-types';
+import { GroceriesService } from '../../../services/groceries-service.service';
 
 @Component({
   selector: 'app-groceriespage',

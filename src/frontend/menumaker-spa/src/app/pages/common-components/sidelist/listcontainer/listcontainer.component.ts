@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { AppstateService } from '../../services/appstate.service';
+import { AppstateService } from '../../../../services/appstate.service';
 import { AsyncPipe } from '@angular/common';
 import { ListitemComponent } from '../listitem/listitem.component';
-import { GroceriesListService } from '../../services/groceries-list.service';
+import { GroceriesListService } from '../../../../services/groceries-list.service';
 
 import {
   MatDialog,
@@ -11,7 +11,7 @@ import {
   MatDialogActions,
   MatDialogClose,
 } from '@angular/material/dialog';
-import { GroceriesListDialogComponent } from '../../groceriesList/groceries-list-dialog/groceries-list-dialog.component';
+import { GroceriesListDialogComponent } from '../../../groceriesList/groceries-list-dialog/groceries-list-dialog.component';
 
 @Component({
   selector: 'listcontainer',

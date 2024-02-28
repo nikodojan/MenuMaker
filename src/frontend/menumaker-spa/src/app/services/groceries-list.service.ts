@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { SelectedRecipe } from '../types/appTypes';
-import {GroceriesListRequestObject, GroceriesListItem} from '../types/dtoTypes';
+import { SelectedRecipe } from '../common/types/app-types';
+import {GroceriesListRequestObject, GroceriesListItem} from '../common/types/dto-types';
 import { Observable, map } from 'rxjs';
 
 @Injectable({

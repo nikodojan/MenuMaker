@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter  } from '@angular/core';
-import { SelectedRecipe } from '../../types/appTypes';
+import { SelectedRecipe } from '../../../../common/types/app-types';
 import {MatButtonModule} from '@angular/material/button';
-import { AppstateService } from '../../services/appstate.service';
+import { AppstateService } from '../../../../services/appstate.service';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({

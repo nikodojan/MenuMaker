@@ -1,4 +1,4 @@
-import { GroceriesListItem } from "./dtoTypes"
+import { GroceriesListItem } from "./dto-types"
 
 export interface SelectedRecipe {
   id: number,

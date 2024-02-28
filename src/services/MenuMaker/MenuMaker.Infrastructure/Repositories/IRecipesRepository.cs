@@ -13,4 +13,8 @@ public interface IRecipesRepository
     Task AddRecipeAsync(Entities.Recipes.Recipe recipe);
 
     Task<int> SaveChangesAsync();
+
+    Task UpdateRecipeAsync(Entities.Recipes.Recipe recipe);
+
+    Task<bool> ExistsAsync(int id);
 }

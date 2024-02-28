@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, groupBy, map } from 'rxjs';
-import { GroceriesListCategory, SelectedRecipe } from '../types/appTypes';
-import { GroceriesListItem } from '../types/dtoTypes';
+import { GroceriesListCategory, SelectedRecipe } from '../common/types/app-types';
+import { GroceriesListItem } from '../common/types/dto-types';
 
 @Injectable({
   providedIn: 'root'

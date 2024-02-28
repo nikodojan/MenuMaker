@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { RecipespageComponent } from '../recipes/recipespage/recipespage.component';
+import { RecipespageComponent } from '../../recipes/recipespage/recipespage.component';
 import { ListcontainerComponent } from '../sidelist/listcontainer/listcontainer.component';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';

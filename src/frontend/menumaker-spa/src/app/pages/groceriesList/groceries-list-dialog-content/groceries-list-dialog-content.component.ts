@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { GroceriesListCategory } from '../../types/appTypes';
+import { GroceriesListCategory } from '../../../common/types/app-types';
 import { MatDividerModule } from '@angular/material/divider';
 
 @Component({

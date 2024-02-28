@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppstateService } from '../../services/appstate.service';
 import { GroceriesListService } from '../../services/groceries-list.service';
-import { GroceriesListItem } from '../../types/dtoTypes';
+import { GroceriesListItem } from '../../common/types/dtoTypes';
 
 @Component({
   selector: 'groceries-list-page',

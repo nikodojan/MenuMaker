@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { Recipe } from '../../types/recipeTypes';
+import { Recipe } from '../../../common/types/dto-types';
 import { ActivatedRoute } from '@angular/router';
-import { RecipesService } from '../../services/recipes-service.service';
-import { FooterComponent } from '../../footer/footer.component';
-import { AppstateService } from '../../services/appstate.service';
+import { RecipesService } from '../../../services/recipes-service.service';
+import { FooterComponent } from '../../../pages/common-components/footer/footer.component';
+import { AppstateService } from '../../../services/appstate.service';
 
 import {
   MatDialog,

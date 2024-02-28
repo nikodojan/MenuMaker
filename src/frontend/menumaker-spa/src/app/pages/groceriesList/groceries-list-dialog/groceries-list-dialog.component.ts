@@ -14,10 +14,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { GroceriesListDialogContentComponent } from '../groceries-list-dialog-content/groceries-list-dialog-content.component';
 import { MatIconModule } from '@angular/material/icon';
-import { AppstateService } from '../../services/appstate.service';
+import { AppstateService } from '../../../services/appstate.service';
 import { Observable } from 'rxjs';
-import { GroceriesListItem } from '../../types/dtoTypes';
-import { GroceriesListCategory } from '../../types/appTypes';
+import { GroceriesListItem } from '../../../common/types/dto-types';
+import { GroceriesListCategory } from '../../../common/types/app-types';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatTooltipModule } from '@angular/material/tooltip';
 

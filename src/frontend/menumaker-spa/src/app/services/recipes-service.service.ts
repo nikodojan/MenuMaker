@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, retry, catchError, throwError } from 'rxjs';
-import { Recipe } from '../types/recipeTypes';
+import { Recipe } from '../common/types/dto-types';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,17 @@ export class RecipesService {
 
   getRecipeById(id: number) : Observable<Recipe> {
     return this.httpClient.get<Recipe>(this.baseUrl + '/' + id);
+  }
+
+  createRecipe(recipe: Recipe) : Observable<Recipe> {
+    return this.httpClient.post<Recipe>(
+      this.baseUrl, 
+      recipe, 
+      {
+        headers: {
+          'x-api-key': environment.apiKey
+      }
+    });
   }
 
   private handleError(error: HttpErrorResponse) {
