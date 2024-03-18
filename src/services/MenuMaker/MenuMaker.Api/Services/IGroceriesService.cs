@@ -9,5 +9,6 @@ public interface IGroceriesService
     Task DeleteGrocery(int groceryId);
     Task<IEnumerable<GroceryReponseModel>> GetAllGroceries();
     Task<GroceryReponseModel?> GetGroceryById(int id);
+    Task<IEnumerable<GroceryCategory>> GetGroceryCategories();
     Task<Grocery> UpdateGrocery(Grocery grocery);
 }

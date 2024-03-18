@@ -7,4 +7,5 @@ public interface IGroceriesRepository : IGenericRepository<Grocery, int>
     Task<IEnumerable<Domain.Models.Groceries.Grocery>> GetGroceries();
     Task<Domain.Models.Groceries.Grocery?> GetGroceryById(int id);
     void Update(Grocery grocery);
+    void ClearTracker();
 }

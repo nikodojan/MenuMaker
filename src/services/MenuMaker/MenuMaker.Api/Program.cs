@@ -2,6 +2,7 @@ using MenuMaker.Api.Authentication;
 using MenuMaker.Api.Services;
 using MenuMaker.Domain.Interfaces;
 using MenuMaker.Domain.Models.Recipes;
+using MenuMaker.Infrastructure.Entities.Recipes;
 using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -82,6 +83,7 @@ public class Program
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
         builder.Services.AddTransient<IGroceriesRepository, GroceriesRepository>();
         builder.Services.AddTransient<IGroceriesService, GroceriesService>();
+        builder.Services.AddTransient<IGenericRepository<GroceryCategory, int>, GenericRepository<GroceryCategory, int, RecipesContext>>();
 
         builder.Services.AddScoped<IUnitOfWork<RecipesContext>, RecipesContext>();
 

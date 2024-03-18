@@ -53,3 +53,29 @@ export interface GroceriesListItem {
   unit: string,
   category: string
 }
+
+export interface NewRecipeModel {
+  title: string,
+  imgPath: string | null,
+  description: string | null,
+  portions: number,
+  timeInMinutes: number,
+  ingredients: NewIngredientModel[] | null,
+  instructions: Record<string, string[]>
+}
+
+export interface NewIngredientModel {
+  amount: number | null,
+  unit: string | null,
+  description: string | null,
+  partOfDish: string | null,
+  grocery: Grocery
+}
+
+export interface EditIngredientModel {
+  amount: number,
+  unit: string,
+  description: string | null,
+  partOfDish: string | null,
+  grocery: string
+}

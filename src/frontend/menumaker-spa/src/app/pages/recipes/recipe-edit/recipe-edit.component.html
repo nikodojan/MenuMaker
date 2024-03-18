@@ -1,0 +1,33 @@
+<p>recipe-edit works!</p>
+
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+        <input type="text" formControlName="title"/>
+        <input type="text" formControlName="imgPath"/>
+        <input type="text" formControlName="description"/>
+        <input type="number" formControlName="timeinminutes"/>
+        <input type="number" formControlName="portions"/>
+
+        <div formArrayName="ingredients">
+            <h2>Ingredients</h2>
+            <!-- <button type="button" (click)="addAlias()">+ Add another alias</button> -->
+<!--           
+            <div *ngFor="let alias of ingredients.controls; let i=index">
+              
+              <label for="alias-{{ i }}">Alias:</label>
+              <input id="alias-{{ i }}" type="text" [formControlName]="i">
+            </div> 
+-->
+
+            @for (ingredient of recipeForm.value.ingredients.controls; track ingredient; let index = $index) {
+                <div formGroupName="ingr-$index">
+                    <input type="number" formControlName="amount" />
+                    <input type="text" formControlName="unit" />
+                    <input type="text" formControlName="description" />
+                    <input type="text" formControlName="part" />
+                    <input type="text" formControlName="groceryname" />
+                </div>
+            }
+        </div>
+
+        
+</form>

@@ -70,9 +70,7 @@ export class RecipeComponent {
       this.recipe.ingredients[this.recipe.ingredients.indexOf(ingredient)].amount = newAmount;
     }
   }
-
-
-
+  
   addButtonClicked(){
     if (this.recipe.portions < 1) {
       this.recipe.portions = 1

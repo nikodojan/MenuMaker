@@ -9,10 +9,14 @@ namespace MenuMaker.Api.Services;
 public class GroceriesService : IGroceriesService
 {
     private readonly IGroceriesRepository _groceriesRepository;
+    private readonly IGenericRepository<Infrastructure.Entities.Recipes.GroceryCategory, int> _groceriesCategoriesRepository;
 
-    public GroceriesService(IGroceriesRepository groceriesRepository)
+    public GroceriesService(
+        IGroceriesRepository groceriesRepository,
+        IGenericRepository<Infrastructure.Entities.Recipes.GroceryCategory, int> groceriesCategoriesRepository)
     {
         _groceriesRepository = groceriesRepository;
+        _groceriesCategoriesRepository = groceriesCategoriesRepository;
     }
 
     public async Task<IEnumerable<GroceryReponseModel>> GetAllGroceries()
@@ -54,5 +58,12 @@ public class GroceriesService : IGroceriesService
     {
         await _groceriesRepository.DeleteAsync(groceryId);
         await _groceriesRepository.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<GroceryCategory>> GetGroceryCategories()
+    {
+        var categoryEntities = await _groceriesCategoriesRepository.GetAllAsync();
+        var categoryModels = categoryEntities.MapToGroceryCategoryModels();
+        return categoryModels;
     }
 }

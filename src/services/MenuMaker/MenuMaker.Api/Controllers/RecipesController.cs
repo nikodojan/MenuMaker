@@ -49,7 +49,7 @@ public class RecipesController : ControllerBase
     [HttpPut]
     public async Task<IActionResult> UpdateRecipe(int id, RecipeRequestModel recipe)
     {
-        var updatedRecipe = await _recipesService.UpdateRecipe(recipe.MapToRecipeModel());
+        var updatedRecipe = await _recipesService.UpdateRecipe(id, recipe.MapToRecipeModel());
         return Ok(updatedRecipe);
     }
 }

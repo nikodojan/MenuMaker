@@ -1,4 +1,5 @@
 ﻿using MenuMaker.Domain.Interfaces;
+using MenuMaker.Infrastructure.Entities.Recipes;
 using MenuMaker.Infrastructure.Mappers;
 using MenuMaker.Infrastructure.Persistence;
 using MenuMaker.Infrastructure.Repositories.Specifications;
