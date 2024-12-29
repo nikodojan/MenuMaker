@@ -20,20 +20,19 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'add-recipe-to-menu-dialog',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose
-  ],
-  templateUrl: './add-recipe-to-menu-dialog.component.html',
-  styleUrl: './add-recipe-to-menu-dialog.component.scss'
+    selector: 'add-recipe-to-menu-dialog',
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose
+    ],
+    templateUrl: './add-recipe-to-menu-dialog.component.html',
+    styleUrl: './add-recipe-to-menu-dialog.component.scss'
 })
 export class AddRecipeToMenuDialogComponent {
   constructor(

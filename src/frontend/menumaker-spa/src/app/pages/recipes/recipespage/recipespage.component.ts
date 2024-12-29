@@ -24,25 +24,25 @@ import { AddRecipeToMenuDialogComponent } from '../add-recipe-to-menu-dialog/add
 import { AppstateService } from '../../../services/appstate.service';
 
 @Component({
-  selector: 'recipespage',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NgIf,
-    RouterLink,
-    MatCardModule,
-    MatButtonModule, 
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose],
-  templateUrl: './recipespage.component.html',
-  styleUrl: './recipespage.component.scss'
+    selector: 'recipespage',
+    imports: [
+        CommonModule,
+        NgIf,
+        RouterLink,
+        MatCardModule,
+        MatButtonModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose
+    ],
+    templateUrl: './recipespage.component.html',
+    styleUrl: './recipespage.component.scss'
 })
 export class RecipespageComponent {
   constructor(

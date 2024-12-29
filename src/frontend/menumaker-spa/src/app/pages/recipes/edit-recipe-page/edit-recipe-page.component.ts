@@ -6,11 +6,10 @@ import { GroceriesService } from '../../../services/groceries-service.service';
 import { RecipeEditComponent } from '../recipe-edit/recipe-edit.component';
 
 @Component({
-  selector: 'edit-recipe-page',
-  standalone: true,
-  imports: [RecipeEditComponent],
-  templateUrl: './edit-recipe-page.component.html',
-  styleUrl: './edit-recipe-page.component.scss'
+    selector: 'edit-recipe-page',
+    imports: [RecipeEditComponent],
+    templateUrl: './edit-recipe-page.component.html',
+    styleUrl: './edit-recipe-page.component.scss'
 })
 export class EditRecipePageComponent {
 

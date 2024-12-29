@@ -5,11 +5,10 @@ import { AppstateService } from '../../../../services/appstate.service';
 import {MatIconModule} from '@angular/material/icon';
 
 @Component({
-  selector: 'listitem',
-  standalone: true,
-  imports: [MatButtonModule,MatIconModule],
-  templateUrl: './listitem.component.html',
-  styleUrl: './listitem.component.scss'
+    selector: 'listitem',
+    imports: [MatButtonModule, MatIconModule],
+    templateUrl: './listitem.component.html',
+    styleUrl: './listitem.component.scss'
 })
 export class ListitemComponent {
   @Input()

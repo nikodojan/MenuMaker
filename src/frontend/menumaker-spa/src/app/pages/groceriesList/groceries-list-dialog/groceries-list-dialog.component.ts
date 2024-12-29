@@ -22,22 +22,21 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
-  selector: 'groceries-list-dialog',
-  standalone: true,
-  imports: [   MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    GroceriesListDialogContentComponent,
-    MatIconModule,
-    ClipboardModule,
-    MatTooltipModule],
-  templateUrl: './groceries-list-dialog.component.html',
-  styleUrl: './groceries-list-dialog.component.scss'
+    selector: 'groceries-list-dialog',
+    imports: [MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose,
+        GroceriesListDialogContentComponent,
+        MatIconModule,
+        ClipboardModule,
+        MatTooltipModule],
+    templateUrl: './groceries-list-dialog.component.html',
+    styleUrl: './groceries-list-dialog.component.scss'
 })
 export class GroceriesListDialogComponent {
   constructor(

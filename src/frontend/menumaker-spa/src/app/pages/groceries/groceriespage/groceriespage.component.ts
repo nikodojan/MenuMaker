@@ -4,11 +4,10 @@ import { Grocery } from '../../../common/types/dto-types';
 import { GroceriesService } from '../../../services/groceries-service.service';
 
 @Component({
-  selector: 'app-groceriespage',
-  standalone: true,
-  imports: [],
-  templateUrl: './groceriespage.component.html',
-  styleUrl: './groceriespage.component.scss'
+    selector: 'app-groceriespage',
+    imports: [],
+    templateUrl: './groceriespage.component.html',
+    styleUrl: './groceriespage.component.scss'
 })
 export class GroceriespageComponent {
   constructor(private groceriesService : GroceriesService) {

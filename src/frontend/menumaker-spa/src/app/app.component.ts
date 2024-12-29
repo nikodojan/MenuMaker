@@ -5,11 +5,10 @@ import { MainLayoutComponent } from './pages/common-components/main-layout/main-
 import { RecipespageComponent } from './pages/recipes/recipespage/recipespage.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet, MainLayoutComponent, RecipespageComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    imports: [CommonModule, RouterOutlet, MainLayoutComponent, RecipespageComponent],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'menumaker-spa';

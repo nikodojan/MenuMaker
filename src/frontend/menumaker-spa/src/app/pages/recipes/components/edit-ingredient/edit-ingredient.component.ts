@@ -3,11 +3,10 @@ import { EditIngredientModel } from '../../../../common/types/dto-types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'edit-ingredient',
-  standalone: true,
-  imports: [],
-  templateUrl: './edit-ingredient.component.html',
-  styleUrl: './edit-ingredient.component.scss'
+    selector: 'edit-ingredient',
+    imports: [],
+    templateUrl: './edit-ingredient.component.html',
+    styleUrl: './edit-ingredient.component.scss'
 })
 export class EditIngredientComponent {
   ingredientForm : FormGroup;

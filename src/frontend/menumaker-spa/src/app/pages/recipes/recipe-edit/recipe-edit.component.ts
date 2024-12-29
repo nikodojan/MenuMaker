@@ -7,11 +7,10 @@ import { ReactiveFormsModule , FormBuilder, FormGroup, Validators, FormControl }
 
 
 @Component({
-  selector: 'recipe-edit',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './recipe-edit.component.html',
-  styleUrl: './recipe-edit.component.scss'
+    selector: 'recipe-edit',
+    imports: [ReactiveFormsModule],
+    templateUrl: './recipe-edit.component.html',
+    styleUrl: './recipe-edit.component.scss'
 })
 export class RecipeEditComponent {
   

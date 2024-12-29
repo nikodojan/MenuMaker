@@ -24,21 +24,21 @@ export interface AddButtonOptions {
 }
 
 @Component({
-  selector: 'add-recipe-to-list-button',
-  standalone: true,
-  imports: [
-    MatButtonModule, 
-    MatGridListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose],
-  templateUrl: './add-recipe-to-list-button.component.html',
-  styleUrl: './add-recipe-to-list-button.component.scss'
+    selector: 'add-recipe-to-list-button',
+    imports: [
+        MatButtonModule,
+        MatGridListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose
+    ],
+    templateUrl: './add-recipe-to-list-button.component.html',
+    styleUrl: './add-recipe-to-list-button.component.scss'
 })
 export class AddRecipeToListButtonComponent {
   constructor(

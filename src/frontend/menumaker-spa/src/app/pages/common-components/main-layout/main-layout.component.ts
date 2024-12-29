@@ -10,21 +10,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
-  selector: 'main-layout',
-  standalone: true,
-  imports: [
-    RouterOutlet, 
-    RouterLink, 
-    MatCardModule, 
-    MatButtonModule, 
-    MatSidenavModule, 
-    RecipespageComponent, 
-    ListcontainerComponent,
-    MatIconModule, 
-    MatTooltipModule,
-    FooterComponent],
-  templateUrl: './main-layout.component.html',
-  styleUrl: './main-layout.component.scss'
+    selector: 'main-layout',
+    imports: [
+        RouterOutlet,
+        RouterLink,
+        MatCardModule,
+        MatButtonModule,
+        MatSidenavModule,
+        RecipespageComponent,
+        ListcontainerComponent,
+        MatIconModule,
+        MatTooltipModule,
+        FooterComponent
+    ],
+    templateUrl: './main-layout.component.html',
+    styleUrl: './main-layout.component.scss'
 })
 export class MainLayoutComponent {  
   isSidelistOpened: boolean = false;

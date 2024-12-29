@@ -17,16 +17,16 @@ import {
 import { AddRecipeToMenuDialogComponent } from '../add-recipe-to-menu-dialog/add-recipe-to-menu-dialog.component';
 
 @Component({
-  selector: 'recipe',
-  standalone: true,
-  imports: [
-    FooterComponent,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose],
-  templateUrl: './recipe.component.html',
-  styleUrl: './recipe.component.scss'
+    selector: 'recipe',
+    imports: [
+        FooterComponent,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose
+    ],
+    templateUrl: './recipe.component.html',
+    styleUrl: './recipe.component.scss'
 })
 export class RecipeComponent {
   constructor(

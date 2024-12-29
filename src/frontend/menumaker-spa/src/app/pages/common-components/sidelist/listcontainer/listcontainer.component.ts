@@ -14,19 +14,18 @@ import {
 import { GroceriesListDialogComponent } from '../../../groceriesList/groceries-list-dialog/groceries-list-dialog.component';
 
 @Component({
-  selector: 'listcontainer',
-  standalone: true,
-  imports: [
-    AsyncPipe, 
-    ListitemComponent,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
-    GroceriesListDialogComponent
-  ],
-  templateUrl: './listcontainer.component.html',
-  styleUrl: './listcontainer.component.scss'
+    selector: 'listcontainer',
+    imports: [
+        AsyncPipe,
+        ListitemComponent,
+        MatDialogTitle,
+        MatDialogContent,
+        MatDialogActions,
+        MatDialogClose,
+        GroceriesListDialogComponent
+    ],
+    templateUrl: './listcontainer.component.html',
+    styleUrl: './listcontainer.component.scss'
 })
 export class ListcontainerComponent {
   constructor(
