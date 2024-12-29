@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: menu-maker-api
+  labels:
+    app: menu-maker-api
+  namespace: menu-maker-dev
+spec:
+  selector:
+    matchLabels:
+      app: menu-maker-api
+  template:
+    metadata:
+      labels:
+        app: menu-maker-api
+    spec:
+      containers:
+      - name: menu-maker-api
+        image: 10.0.1.1:32000/menu-maker-api:latest
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        env:
+        - name: mm-db-connection-string #name of env variable
+          valueFrom:
+            secretKeyRef:
+              name: mm-db-connection-string #name of secret yaml
+              key: mm-db-connection-string #name of key in secret file
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: menu-maker-api-service
+  namespace: menu-maker-dev
+spec:
+  type: ClusterIP
+  selector:
+    app: menu-maker-api
+  ports:
+    - name: api-http
+      protocol: TCP
+      port: 8090
+      targetPort: 8080
+    - name: api-https
+      protocol: TCP
+      port: 8091
+      targetPort: 443
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: menu-maker-api-ingress
+  namespace: menu-maker-dev
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: menu-maker.nikoddev.dk
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: menu-maker-api-service
+                port:
+                  number: 8090
+          - path: /swagger
+            pathType: Prefix
+            backend:
+              service:
+                name: menu-maker-api-service
+                port:
+                  number: 8090
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mm-db-connection-string
+  namespace: menu-maker-dev
+type: kubernetes.io/Opaque
+stringData:
+  mm-db-connection-string: User ID=mm_db_sp;Password=password;Host=192.168.0.160;Port=5432;Database=mm_db;
