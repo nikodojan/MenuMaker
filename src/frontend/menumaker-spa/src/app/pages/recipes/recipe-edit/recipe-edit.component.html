@@ -1,11 +1,36 @@
-<p>recipe-edit works!</p>
+<p>Recipe edit form</p>
 
 <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-        <input type="text" formControlName="title"/>
-        <input type="text" formControlName="imgPath"/>
-        <input type="text" formControlName="description"/>
-        <input type="number" formControlName="timeinminutes"/>
-        <input type="number" formControlName="portions"/>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Recipe title</mat-label>
+            <input matInput type="text" formControlName="title"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Image path</mat-label>
+            <input matInput type="text" formControlName="imgPath"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput type="text" formControlName="description"></textarea>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Time (in minutes)</mat-label>
+            <input matInput type="number" formControlName="timeinminutes"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Portions</mat-label>
+            <input matInput type="number" formControlName="portions"/>
+        </mat-form-field>
+    </p>
 
         <div formArrayName="ingredients">
             <h2>Ingredients</h2>

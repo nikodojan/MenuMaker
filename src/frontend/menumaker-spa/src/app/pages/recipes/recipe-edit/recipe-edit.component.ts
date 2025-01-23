@@ -6,9 +6,13 @@ import { RecipesService } from '../../../services/recipes-service.service';
 import { ReactiveFormsModule , FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+
 @Component({
     selector: 'recipe-edit',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule,MatFormFieldModule,MatInputModule],
     templateUrl: './recipe-edit.component.html',
     styleUrl: './recipe-edit.component.scss'
 })
