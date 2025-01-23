@@ -1,4 +1,5 @@
 ﻿using MenuMaker.Infrastructure.Entities;
+using MenuMaker.Infrastructure.Entities.Recipes;
 using MenuMaker.Infrastructure.Repositories.Specifications;
 using System.Linq.Expressions;
 
@@ -18,6 +19,4 @@ public interface IGenericRepository<TEntity, TId>
     void UpdateValues(TEntity existingEntityToUpdate, TEntity entityWithUpdates);
     Task<IEnumerable<TEntity>> FindWithSpecification(ISpecification<TEntity> specification = null);
     Task<int> SaveChangesAsync();
-    Task<TEntity> ReloadAsync(TEntity entity);
-    void ClearTracker();
 }

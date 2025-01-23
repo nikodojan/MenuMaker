@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { catchError, retry, throwError } from 'rxjs';
-import { Grocery } from '../types/recipeTypes';
+import { Grocery, GroceryCategory } from '../common/types/dto-types';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,25 @@ export class GroceriesService {
 
   constructor(private httpClient : HttpClient) { }
 
-  baseUrl : string =  environment.apiBaseUrl + '/v1/groceries'
+  baseUrl: string = environment.apiBaseUrl;
+  groceriesUrl : string = this.baseUrl + '/v1/groceries';
+  groceriesCategoriesUrl : string = this.baseUrl + '/v1/groceries/categories';
 
   getGroceries() {
-    return this.httpClient.get<Grocery[]>(this.baseUrl)
+    return this.httpClient.get<Grocery[]>(this.groceriesUrl)
       .pipe(
         retry(2),
         catchError(this.handleError)
       );
   };
+
+  getGroceriesCategories() {
+    return this.httpClient.get<GroceryCategory[]>(this.groceriesCategoriesUrl)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

@@ -1,0 +1,58 @@
+<p>Recipe edit form</p>
+
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Recipe title</mat-label>
+            <input matInput type="text" formControlName="title"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Image path</mat-label>
+            <input matInput type="text" formControlName="imgPath"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput type="text" formControlName="description"></textarea>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Time (in minutes)</mat-label>
+            <input matInput type="number" formControlName="timeinminutes"/>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="outline">
+            <mat-label>Portions</mat-label>
+            <input matInput type="number" formControlName="portions"/>
+        </mat-form-field>
+    </p>
+
+        <div formArrayName="ingredients">
+            <h2>Ingredients</h2>
+            <!-- <button type="button" (click)="addAlias()">+ Add another alias</button> -->
+<!--           
+            <div *ngFor="let alias of ingredients.controls; let i=index">
+              
+              <label for="alias-{{ i }}">Alias:</label>
+              <input id="alias-{{ i }}" type="text" [formControlName]="i">
+            </div> 
+-->
+
+            @for (ingredient of recipeForm.value.ingredients.controls; track ingredient; let index = $index) {
+                <div formGroupName="ingr-$index">
+                    <input type="number" formControlName="amount" />
+                    <input type="text" formControlName="unit" />
+                    <input type="text" formControlName="description" />
+                    <input type="text" formControlName="part" />
+                    <input type="text" formControlName="groceryname" />
+                </div>
+            }
+        </div>
+
+        
+</form>

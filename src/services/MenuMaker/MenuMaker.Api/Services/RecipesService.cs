@@ -70,10 +70,24 @@ public class RecipesService : IRecipesService
         return newNf;
     }
 
-    public async Task<Recipe> AddRecipe(Recipe recipeModel)
+    public async Task<Recipe> CreateRecipe(Recipe recipeModel)
     {
         var recipe = RecipeEntityMapper.MapToRecipeEntity(recipeModel);
         await _recipesRepository.AddRecipeAsync(recipe);
+        await _recipesRepository.SaveChangesAsync();
+        return RecipeEntityMapper.MapToRecipeModel(recipe);
+    }
+
+    public async Task<Recipe?> UpdateRecipe(int id, Recipe recipeModel)
+    {
+        if (!await _recipesRepository.ExistsAsync(id))
+        {
+            return null;
+        }
+
+        recipeModel.Id = id;
+        var recipe = RecipeEntityMapper.MapToRecipeEntity(recipeModel);
+        await _recipesRepository.UpdateRecipeAsync(recipe);
         await _recipesRepository.SaveChangesAsync();
         return RecipeEntityMapper.MapToRecipeModel(recipe);
     }

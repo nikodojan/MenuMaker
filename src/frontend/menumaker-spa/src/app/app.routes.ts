@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomepageComponent } from './home/homepage/homepage.component';
-import { AboutpageComponent } from './aboutpage/aboutpage.component';
-import { GroceriespageComponent } from './groceries/groceriespage/groceriespage.component';
+import { HomepageComponent } from './pages/homepage/homepage.component';
 
 export const routes: Routes = [
   {
@@ -11,21 +9,26 @@ export const routes: Routes = [
   {
     path: 'recipes',
     loadComponent: () => 
-      import('./recipes/recipespage/recipespage.component').then(comp=>comp.RecipespageComponent)
+      import('./pages/recipes/recipespage/recipespage.component').then(comp=>comp.RecipespageComponent)
   },
   {
     path: 'recipes/:id',
     loadComponent: () => 
-      import('./recipes/recipe/recipe.component').then(comp=>comp.RecipeComponent)
+      import('./pages/recipes/recipe/recipe.component').then(comp=>comp.RecipeComponent)
+  },
+  {
+    path: 'recipes/edit/:id',
+    loadComponent: () => 
+      import('./pages/recipes/edit-recipe-page/edit-recipe-page.component').then(comp=>comp.EditRecipePageComponent)
   },
   {
     path: 'about',
     loadComponent: () => 
-      import('./aboutpage/aboutpage.component').then(comp=>comp.AboutpageComponent)
+      import('./pages/aboutpage/aboutpage.component').then(comp=>comp.AboutpageComponent)
   },
   {
     path: 'groceries',
     loadComponent: () => 
-      import('./groceries/groceriespage/groceriespage.component').then(comp=>comp.GroceriespageComponent)
+      import('./pages/groceries/groceriespage/groceriespage.component').then(comp=>comp.GroceriespageComponent)
   }
 ];

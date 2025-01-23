@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy-arm64v8
+FROM mcr.microsoft.com/dotnet/sdk:8.0-jammy
 EXPOSE 80
 EXPOSE 443
 

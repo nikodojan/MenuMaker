@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: menu-maker-webapp
+  labels:
+    app: menu-maker-webapp
+  namespace: menu-maker-dev
+spec:
+  selector:
+    matchLabels:
+      app: menu-maker-webapp
+  template:
+    metadata:
+      labels:
+        app: menu-maker-webapp
+    spec:
+      containers:
+      - name: menu-maker-webapp
+        image: 10.0.1.1:32000/menu-maker-webapp:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: menu-maker-webapp-service
+  namespace: menu-maker-dev
+spec:
+  type: ClusterIP
+  selector:
+    app: menu-maker-webapp
+  ports:
+    - name: webapp-http
+      protocol: TCP
+      port: 8091
+      targetPort: 8080
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: menu-maker-webapp-ingress
+  namespace: menu-maker-dev
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: menu-maker.nikoddev.dk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: menu-maker-webapp-service
+                port:
+                  number: 8091

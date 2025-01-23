@@ -42,7 +42,14 @@ public class RecipesController : ControllerBase
     [ApiKey]
     public async Task<IActionResult> AddRecipe([FromBody] RecipeRequestModel recipe)
     {
-        var newRecipe = await _recipesService.AddRecipe(RecipeMapper.MapToRecipeModel(recipe));
+        var newRecipe = await _recipesService.CreateRecipe(recipe.MapToRecipeModel());
         return Created(newRecipe.Id.ToString(), RecipeMapper.MapToRecipeResponseModel(newRecipe));
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateRecipe(int id, RecipeRequestModel recipe)
+    {
+        var updatedRecipe = await _recipesService.UpdateRecipe(id, recipe.MapToRecipeModel());
+        return Ok(updatedRecipe);
     }
 }

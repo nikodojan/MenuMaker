@@ -64,4 +64,11 @@ public class GroceriesController : ControllerBase
         return Ok();
     }
 
+    [HttpGet]
+    [Route("categories")]
+    public async Task<IActionResult> GetCategories()
+    {
+        return Ok(await _groceriesService.GetGroceryCategories());
+    }
+
 }

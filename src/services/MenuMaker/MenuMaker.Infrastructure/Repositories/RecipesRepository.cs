@@ -75,4 +75,20 @@ public class RecipesRepository : GenericRepository<Recipe, int, RecipesContext>,
         }
     }
 
+    public async Task UpdateRecipeAsync(Recipe recipe)
+    {
+        base.Update(recipe);
+        var dummyIdCounter = 0;
+        foreach (var ingr in recipe.Ingredients)
+        {
+            _dbContext.Entry<Grocery>(ingr.Grocery).State = EntityState.Unchanged;
+            _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).Entity.Id = ++dummyIdCounter;
+            _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).State = EntityState.Unchanged;
+        }
+    }
+
+    public new async Task<bool> ExistsAsync(int id)
+    {
+        return await base.ExistsAsync(id);
+    }
 }

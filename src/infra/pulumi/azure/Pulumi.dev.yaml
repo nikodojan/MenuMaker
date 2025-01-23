@@ -1,0 +1,4 @@
+config:
+  azure-native:location: northeurope
+  mm-azure:dbConnectionString:
+    secure: AAABAMJlPfJSBPekGf/8Hn+G/AvjQYc3H5F1JVIWlFF4BzpxUtZaUjfKCkdr0tuROY0/ykl8f5SP6WgEODmP5KYpCipBsonbgDQ+0OTH8cMKlkvLXfTU8D0QF7kynkfRo6jYDF1Qr/iy+1Dc5K2pzPtawFwZ1n8f/YUD6Y8Dt2vMQPFeKHBUhpM9N5u4uuMoCaxv8pq7iGqLW2hjG1eoMMaq/Q==
