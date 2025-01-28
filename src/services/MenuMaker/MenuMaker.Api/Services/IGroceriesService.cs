@@ -6,9 +6,9 @@ namespace MenuMaker.Api.Services;
 public interface IGroceriesService
 {
     Task<Grocery> AddGrocery(Grocery grocery);
-    Task DeleteGrocery(int groceryId);
+    Task DeleteGrocery(Guid groceryId);
     Task<IEnumerable<GroceryReponseModel>> GetAllGroceries();
-    Task<GroceryReponseModel?> GetGroceryById(int id);
+    Task<GroceryReponseModel?> GetGroceryById(Guid id);
     Task<IEnumerable<GroceryCategory>> GetGroceryCategories();
     Task<Grocery> UpdateGrocery(Grocery grocery);
 }

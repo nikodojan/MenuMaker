@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Grocery = MenuMaker.Infrastructure.Entities.Recipes.Grocery;
 
 namespace MenuMaker.Infrastructure.Repositories;
-public class GroceriesRepository : GenericRepository<Grocery, int, RecipesContext>, IGroceriesRepository
+public class GroceriesRepository : GenericRepository<Grocery, Guid, RecipesContext>, IGroceriesRepository
 {
     public GroceriesRepository(RecipesContext dbContext) : base(dbContext)
     {
@@ -21,7 +21,7 @@ public class GroceriesRepository : GenericRepository<Grocery, int, RecipesContex
         return GroceryEntityMapper.MapToGroceryModelsList(groceries.ToList());
     }
 
-    public async Task<Domain.Models.Groceries.Grocery?> GetGroceryById(int id)
+    public async Task<Domain.Models.Groceries.Grocery?> GetGroceryById(Guid id)
     {
         var grocery = await GetAsync(id, gr => gr.Category);
         if (grocery is null) 

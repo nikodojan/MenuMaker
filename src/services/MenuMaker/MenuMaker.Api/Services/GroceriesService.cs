@@ -9,11 +9,11 @@ namespace MenuMaker.Api.Services;
 public class GroceriesService : IGroceriesService
 {
     private readonly IGroceriesRepository _groceriesRepository;
-    private readonly IGenericRepository<Infrastructure.Entities.Recipes.GroceryCategory, int> _groceriesCategoriesRepository;
+    private readonly IGenericRepository<Infrastructure.Entities.Recipes.GroceryCategory, Guid> _groceriesCategoriesRepository;
 
     public GroceriesService(
         IGroceriesRepository groceriesRepository,
-        IGenericRepository<Infrastructure.Entities.Recipes.GroceryCategory, int> groceriesCategoriesRepository)
+        IGenericRepository<Infrastructure.Entities.Recipes.GroceryCategory, Guid> groceriesCategoriesRepository)
     {
         _groceriesRepository = groceriesRepository;
         _groceriesCategoriesRepository = groceriesCategoriesRepository;
@@ -25,7 +25,7 @@ public class GroceriesService : IGroceriesService
         return GroceryMapper.MapToGroceryReponseModelsList(groceryModels.ToList());
     }
 
-    public async Task<GroceryReponseModel?> GetGroceryById(int id)
+    public async Task<GroceryReponseModel?> GetGroceryById(Guid id)
     {
         if ((await _groceriesRepository.GetGroceryById(id)) is Grocery grocery)
             return GroceryMapper.MapToGroceryReponseModel(grocery);
@@ -54,7 +54,7 @@ public class GroceriesService : IGroceriesService
         return GroceryEntityMapper.MapToGroceryModel(groceryEntity!);
     }
 
-    public async Task DeleteGrocery(int groceryId)
+    public async Task DeleteGrocery(Guid groceryId)
     {
         await _groceriesRepository.DeleteAsync(groceryId);
         await _groceriesRepository.SaveChangesAsync();

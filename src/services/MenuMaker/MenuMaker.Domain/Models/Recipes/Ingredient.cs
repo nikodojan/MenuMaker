@@ -5,7 +5,7 @@ namespace MenuMaker.Domain.Models.Recipes;
 
 public class Ingredient
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public double? Amount { get; set; }
 

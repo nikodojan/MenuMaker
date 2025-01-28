@@ -26,7 +26,7 @@ public class GroceriesController : ControllerBase
 
     [HttpGet]
     [Route("{id:int}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         if ((await _groceriesService.GetGroceryById(id)) is GroceryReponseModel grocery)
             return Ok(grocery);
@@ -45,7 +45,7 @@ public class GroceriesController : ControllerBase
     [HttpPut]
     [ApiKey]
     [Route("{id:int}")]
-    public async Task<IActionResult> EditGrocery([FromRoute] int id, [FromBody] GroceryRequestModel grocery)
+    public async Task<IActionResult> EditGrocery([FromRoute] Guid id, [FromBody] GroceryRequestModel grocery)
     {
         if (grocery.Id != id)
             return BadRequest();
@@ -57,8 +57,8 @@ public class GroceriesController : ControllerBase
 
     [HttpDelete]
     [ApiKey]
-    [Route("{id:int}")]
-    public async Task<IActionResult> DeleteGrocery(int id)
+    [Route("{id:guid}")]
+    public async Task<IActionResult> DeleteGrocery(Guid id)
     {
         await _groceriesService.DeleteGrocery(id);
         return Ok();

@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace MenuMaker.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ParentCat : Migration
+    public partial class guidids : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,10 +15,9 @@ namespace MenuMaker.Infrastructure.Migrations
                 name: "GroceryCategories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    ParentCategoryId = table.Column<int>(type: "integer", nullable: false)
+                    ParentCategoryId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,21 +27,20 @@ namespace MenuMaker.Infrastructure.Migrations
                         column: x => x.ParentCategoryId,
                         principalTable: "GroceryCategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Recipes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    ImgPath = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
-                    Instructions = table.Column<string>(type: "character varying(2000)", maxLength: 2000, nullable: false),
-                    Portions = table.Column<int>(type: "integer", nullable: true),
-                    TimeInMinutes = table.Column<int>(type: "integer", nullable: true)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ImgPath = table.Column<string>(type: "text", nullable: true),
+                    Portions = table.Column<int>(type: "integer", nullable: false, defaultValue: 1),
+                    TimeInMinutes = table.Column<int>(type: "integer", nullable: true),
+                    Instructions = table.Column<string>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,12 +51,11 @@ namespace MenuMaker.Infrastructure.Migrations
                 name: "Groceries",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     NameSelectable = table.Column<string>(type: "character varying(250)", maxLength: 250, nullable: false),
                     NameSingular = table.Column<string>(type: "text", nullable: true),
                     NamePlural = table.Column<string>(type: "text", nullable: true),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
                     StandardUnit = table.Column<string>(type: "text", nullable: false, defaultValue: "g"),
                     NF_Serving_Unit = table.Column<string>(type: "text", nullable: false, defaultValue: "g"),
                     NF_Serving_Amount = table.Column<double>(type: "double precision", nullable: false),
@@ -77,22 +74,20 @@ namespace MenuMaker.Infrastructure.Migrations
                         name: "FK_Groceries_GroceryCategories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "GroceryCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Ingredients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Amount = table.Column<double>(type: "double precision", nullable: true),
                     Unit = table.Column<string>(type: "text", nullable: true),
-                    GroceryId = table.Column<int>(type: "integer", nullable: false),
+                    GroceryId = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     PartOfDish = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    RecipeId = table.Column<int>(type: "integer", nullable: false)
+                    RecipeId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {

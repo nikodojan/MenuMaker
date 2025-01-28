@@ -5,7 +5,7 @@ namespace MenuMaker.Api.Models.ResponseModels;
 public class GroceryReponseModel
 {
     [JsonPropertyName("id")]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     [JsonPropertyName("name")]
     public string Name { get; set; } = string.Empty;
     [JsonPropertyName("category")]

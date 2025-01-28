@@ -9,7 +9,7 @@ namespace MenuMaker_HostedWasm.Shared.Models.Menus
     public class Dish
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         
         public int MealId { get; set; }
 

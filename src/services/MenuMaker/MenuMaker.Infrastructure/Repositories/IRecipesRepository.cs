@@ -8,7 +8,7 @@ public interface IRecipesRepository
 
     Task<IEnumerable<Recipe>> GetRecipesWithFilter(RecipeFilter filter);
 
-    Task<Recipe> GetRecipe(int id);
+    Task<Recipe> GetRecipe(Guid id);
 
     Task AddRecipeAsync(Entities.Recipes.Recipe recipe);
 
@@ -16,5 +16,5 @@ public interface IRecipesRepository
 
     Task UpdateRecipeAsync(Entities.Recipes.Recipe recipe);
 
-    Task<bool> ExistsAsync(int id);
+    Task<bool> ExistsAsync(Guid id);
 }

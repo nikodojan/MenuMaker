@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MenuMaker.Infrastructure.Migrations
 {
     [DbContext(typeof(RecipesContext))]
-    [Migration("20240102123552_InstructionsAsJson")]
-    partial class InstructionsAsJson
+    [Migration("20250123173830_guid-ids")]
+    partial class guidids
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,14 +27,12 @@ namespace MenuMaker.Infrastructure.Migrations
 
             modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Grocery", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
 
                     b.Property<bool>("HasNutritionValues")
                         .HasColumnType("boolean");
@@ -68,18 +66,16 @@ namespace MenuMaker.Infrastructure.Migrations
 
             modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.GroceryCategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ParentCategoryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid?>("ParentCategoryId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
@@ -90,11 +86,9 @@ namespace MenuMaker.Infrastructure.Migrations
 
             modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Ingredient", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<double?>("Amount")
                         .HasColumnType("double precision");
@@ -103,15 +97,15 @@ namespace MenuMaker.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<int>("GroceryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("GroceryId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("PartOfDish")
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("RecipeId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Unit")
                         .HasColumnType("text");
@@ -127,19 +121,19 @@ namespace MenuMaker.Infrastructure.Migrations
 
             modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Recipe", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<string>("ImgPath")
-                        .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
+                        .HasColumnType("text");
+
+                    b.Property<string>("Instructions")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
 
                     b.Property<int>("Portions")
                         .ValueGeneratedOnAdd()
@@ -151,8 +145,7 @@ namespace MenuMaker.Infrastructure.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -164,13 +157,13 @@ namespace MenuMaker.Infrastructure.Migrations
                     b.HasOne("MenuMaker.Infrastructure.Entities.Recipes.GroceryCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.OwnsOne("MenuMaker.Infrastructure.Entities.Recipes.NutritionFacts", "NutritionFacts", b1 =>
                         {
-                            b1.Property<int>("GroceryId")
-                                .HasColumnType("integer");
+                            b1.Property<Guid>("GroceryId")
+                                .HasColumnType("uuid");
 
                             b1.Property<double>("Calories")
                                 .HasColumnType("double precision")
@@ -205,8 +198,8 @@ namespace MenuMaker.Infrastructure.Migrations
 
                             b1.OwnsOne("MenuMaker.Domain.Models.ValueObjects.UnitValue", "ServingSize", b2 =>
                                 {
-                                    b2.Property<int>("NutritionFactsGroceryId")
-                                        .HasColumnType("integer");
+                                    b2.Property<Guid>("NutritionFactsGroceryId")
+                                        .HasColumnType("uuid");
 
                                     b2.Property<double>("Amount")
                                         .HasColumnType("double precision")
@@ -241,7 +234,8 @@ namespace MenuMaker.Infrastructure.Migrations
                 {
                     b.HasOne("MenuMaker.Infrastructure.Entities.Recipes.GroceryCategory", "ParentCategory")
                         .WithMany()
-                        .HasForeignKey("ParentCategoryId");
+                        .HasForeignKey("ParentCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ParentCategory");
                 });
@@ -261,27 +255,6 @@ namespace MenuMaker.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Grocery");
-                });
-
-            modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Recipe", b =>
-                {
-                    b.OwnsOne("System.Collections.Generic.Dictionary<string, System.Collections.Generic.List<string>>", "Instructions", b1 =>
-                        {
-                            b1.Property<int>("RecipeId")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("RecipeId");
-
-                            b1.ToTable("Recipes");
-
-                            b1.ToJson("Instructions");
-
-                            b1.WithOwner()
-                                .HasForeignKey("RecipeId");
-                        });
-
-                    b.Navigation("Instructions")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MenuMaker.Infrastructure.Entities.Recipes.Recipe", b =>

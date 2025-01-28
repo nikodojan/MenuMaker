@@ -9,7 +9,7 @@ using Recipe = MenuMaker.Infrastructure.Entities.Recipes.Recipe;
 using MenuMaker.Infrastructure.Persistence;
 
 namespace MenuMaker.Infrastructure.Repositories;
-public class RecipesRepository : GenericRepository<Recipe, int, RecipesContext>, IRecipesRepository
+public class RecipesRepository : GenericRepository<Recipe, Guid, RecipesContext>, IRecipesRepository
 {
     public RecipesRepository(RecipesContext context) : base(context)
     {
@@ -22,7 +22,7 @@ public class RecipesRepository : GenericRepository<Recipe, int, RecipesContext>,
         return RecipeEntityMapper.MapToRecipeModelsList(recipes.ToList());
     }
 
-    public async Task<Domain.Models.Recipes.Recipe> GetRecipe(int id)
+    public async Task<Domain.Models.Recipes.Recipe> GetRecipe(Guid id)
     {
         var spec = new BaseSpecification<Recipe>(r => r.Id == id);
         spec.AddInclude(q =>
@@ -70,7 +70,7 @@ public class RecipesRepository : GenericRepository<Recipe, int, RecipesContext>,
         foreach (var ingr in recipe.Ingredients)
         {
             _dbContext.Entry<Grocery>(ingr.Grocery).State = EntityState.Unchanged;
-            _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).Entity.Id = ++dummyIdCounter;
+            _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).Entity.Id = Guid.NewGuid();
             _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).State = EntityState.Unchanged;
         }
     }
@@ -82,12 +82,12 @@ public class RecipesRepository : GenericRepository<Recipe, int, RecipesContext>,
         foreach (var ingr in recipe.Ingredients)
         {
             _dbContext.Entry<Grocery>(ingr.Grocery).State = EntityState.Unchanged;
-            _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).Entity.Id = ++dummyIdCounter;
+            _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).Entity.Id = Guid.NewGuid();
             _dbContext.Entry<GroceryCategory>(ingr.Grocery.Category).State = EntityState.Unchanged;
         }
     }
 
-    public new async Task<bool> ExistsAsync(int id)
+    public new async Task<bool> ExistsAsync(Guid id)
     {
         return await base.ExistsAsync(id);
     }

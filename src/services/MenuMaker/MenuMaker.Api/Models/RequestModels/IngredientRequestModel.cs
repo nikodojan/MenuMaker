@@ -4,13 +4,13 @@ namespace MenuMaker.Api.Models.RequestModels;
 
 public class IngredientRequestModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public double? Amount { get; set; }
 
     public string? Unit { get; set; }
 
-    public int GroceryId { get; set; }
+    public Guid GroceryId { get; set; }
 
     [StringLength(50)]
     public string? Description { get; set; }

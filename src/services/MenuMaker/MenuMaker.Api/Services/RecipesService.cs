@@ -22,7 +22,7 @@ public class RecipesService : IRecipesService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<RecipeResponseModel> GetRecipeById(int id)
+    public async Task<RecipeResponseModel> GetRecipeById(Guid id)
     {
         var recipe = await _recipesRepository.GetRecipe(id);
         var recipeResponse = RecipeMapper.MapToRecipeResponseModel(recipe);
@@ -78,7 +78,7 @@ public class RecipesService : IRecipesService
         return RecipeEntityMapper.MapToRecipeModel(recipe);
     }
 
-    public async Task<Recipe?> UpdateRecipe(int id, Recipe recipeModel)
+    public async Task<Recipe?> UpdateRecipe(Guid id, Recipe recipeModel)
     {
         if (!await _recipesRepository.ExistsAsync(id))
         {

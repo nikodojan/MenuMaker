@@ -93,7 +93,7 @@ public class GroceriesListService : IGroceriesListService
     //    return resultList;
     //}
 
-    public async Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<(int, short)> idPortionsTuples)
+    public async Task<IEnumerable<GroceryListItem>> GetGroceryList(IEnumerable<(Guid, short)> idPortionsTuples)
     {
         var recipesAndPortions = new List<GroceriesListRequestModel>();
         foreach (var tuple in idPortionsTuples)

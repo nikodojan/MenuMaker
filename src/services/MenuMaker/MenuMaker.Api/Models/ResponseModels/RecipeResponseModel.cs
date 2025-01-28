@@ -4,7 +4,7 @@ namespace MenuMaker.Api.DTOs;
 
 public class RecipeResponseModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string Title { get; init; }
 

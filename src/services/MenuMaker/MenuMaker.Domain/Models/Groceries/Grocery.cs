@@ -4,7 +4,7 @@ namespace MenuMaker.Domain.Models.Groceries;
 
 public class Grocery
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public string NameSelectable { get; set; } = string.Empty;
 

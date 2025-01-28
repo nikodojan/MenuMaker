@@ -1,6 +1,6 @@
 ﻿namespace MenuMaker.Infrastructure.Entities.Recipes;
 
-public class Recipe : Entity<int>
+public class Recipe : Entity<Guid>
 {
     public string Title { get; set; }
 

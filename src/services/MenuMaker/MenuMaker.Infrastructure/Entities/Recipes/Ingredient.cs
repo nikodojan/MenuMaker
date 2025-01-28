@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MenuMaker.Infrastructure.Entities.Recipes;
 
-public class Ingredient : Entity<int>
+public class Ingredient : Entity<Guid>
 {
     public double? Amount { get; set; }
 
     public string? Unit { get; set; }
 
-    public int GroceryId { get; set; }
+    public Guid GroceryId { get; set; }
 
     public Grocery Grocery { get; set; } = default!;
 
@@ -22,6 +22,6 @@ public class Ingredient : Entity<int>
     [StringLength(50)]
     public string? PartOfDish { get; set; }
 
-    public int RecipeId { get; set; }
+    public Guid RecipeId { get; set; }
 }
 

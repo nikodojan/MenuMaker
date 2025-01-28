@@ -5,7 +5,7 @@ namespace MenuMaker.Api.Models.ResponseModels;
 
 public class IngredientResponseModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public double? Amount { get; set; }
     public string? Unit { get; set; }
     public required GroceryReponseModel Grocery { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace MenuMaker.Infrastructure.Entities.Recipes;
 
-public class Grocery : Entity<int>
+public class Grocery : Entity<Guid>
 {
     public string NameSelectable { get; set; } = string.Empty;
 
@@ -10,7 +10,7 @@ public class Grocery : Entity<int>
 
     public GroceryCategory Category { get; set; }
 
-    public int CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
 
     public string StandardUnit { get; set; }
 

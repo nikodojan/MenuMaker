@@ -14,7 +14,7 @@ namespace MenuMaker_HostedWasm.Shared.Models.Menus
         }
 
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [StringLength(50)]
         public string Name { get; set; }

@@ -31,7 +31,7 @@ public class RecipesController : ControllerBase
 
     [HttpGet]
     [Route("{id}")]
-    public async Task<IActionResult> GetRecipeByIt([FromRoute] int id)
+    public async Task<IActionResult> GetRecipeByIt([FromRoute] Guid id)
     {
         var recipe = await _recipesService.GetRecipeById(id);
         if (recipe == null) { return NotFound(); }
@@ -47,7 +47,7 @@ public class RecipesController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateRecipe(int id, RecipeRequestModel recipe)
+    public async Task<IActionResult> UpdateRecipe(Guid id, RecipeRequestModel recipe)
     {
         var updatedRecipe = await _recipesService.UpdateRecipe(id, recipe.MapToRecipeModel());
         return Ok(updatedRecipe);

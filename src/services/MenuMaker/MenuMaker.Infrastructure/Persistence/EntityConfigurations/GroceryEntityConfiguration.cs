@@ -45,6 +45,6 @@ internal class GroceryEntityConfiguration : IEntityTypeConfiguration<Grocery>
 
         builder.HasIndex(g => g.NameSelectable).IsUnique();
 
-        builder.Property<int>(g => g.Id).UseIdentityAlwaysColumn();
+        builder.Property<Guid>(g => g.Id).ValueGeneratedOnAdd();
     }
 }

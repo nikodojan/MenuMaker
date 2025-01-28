@@ -83,7 +83,7 @@ public class Program
         builder.Services.AddTransient<IRecipesRepository, RecipesRepository>();
         builder.Services.AddTransient<IGroceriesRepository, GroceriesRepository>();
         builder.Services.AddTransient<IGroceriesService, GroceriesService>();
-        builder.Services.AddTransient<IGenericRepository<GroceryCategory, int>, GenericRepository<GroceryCategory, int, RecipesContext>>();
+        builder.Services.AddTransient<IGenericRepository<GroceryCategory, Guid>, GenericRepository<GroceryCategory, Guid, RecipesContext>>();
 
         builder.Services.AddScoped<IUnitOfWork<RecipesContext>, RecipesContext>();
 

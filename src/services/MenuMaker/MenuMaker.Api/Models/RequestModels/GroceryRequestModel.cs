@@ -3,7 +3,7 @@
 public class GroceryRequestModel
 {
 
-    public int? Id { get; set; } 
+    public Guid? Id { get; set; } 
     public string NameSelectable { get; set; } = string.Empty;
 
     public string? NameSingular { get; set; }
@@ -12,7 +12,7 @@ public class GroceryRequestModel
 
     public required string StandardUnit { get; set; }
 
-    public int CategoryId { get; set; }
+    public Guid CategoryId { get; set; }
 
     public required NutritionFactsViewModel NutritionFacts { get; set; }
 

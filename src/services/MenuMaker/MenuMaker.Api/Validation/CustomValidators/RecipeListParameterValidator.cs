@@ -14,7 +14,7 @@ public class RecipeListParameterValidator
 
         var numberStrings = trimmed.Split(',');
 
-        var recipes = new List<(int, short)>();
+        var recipes = new List<(Guid, short)>();
 
         foreach (var recipePortionPair in numberStrings)
         {
@@ -24,7 +24,7 @@ public class RecipeListParameterValidator
 
             try
             {
-                var recipeId = Convert.ToInt32(values[0]);
+                var recipeId = Guid.Parse(values[0]);
                 var portions = Convert.ToInt16(values[1]);
                 recipes.Add((recipeId, portions));
             }
@@ -35,7 +35,7 @@ public class RecipeListParameterValidator
             catch (OverflowException)
             {
                 return new RecipeListParamaterValidationResult(false, $"One of the values in {recipePortionPair} is not a number", null);
-            }
+            } 
         }
 
         return new RecipeListParamaterValidationResult(true, null, recipes);

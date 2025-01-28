@@ -10,11 +10,13 @@ internal class IngredientEntityConfiguration : IEntityTypeConfiguration<Ingredie
     {
         builder.ToTable("Ingredients");
 
-        builder.HasKey(x => x.Id);
+        builder.HasKey(i => i.Id);
 
         builder
             .HasOne<Grocery>(i => i.Grocery)
             .WithMany()
             .HasForeignKey(i=>i.GroceryId);
+
+        builder.Property(i => i.Id).ValueGeneratedOnAdd();
     }
 }

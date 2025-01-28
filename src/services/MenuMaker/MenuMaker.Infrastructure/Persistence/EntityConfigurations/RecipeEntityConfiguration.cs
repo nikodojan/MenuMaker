@@ -10,7 +10,9 @@ internal class RecipeEntityConfiguration : IEntityTypeConfiguration<Recipe>
     {
         builder.ToTable("Recipes");
 
-        builder.HasKey(x => x.Id);
+        builder.HasKey(r => r.Id);
+
+        builder.Property(r => r.Id).ValueGeneratedOnAdd();
 
         builder
             .HasMany<Ingredient>(r => r.Ingredients)
